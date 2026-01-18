@@ -1,57 +1,86 @@
-
-import { state } from './state.js';
+import { OverviewPage } from './pages/OverviewPage.js';
 import { TrendsPage } from './pages/TrendsPage.js';
 import { CrisisPage } from './pages/CrisisPage.js';
 import { RegionalPage } from './pages/RegionalPage.js';
+import { StateManager } from './utils/StateManager.js';
+
+window.state = new StateManager();
 
 class App {
     constructor() {
-        this.container = document.getElementById('app-content');
-        this.navLinks = document.querySelectorAll('.nav-link');
-        this.currentPage = null;
-
-        this.routes = {
-            'trends': TrendsPage,
-            'crisis': CrisisPage,
-            'regional': RegionalPage
-        };
-
-        this.init();
+        this.container = document.getElementById('content-area');
+        this.pages = {};
     }
 
-    init() {
-        // Handle Navigation
+    async init() {
+        // Clear container
+        this.container.innerHTML = '';
+
+        // Render ALL Sections (Hidden by default via CSS or JS)
+        await this.renderSection('overview', OverviewPage);
+        await this.renderSection('trends', TrendsPage);
+        await this.renderSection('analysis', CrisisPage);
+        await this.renderSection('map', RegionalPage);
+
+        // Setup Router
         window.addEventListener('hashchange', () => this.handleRoute());
-
-        // Initial Route
-        this.handleRoute();
+        this.handleRoute(); // Initial Route
     }
 
-    async handleRoute() {
-        const hash = window.location.hash.slice(1) || 'trends';
-        const PageClass = this.routes[hash] || TrendsPage;
+    async renderSection(id, PageClass) {
+        const section = document.createElement('section');
+        section.id = id;
+        section.className = 'dashboard-section';
+        section.style.display = 'none'; // Hidden by default
+        this.container.appendChild(section);
 
-        // Update Nav UI
-        this.navLinks.forEach(link => {
-            link.classList.toggle('active', link.dataset.page === hash);
-        });
+        const pageInstance = new PageClass();
+        await pageInstance.render(section);
+        this.pages[id] = section;
+    }
 
-        // Cleanup old page
-        if (this.currentPage) {
-            this.currentPage.destroy();
+    handleRoute() {
+        // Get Hash or Default to #overview
+        let hash = window.location.hash.slice(1) || 'overview';
+        const validRoutes = ['overview', 'trends', 'analysis', 'map'];
+
+        if (!validRoutes.includes(hash)) {
+            hash = 'overview';
         }
 
-        // Init new page
-        this.container.innerHTML = ''; // Clear content
-        this.currentPage = new PageClass();
-        await this.currentPage.render(this.container);
+        // Hide all sections, Show active
+        Object.values(this.pages).forEach(el => el.style.display = 'none');
+        if (this.pages[hash]) {
+            this.pages[hash].style.display = 'block';
+            this.pages[hash].style.animation = 'fadeIn 0.3s ease-in-out';
+        }
 
-        // Set initial state for page
-        state.set('activePage', hash);
+        // Update Active Nav
+        document.querySelectorAll('.nav-item').forEach(link => {
+            const linkHref = link.getAttribute('href').slice(1);
+            if (linkHref === hash) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // Scroll to top
+        window.scrollTo(0, 0);
     }
 }
 
-// Start App
+// Global fade animation
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+`;
+document.head.appendChild(style);
+
 document.addEventListener('DOMContentLoaded', () => {
-    new App();
+    const app = new App();
+    app.init();
 });

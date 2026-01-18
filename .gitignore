@@ -1,0 +1,20 @@
+# General
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# JS/Node
+node_modules/
+npm-debug.log
+
+# Large Data
+backend/data/tankerkoenig_historic/
+output/

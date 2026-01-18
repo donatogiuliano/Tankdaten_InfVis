@@ -1,164 +1,114 @@
-
-import { COLORS } from './colors.js';
-
-export class HeatMap {
-    constructor(container, options = {}) {
-        this.container = typeof container === 'string' ? document.querySelector(container) : container;
-        this.data = [];
-        this.margin = { top: 30, right: 30, bottom: 60, left: 60 };
-        this.options = options;
-
-        // Setup Resize Observer
-        this.resizeObserver = new ResizeObserver(() => this.resize());
-        this.resizeObserver.observe(this.container);
-
+export class Heatmap {
+    constructor(container, data, options = {}) {
+        this.container = container;
+        this.allData = data; // Full dataset
+        this.data = data; // Filtered dataset
+        this.options = {
+            margin: { top: 20, right: 30, bottom: 40, left: 40 },
+            fuelType: 'e10',
+            ...options
+        };
         this.init();
     }
 
     init() {
-        this.div = d3.select(this.container);
-        this.svg = this.div.append('svg')
-            .attr('class', 'chart-svg');
+        this.container.innerHTML = '';
 
-        this.g = this.svg.append('g');
-
-        // Axis
-        this.xAxisG = this.g.append('g').attr('class', 'axis x-axis');
-        this.yAxisG = this.g.append('g').attr('class', 'axis y-axis');
-
-        // Legend Container
-        this.legendG = this.svg.append('g').attr('class', 'legend');
-
-        // Tooltip
-        this.tooltip = d3.select('body').append('div')
-            .attr('class', 'chart-tooltip')
-            .style('opacity', 0)
-            .style('position', 'absolute')
-            .style('background', COLORS.tooltipBg)
-            .style('border', `1px solid ${COLORS.tooltipBorder}`)
-            .style('padding', '8px')
-            .style('border-radius', '4px')
-            .style('pointer-events', 'none')
-            .style('box-shadow', '0 2px 4px rgba(0,0,0,0.1)');
-    }
-
-    update(data) {
-        // Aggregate raw single-station data to mean per hour per day (if needed)
-        // Or assume data is already aggregated.
-        // For compatibility with app.js legacy format:
-        this.data = this._processData(data);
-        this.draw();
-    }
-
-    _processData(rawData) {
-        // Convert [ {hour, price} ] or similar to [ {day, hour, price} ]
-        // Using logic from original app.js to simulate week-days from flattened data if necessary
-        // Or expect prepared data. 
-        // For now, assuming rawData is the heatmap_*.json format which lacks day info, 
-        // so we use the simulation logic from app.js
-        if (!rawData || rawData.length === 0) return [];
-
-        const hourlyPrices = {};
-        rawData.forEach(d => {
-            if (!hourlyPrices[d.hour]) hourlyPrices[d.hour] = [];
-            if (d.price > 0) hourlyPrices[d.hour].push(d.price);
-        });
-
-        const days = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
-        const hours = Array.from({ length: 24 }, (_, i) => i);
-        const aggregated = [];
-
-        days.forEach((day, dayIndex) => {
-            hours.forEach(hour => {
-                const prices = hourlyPrices[hour] || [];
-                const avg = prices.length ? prices.reduce((a, b) => a + b) / prices.length : 0;
-                // Simulating variation
-                const variation = 1 + (dayIndex - 3) * 0.005;
-                aggregated.push({
-                    day,
-                    dayIndex,
-                    hour,
-                    price: avg * variation
-                });
-            });
-        });
-
-        return aggregated;
-    }
-
-    resize() {
-        if (!this.data.length) return;
-        this.draw();
-    }
-
-    draw() {
         const rect = this.container.getBoundingClientRect();
-        const width = Math.max(400, rect.width - this.margin.left - this.margin.right);
-        const height = Math.max(300, rect.height - this.margin.top - this.margin.bottom);
+        this.width = rect.width - this.options.margin.left - this.options.margin.right;
+        this.height = rect.height - this.options.margin.top - this.options.margin.bottom;
 
-        this.svg.attr('width', '100%').attr('height', '100%')
-            .attr('viewBox', `0 0 ${rect.width} ${rect.height}`); // Responsive scaling
-
-        this.g.attr('transform', `translate(${this.margin.left},${this.margin.top})`);
+        this.svg = d3.select(this.container).append("svg")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .attr("viewBox", `0 0 ${rect.width} ${rect.height}`)
+            .append("g")
+            .attr("transform", `translate(${this.options.margin.left},${this.options.margin.top})`);
 
         // Scales
-        const days = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
-        const hours = Array.from({ length: 24 }, (_, i) => i);
-
-        const xScale = d3.scaleBand()
-            .domain(hours)
-            .range([0, width])
+        // X = Month (Jan - Dec)
+        this.x = d3.scaleBand()
+            .range([0, this.width])
+            .domain(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
             .padding(0.05);
 
-        const yScale = d3.scaleBand()
-            .domain(days)
-            .range([0, height])
+        // Y = Year
+        this.y = d3.scaleBand()
+            .range([this.height, 0])
             .padding(0.05);
 
-        const prices = this.data.map(d => d.price).filter(p => p > 0);
-        const colorScale = d3.scaleLinear()
-            .domain([d3.min(prices), d3.mean(prices), d3.max(prices)])
-            .range([COLORS.success, COLORS.warning, COLORS.danger]);
-
-        // Cells
-        const cells = this.g.selectAll('rect').data(this.data);
-
-        cells.enter().append('rect')
-            .merge(cells)
-            .attr('x', d => xScale(d.hour))
-            .attr('y', d => yScale(d.day))
-            .attr('width', xScale.bandwidth())
-            .attr('height', yScale.bandwidth())
-            .attr('rx', 4)
-            .attr('fill', d => d.price > 0 ? colorScale(d.price) : '#eee')
-            .on('mouseover', (event, d) => {
-                this.tooltip.style('opacity', 1)
-                    .html(`
-                        <b>${d.day}, ${d.hour}:00</b><br>
-                        ${d.price.toFixed(3)} €
-                    `)
-                    .style('left', (event.pageX + 10) + 'px')
-                    .style('top', (event.pageY - 10) + 'px');
-            })
-            .on('mouseout', () => {
-                this.tooltip.style('opacity', 0);
-            });
-
-        cells.exit().remove();
+        // Color
+        this.color = d3.scaleSequential()
+            .interpolator(d3.interpolateInferno); // Good heatmap scale
 
         // Axes
-        this.xAxisG.attr('transform', `translate(0,${height})`)
-            .call(d3.axisBottom(xScale).tickFormat(d => `${d}h`));
+        this.svg.append("g")
+            .attr("transform", `translate(0,${this.height})`)
+            .call(d3.axisBottom(this.x));
 
-        this.yAxisG.call(d3.axisLeft(yScale));
-
-        // Remove axis lines for cleaner look
-        this.g.selectAll('.domain').remove();
+        this.yAxis = this.svg.append("g");
     }
 
-    destroy() {
-        this.resizeObserver.disconnect();
-        this.svg.remove();
-        this.tooltip.remove();
+    update(filteredDataRange = null) {
+        // Prepare Data
+        // 1. Filter by Date Range (if brushed)
+        let workingData = this.allData;
+        if (filteredDataRange) {
+            const [start, end] = filteredDataRange;
+            workingData = workingData.filter(d => {
+                const date = new Date(d.date);
+                return date >= start && date <= end;
+            });
+        }
+
+        const fuel = this.options.fuelType;
+
+        // 2. Aggregate per Month/Year
+        // We need average price for each (Year, Month) pair
+        const nested = d3.rollups(workingData,
+            v => d3.mean(v, d => +d[fuel]),
+            d => new Date(d.date).getFullYear(),
+            d => new Date(d.date).getMonth() // 0-11
+        );
+
+        // Flatten back to list
+        const flatData = [];
+        const years = new Set();
+        nested.forEach(([year, months]) => {
+            years.add(year);
+            months.forEach(([monthIdx, val]) => {
+                flatData.push({ year, monthIdx, val });
+            });
+        });
+
+        const sortedYears = Array.from(years).sort();
+        this.y.domain(sortedYears);
+        this.yAxis.transition().call(d3.axisLeft(this.y));
+
+        // Update Color domain
+        const [min, max] = d3.extent(flatData, d => d.val);
+        this.color.domain([min, max]);
+
+        // Draw Rects
+        const monthsStr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        const rects = this.svg.selectAll("rect")
+            .data(flatData, d => `${d.year}-${d.monthIdx}`);
+
+        rects.enter().append("rect")
+            .attr("x", d => this.x(monthsStr[d.monthIdx]))
+            .attr("y", d => this.y(d.year))
+            .attr("width", this.x.bandwidth())
+            .attr("height", this.y.bandwidth())
+            .style("fill", d => this.color(d.val))
+            .merge(rects)
+            .transition()
+            .attr("x", d => this.x(monthsStr[d.monthIdx]))
+            .attr("y", d => this.y(d.year))
+            .attr("width", this.x.bandwidth())
+            .attr("height", this.y.bandwidth())
+            .style("fill", d => this.color(d.val));
+
+        rects.exit().remove();
     }
 }

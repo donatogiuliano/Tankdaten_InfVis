@@ -1,0 +1,348 @@
+/* ===== CSS Variables ===== */
+:root {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-card: #1a1a1a;
+    --accent-primary: #e94560;
+    --accent-secondary: #333333;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --border-color: transparent;
+    --gradient-start: #667eea;
+    --gradient-end: #764ba2;
+
+    /* Price colors */
+    --price-low: #00d26a;
+    --price-mid: #ffc107;
+    --price-high: #e94560;
+
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --radius: 16px;
+    --transition: all 0.3s ease;
+}
+
+/* ===== Reset & Base ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ===== Header ===== */
+.dashboard-header {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(233, 69, 96, 0.05) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.dashboard-header h1 {
+    font-family: 'Teko', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.controls {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.controls label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.controls select {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.controls select:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(233, 69, 96, 0.2);
+}
+
+.controls select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+/* ===== Main Container ===== */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Panels ===== */
+.panel {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.panel:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.3), 0 0 80px rgba(118, 75, 162, 0.2);
+    border-color: transparent;
+}
+
+.panel-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.panel-header h2 {
+    font-family: 'Teko', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+.panel-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.icon {
+    display: inline-block;
+    filter: grayscale(100%) invert(1);
+    -webkit-text-stroke: 1px #000;
+    margin-right: 0.3rem;
+}
+
+.chart-container {
+    padding: 1.5rem;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.legend-container {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* ===== Loading State ===== */
+.loading {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.loading::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== Tooltip ===== */
+.tooltip {
+    position: fixed;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    max-width: 300px;
+}
+
+.tooltip.visible {
+    opacity: 1;
+}
+
+.tooltip-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--accent-primary);
+}
+
+.tooltip-content {
+    color: var(--text-secondary);
+}
+
+.tooltip-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* ===== SVG Styles ===== */
+.heatmap-cell {
+    stroke: var(--bg-card);
+    stroke-width: 1px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.heatmap-cell:hover {
+    stroke: var(--text-primary);
+    stroke-width: 2px;
+}
+
+.axis text {
+    fill: var(--text-secondary);
+    font-size: 11px;
+}
+
+.axis line,
+.axis path {
+    stroke: var(--border-color);
+}
+
+.axis-label {
+    fill: var(--text-primary);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.station-circle {
+    stroke: var(--bg-card);
+    stroke-width: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.station-circle:hover {
+    stroke: var(--text-primary);
+    stroke-width: 2px;
+    transform: scale(1.2);
+}
+
+.map-background {
+    fill: var(--bg-secondary);
+    stroke: var(--border-color);
+    stroke-width: 0.5px;
+}
+
+/* ===== Legend ===== */
+.legend-gradient {
+    height: 16px;
+    width: 200px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--price-low), var(--price-mid), var(--price-high));
+}
+
+.legend-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.legend-title {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-right: 1rem;
+}
+
+/* ===== Footer ===== */
+.dashboard-footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}

@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tank-Strategie BW</title>
+    <title>FuelIntel Germany | Market Analytics</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="index.css">
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -21,49 +23,86 @@
 
 <body>
 
-    <!-- Sidebar Navigation -->
-    <aside>
-        <div class="logo">
-            <div>
-                Tank-Strategie BW<br>
-                <span>Preis-Monitor & Analyse</span>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <!-- User Logo Image -->
+                <div class="logo-wrapper">
+                    <!-- Transforming to crop white border as requested -->
+                    <img src="img/logo.png" alt="Logo" class="logo-img">
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Tankpreis-Analyse</span>
+                    <span class="logo-subtitle">Dashboard</span>
+                </div>
             </div>
-        </div>
 
-        <nav>
-            <a href="#trends" class="nav-link active" data-page="trends">
-                <span>📈</span> Markttrends
-            </a>
-            <a href="#crisis" class="nav-link" data-page="crisis">
-                <span>⚡</span> Krisen-Radar
-            </a>
-            <a href="#regional" class="nav-link" data-page="regional">
-                <span>🗺️</span> Regional-Vergleich
-            </a>
-        </nav>
+            <nav class="main-nav">
+                <a href="#overview" class="nav-item active">
+                    <span class="icon">
+                        <!-- Home Icon -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </span> Übersicht
+                </a>
+                <a href="#trends" class="nav-item">
+                    <span class="icon">
+                        <!-- Trend Icon -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </span> Preistrends
+                </a>
+                <a href="#analysis" class="nav-item">
+                    <span class="icon">
+                        <!-- Activity Icon (Pulse) -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </span> Krisen-Analyse
+                </a>
+                <a href="#map" class="nav-item">
+                    <span class="icon">
+                        <!-- Map Icon -->
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                            <line x1="8" y1="2" x2="8" y2="18"></line>
+                            <line x1="16" y1="6" x2="16" y2="22"></line>
+                        </svg>
+                    </span> Regional-Vergleich
+                </a>
+            </nav>
+        </aside>
 
-        <div class="sidebar-footer">
-            <!-- Filter removed: Fuel selection is now local to charts -->
-            <div style="font-size:0.8rem; color:var(--text-muted)">
-                Backend: Flask + Parquet
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar Removed as requested -->
+
+            <div id="content-area" class="content-grid">
+                <!-- Content injected by JS -->
+                <div class="loading-screen">
+                    <div class="spinner"></div>
+                    <p>Building Analytics Environment...</p>
+                </div>
             </div>
-        </div>
-    </aside>
-
-    <!-- Main Content Area -->
-    <main id="app-content">
-        <!-- Dynamic Content will be loaded here -->
-        <div class="loading">Lade Dashboard...</div>
-    </main>
+        </main>
+    </div>
 
     <!-- Libraries -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <!-- App Entry Point -->
+    <!-- App Entry -->
     <script type="module" src="js/main.js"></script>
-
 </body>
 
 </html>

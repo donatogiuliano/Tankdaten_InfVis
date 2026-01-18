@@ -1,0 +1,12 @@
+region_plz2
+fuel
+price_mean
+price_std
+price_min
+price_max
+date
+brent_oil_usd
+exchange_rate_eur_usd
+brent_oil_eur
+ma_7d
+trend_slope

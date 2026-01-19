@@ -1,11 +1,19 @@
 
 class StateManager {
     constructor() {
-        this.state = {
+        // Default State
+        const defaults = {
             fuelType: 'e10', // e5, e10, diesel
-            dateRange: null, // { start, end }
-            activePage: 'trends'
+            year: new Date().getFullYear().toString(),
+            month: '1',
+            activePage: 'overview',
+            colorMode: 'default' // 'default' or 'accessible'
         };
+
+        // Load from LocalStorage
+        const saved = JSON.parse(localStorage.getItem('fuelApp_settings') || '{}');
+
+        this.state = { ...defaults, ...saved };
         this.listeners = [];
     }
 
@@ -16,8 +24,21 @@ class StateManager {
     set(key, value) {
         if (this.state[key] !== value) {
             this.state[key] = value;
+
+            // Persist to LocalStorage
+            this.save();
+
             this.notify(key, value);
         }
+    }
+
+    save() {
+        localStorage.setItem('fuelApp_settings', JSON.stringify({
+            fuelType: this.state.fuelType,
+            year: this.state.year,
+            month: this.state.month,
+            colorMode: this.state.colorMode
+        }));
     }
 
     subscribe(listener) {

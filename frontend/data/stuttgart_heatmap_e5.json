@@ -1,0 +1,1872 @@
+[
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 5,
+    "price": 1.7814999999999999
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 6,
+    "price": 1.8143846153846153
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 7,
+    "price": 1.834
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 8,
+    "price": 1.8169999999999997
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 9,
+    "price": 1.8158421052631577
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 10,
+    "price": 1.8065
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 11,
+    "price": 1.7736153846153846
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 12,
+    "price": 1.7912222222222223
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 13,
+    "price": 1.7890000000000001
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 14,
+    "price": 1.7671818181818182
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 15,
+    "price": 1.7856666666666667
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 16,
+    "price": 1.7680909090909092
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 17,
+    "price": 1.76525
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 18,
+    "price": 1.7317272727272728
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 19,
+    "price": 1.741941176470588
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 20,
+    "price": 1.739
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 21,
+    "price": 1.7313076923076924
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 22,
+    "price": 1.7415
+  },
+  {
+    "station_name": "AVIA S-Bebelstr.",
+    "hour": 23,
+    "price": 1.764
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 5,
+    "price": 1.737
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 6,
+    "price": 1.7196666666666667
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 7,
+    "price": 1.8227499999999999
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 8,
+    "price": 1.7927499999999998
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 9,
+    "price": 1.7883333333333333
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 10,
+    "price": 1.804
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 11,
+    "price": 1.7766470588235295
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 12,
+    "price": 1.78275
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 13,
+    "price": 1.7936153846153846
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 14,
+    "price": 1.7763333333333333
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 15,
+    "price": 1.7951111111111109
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 16,
+    "price": 1.7736666666666667
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 17,
+    "price": 1.7666923076923076
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 18,
+    "price": 1.730578947368421
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 19,
+    "price": 1.7189999999999999
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 20,
+    "price": 1.7023333333333335
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 21,
+    "price": 1.6843333333333335
+  },
+  {
+    "station_name": "AVIA S-Rappachstr.",
+    "hour": 23,
+    "price": 1.7109999999999999
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 0,
+    "price": 1.839
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 5,
+    "price": 1.8615
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 6,
+    "price": 1.8190000000000002
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 7,
+    "price": 1.8325
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 8,
+    "price": 1.81775
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 9,
+    "price": 1.8331304347826087
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 10,
+    "price": 1.8056666666666665
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 11,
+    "price": 1.7909444444444444
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 12,
+    "price": 1.8072978723404254
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 13,
+    "price": 1.8003793103448276
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 14,
+    "price": 1.779327868852459
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 15,
+    "price": 1.7962549019607843
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 16,
+    "price": 1.7684871794871795
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 17,
+    "price": 1.7700909090909092
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 18,
+    "price": 1.7463809523809524
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 19,
+    "price": 1.7664358974358971
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 20,
+    "price": 1.7616923076923077
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 21,
+    "price": 1.739857142857143
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 22,
+    "price": 1.7670952380952383
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "hour": 23,
+    "price": 1.7723333333333333
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 0,
+    "price": 1.859
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 5,
+    "price": 1.8714444444444445
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 6,
+    "price": 1.867
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 8,
+    "price": 1.8279393939393938
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 9,
+    "price": 1.8676486486486485
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 10,
+    "price": 1.8152711864406779
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 11,
+    "price": 1.7936875
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 12,
+    "price": 1.8389290780141843
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 13,
+    "price": 1.7997971014492753
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 14,
+    "price": 1.7978177339901478
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 15,
+    "price": 1.7896
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 16,
+    "price": 1.7706239316239316
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 17,
+    "price": 1.7828970588235293
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 18,
+    "price": 1.7512429906542057
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 19,
+    "price": 1.7766
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 20,
+    "price": 1.7484059405940593
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 21,
+    "price": 1.7280000000000002
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 22,
+    "price": 1.8184999999999998
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "hour": 23,
+    "price": 1.7905384615384616
+  },
+  {
+    "station_name": "ENI",
+    "hour": 5,
+    "price": 1.8239999999999998
+  },
+  {
+    "station_name": "ENI",
+    "hour": 6,
+    "price": 1.821142857142857
+  },
+  {
+    "station_name": "ENI",
+    "hour": 7,
+    "price": 1.8432857142857144
+  },
+  {
+    "station_name": "ENI",
+    "hour": 8,
+    "price": 1.8404285714285713
+  },
+  {
+    "station_name": "ENI",
+    "hour": 9,
+    "price": 1.8920000000000001
+  },
+  {
+    "station_name": "ENI",
+    "hour": 10,
+    "price": 1.8484736842105265
+  },
+  {
+    "station_name": "ENI",
+    "hour": 11,
+    "price": 1.8041282051282053
+  },
+  {
+    "station_name": "ENI",
+    "hour": 12,
+    "price": 1.8399999999999999
+  },
+  {
+    "station_name": "ENI",
+    "hour": 13,
+    "price": 1.791
+  },
+  {
+    "station_name": "ENI",
+    "hour": 14,
+    "price": 1.7785833333333334
+  },
+  {
+    "station_name": "ENI",
+    "hour": 15,
+    "price": 1.814
+  },
+  {
+    "station_name": "ENI",
+    "hour": 16,
+    "price": 1.7553636363636365
+  },
+  {
+    "station_name": "ENI",
+    "hour": 17,
+    "price": 1.7613076923076922
+  },
+  {
+    "station_name": "ENI",
+    "hour": 18,
+    "price": 1.7397692307692307
+  },
+  {
+    "station_name": "ENI",
+    "hour": 19,
+    "price": 1.7656666666666665
+  },
+  {
+    "station_name": "ENI",
+    "hour": 20,
+    "price": 1.734263157894737
+  },
+  {
+    "station_name": "ENI",
+    "hour": 21,
+    "price": 1.7366923076923078
+  },
+  {
+    "station_name": "ENI",
+    "hour": 22,
+    "price": 1.761
+  },
+  {
+    "station_name": "ENI",
+    "hour": 23,
+    "price": 1.75775
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 4,
+    "price": 1.7890000000000001
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 5,
+    "price": 1.8425714285714285
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 6,
+    "price": 1.835078431372549
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 7,
+    "price": 1.8479473684210526
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 8,
+    "price": 1.829909090909091
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 9,
+    "price": 1.8608055555555556
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 10,
+    "price": 1.8382682926829268
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 11,
+    "price": 1.8065
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 12,
+    "price": 1.8285505617977527
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 13,
+    "price": 1.8211176470588233
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 14,
+    "price": 1.7875714285714286
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 15,
+    "price": 1.8222692307692308
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 16,
+    "price": 1.7799333333333334
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 17,
+    "price": 1.7765
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 18,
+    "price": 1.7587590361445784
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 19,
+    "price": 1.772265306122449
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 20,
+    "price": 1.7655116279069767
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 21,
+    "price": 1.7554285714285713
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 22,
+    "price": 1.7365000000000002
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "hour": 23,
+    "price": 1.8219032258064516
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 5,
+    "price": 1.809
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 6,
+    "price": 1.845
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 7,
+    "price": 1.8210000000000002
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 8,
+    "price": 1.8074615384615385
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 9,
+    "price": 1.830111111111111
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 10,
+    "price": 1.7849999999999997
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 11,
+    "price": 1.7713076923076925
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 12,
+    "price": 1.809
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 13,
+    "price": 1.7859230769230767
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 14,
+    "price": 1.769909090909091
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 15,
+    "price": 1.7710000000000001
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 16,
+    "price": 1.7623333333333333
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 17,
+    "price": 1.764
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 18,
+    "price": 1.7469999999999999
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 19,
+    "price": 1.7656666666666667
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 20,
+    "price": 1.7634444444444444
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 21,
+    "price": 1.7489999999999999
+  },
+  {
+    "station_name": "JET STUTTGART INDUSTRIESTR. 38",
+    "hour": 23,
+    "price": 1.777
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 5,
+    "price": 1.8030000000000002
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 6,
+    "price": 1.845
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 7,
+    "price": 1.8189999999999997
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 8,
+    "price": 1.807
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 9,
+    "price": 1.846142857142857
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 10,
+    "price": 1.836142857142857
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 11,
+    "price": 1.8006
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 12,
+    "price": 1.818090909090909
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 13,
+    "price": 1.7965
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 14,
+    "price": 1.781
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 15,
+    "price": 1.7923333333333333
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 16,
+    "price": 1.7578888888888888
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 17,
+    "price": 1.7598333333333331
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 18,
+    "price": 1.733
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 19,
+    "price": 1.763
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 20,
+    "price": 1.743285714285714
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 21,
+    "price": 1.731857142857143
+  },
+  {
+    "station_name": "JET STUTTGART LUDWIGSBURGER STR. 15",
+    "hour": 23,
+    "price": 1.7550000000000001
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 5,
+    "price": 1.7890000000000001
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 6,
+    "price": 1.845
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 7,
+    "price": 1.849
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 8,
+    "price": 1.7473333333333334
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 9,
+    "price": 1.759
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 10,
+    "price": 1.7475714285714286
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 11,
+    "price": 1.7367777777777778
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 12,
+    "price": 1.7578888888888888
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 13,
+    "price": 1.7497142857142856
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 14,
+    "price": 1.7206666666666666
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 15,
+    "price": 1.7706666666666664
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 16,
+    "price": 1.7361428571428572
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 17,
+    "price": 1.7489999999999999
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 18,
+    "price": 1.7332857142857143
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 19,
+    "price": 1.743285714285714
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 20,
+    "price": 1.731857142857143
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 21,
+    "price": 1.7204285714285716
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STR. 54",
+    "hour": 23,
+    "price": 1.761
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 5,
+    "price": 1.7890000000000001
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 6,
+    "price": 1.845
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 7,
+    "price": 1.849
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 8,
+    "price": 1.745
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 9,
+    "price": 1.776142857142857
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 10,
+    "price": 1.7504285714285714
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 11,
+    "price": 1.7323333333333335
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 12,
+    "price": 1.7690000000000001
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 13,
+    "price": 1.75275
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 14,
+    "price": 1.723
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 15,
+    "price": 1.772333333333333
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 16,
+    "price": 1.7354285714285713
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 17,
+    "price": 1.748090909090909
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 18,
+    "price": 1.7325714285714287
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 19,
+    "price": 1.7532857142857143
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 20,
+    "price": 1.73025
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 21,
+    "price": 1.7204285714285716
+  },
+  {
+    "station_name": "JET STUTTGART NEUHAUSER STRASSE 50 B",
+    "hour": 23,
+    "price": 1.761
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 5,
+    "price": 1.775
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 6,
+    "price": 1.845
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 7,
+    "price": 1.8239999999999998
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 8,
+    "price": 1.8067777777777776
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 9,
+    "price": 1.8375714285714284
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 10,
+    "price": 1.8105384615384614
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 11,
+    "price": 1.7648823529411766
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 12,
+    "price": 1.789625
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 13,
+    "price": 1.781
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 14,
+    "price": 1.7451904761904762
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 15,
+    "price": 1.7725714285714285
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 16,
+    "price": 1.7396666666666667
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 17,
+    "price": 1.7456666666666667
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 18,
+    "price": 1.730818181818182
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 19,
+    "price": 1.7532857142857143
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 20,
+    "price": 1.7299090909090908
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 21,
+    "price": 1.7156666666666667
+  },
+  {
+    "station_name": "JET STUTTGART ROTWEG 15",
+    "hour": 23,
+    "price": 1.749
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 5,
+    "price": 1.8056666666666665
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 6,
+    "price": 1.845
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 7,
+    "price": 1.8189999999999997
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 8,
+    "price": 1.806142857142857
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 9,
+    "price": 1.847
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 10,
+    "price": 1.823
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 11,
+    "price": 1.7926
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 12,
+    "price": 1.821222222222222
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 13,
+    "price": 1.804
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 14,
+    "price": 1.7813809523809523
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 15,
+    "price": 1.793
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 16,
+    "price": 1.7512222222222222
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 17,
+    "price": 1.758090909090909
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 18,
+    "price": 1.729
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 19,
+    "price": 1.7590000000000001
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 20,
+    "price": 1.7423333333333335
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 21,
+    "price": 1.7323333333333333
+  },
+  {
+    "station_name": "JET STUTTGART VERA-VOLLMER-STR. 2",
+    "hour": 23,
+    "price": 1.7550000000000001
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 5,
+    "price": 1.7631666666666668
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 6,
+    "price": 1.875451612903226
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 7,
+    "price": 1.8422075471698114
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 8,
+    "price": 1.8063170731707316
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 9,
+    "price": 1.8054999999999999
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 10,
+    "price": 1.8091470588235292
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 11,
+    "price": 1.7761666666666664
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 12,
+    "price": 1.8008181818181819
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 13,
+    "price": 1.805923076923077
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 14,
+    "price": 1.7704516129032257
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 15,
+    "price": 1.8154583333333332
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 16,
+    "price": 1.7730277777777779
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 17,
+    "price": 1.7588684210526317
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 18,
+    "price": 1.752921568627451
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 19,
+    "price": 1.758491525423729
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 20,
+    "price": 1.7488214285714285
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 21,
+    "price": 1.725078431372549
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 22,
+    "price": 1.739
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "hour": 23,
+    "price": 1.794862068965517
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 0,
+    "price": 1.879
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 5,
+    "price": 1.7523333333333333
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 6,
+    "price": 1.7879999999999998
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 7,
+    "price": 1.699
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 8,
+    "price": 1.7215
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 9,
+    "price": 1.771857142857143
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 10,
+    "price": 1.719
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 12,
+    "price": 1.781857142857143
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 13,
+    "price": 1.7134444444444445
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 14,
+    "price": 1.7315
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 15,
+    "price": 1.7545555555555556
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 16,
+    "price": 1.696777777777778
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 17,
+    "price": 1.7523333333333335
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 18,
+    "price": 1.7367777777777778
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 19,
+    "price": 1.729
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 20,
+    "price": 1.7129999999999999
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 22,
+    "price": 1.799
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "hour": 23,
+    "price": 1.737
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 0,
+    "price": 1.759
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 1,
+    "price": 1.729
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 5,
+    "price": 1.7528095238095236
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 6,
+    "price": 1.7762
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 7,
+    "price": 1.819
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 8,
+    "price": 1.7905625
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 9,
+    "price": 1.7785
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 10,
+    "price": 1.7645172413793104
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 11,
+    "price": 1.7745172413793102
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 12,
+    "price": 1.7856666666666667
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 13,
+    "price": 1.772095238095238
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 14,
+    "price": 1.7553636363636365
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 15,
+    "price": 1.794625
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 16,
+    "price": 1.7536341463414635
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 17,
+    "price": 1.7704285714285715
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 18,
+    "price": 1.7283939393939394
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 19,
+    "price": 1.735
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 20,
+    "price": 1.7129999999999999
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 21,
+    "price": 1.6876666666666666
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 22,
+    "price": 1.699
+  },
+  {
+    "station_name": "RAN Station",
+    "hour": 23,
+    "price": 1.7109999999999999
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 5,
+    "price": 1.826142857142857
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 6,
+    "price": 1.869
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 7,
+    "price": 1.849
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 8,
+    "price": 1.7917272727272726
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 9,
+    "price": 1.799
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 10,
+    "price": 1.7754285714285716
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 11,
+    "price": 1.748090909090909
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 12,
+    "price": 1.7890000000000001
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 13,
+    "price": 1.772529411764706
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 14,
+    "price": 1.74525
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 15,
+    "price": 1.7869999999999997
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 16,
+    "price": 1.755842105263158
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 17,
+    "price": 1.7461428571428572
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 18,
+    "price": 1.762
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 19,
+    "price": 1.7423333333333335
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 20,
+    "price": 1.7382857142857144
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 21,
+    "price": 1.729
+  },
+  {
+    "station_name": "STUTTGART - HEDELFINGER STR.",
+    "hour": 22,
+    "price": 1.7530000000000001
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 5,
+    "price": 1.8375714285714284
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 6,
+    "price": 1.879
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 7,
+    "price": 1.859
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 8,
+    "price": 1.83525
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 9,
+    "price": 1.879
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 10,
+    "price": 1.8226363636363636
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 11,
+    "price": 1.7831666666666666
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 12,
+    "price": 1.841
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 13,
+    "price": 1.799
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 14,
+    "price": 1.779
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 15,
+    "price": 1.8350000000000002
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 16,
+    "price": 1.776857142857143
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 17,
+    "price": 1.779
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 18,
+    "price": 1.7465000000000002
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 19,
+    "price": 1.759
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 20,
+    "price": 1.7565
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 21,
+    "price": 1.7400000000000002
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 22,
+    "price": 1.7730000000000001
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "hour": 23,
+    "price": 1.829
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 5,
+    "price": 1.709
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 6,
+    "price": 1.834
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 7,
+    "price": 1.8465
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 8,
+    "price": 1.8356666666666666
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 9,
+    "price": 1.907
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 10,
+    "price": 1.8523333333333332
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 11,
+    "price": 1.789
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 12,
+    "price": 1.8210000000000002
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 13,
+    "price": 1.7926363636363634
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 14,
+    "price": 1.764
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 15,
+    "price": 1.795
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 16,
+    "price": 1.7456666666666667
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 17,
+    "price": 1.7504285714285714
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 18,
+    "price": 1.739
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 19,
+    "price": 1.7532857142857143
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 20,
+    "price": 1.717
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 21,
+    "price": 1.689
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 22,
+    "price": 1.7469999999999999
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "hour": 23,
+    "price": 1.7323333333333333
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 5,
+    "price": 1.7990000000000002
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 6,
+    "price": 1.8332857142857144
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 7,
+    "price": 1.859
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 8,
+    "price": 1.8075185185185185
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 9,
+    "price": 1.7723333333333333
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 10,
+    "price": 1.7865
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 11,
+    "price": 1.759
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 12,
+    "price": 1.78
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 13,
+    "price": 1.78775
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 14,
+    "price": 1.761
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 15,
+    "price": 1.7948333333333333
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 16,
+    "price": 1.766727272727273
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 17,
+    "price": 1.7598333333333331
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 18,
+    "price": 1.751857142857143
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 19,
+    "price": 1.76275
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 20,
+    "price": 1.7596666666666667
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 21,
+    "price": 1.7431666666666665
+  },
+  {
+    "station_name": "STUTTGART - WELFENSTRASSE 32",
+    "hour": 23,
+    "price": 1.7710000000000001
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 0,
+    "price": 1.849
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 5,
+    "price": 1.791
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 6,
+    "price": 1.859
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 7,
+    "price": 1.82025
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 8,
+    "price": 1.8075714285714284
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 9,
+    "price": 1.8335454545454546
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 10,
+    "price": 1.8023333333333333
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 11,
+    "price": 1.7710000000000001
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 12,
+    "price": 1.7719999999999998
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 13,
+    "price": 1.7861428571428573
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 14,
+    "price": 1.7498333333333334
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 15,
+    "price": 1.769
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 16,
+    "price": 1.7417777777777779
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 17,
+    "price": 1.7466923076923078
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 18,
+    "price": 1.7223333333333333
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 19,
+    "price": 1.7590000000000001
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 20,
+    "price": 1.7331666666666667
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 21,
+    "price": 1.7165000000000001
+  },
+  {
+    "station_name": "Sprint",
+    "hour": 23,
+    "price": 1.759
+  }
+]

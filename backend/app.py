@@ -22,9 +22,12 @@ def serve_static(path):
 @app.route('/api/data/daily')
 def get_daily_data():
     try:
-        df = pd.read_parquet(os.path.join(DATA_DIR, 'data_daily.parquet'))
-        # Limit for performance if needed, or aggregate
-        # For charts, we might want full history or filtered
+        year = request.args.get('year', default=2024, type=int)
+        file_path = os.path.join(DATA_DIR, f'data_daily_{year}.parquet')
+        if not os.path.exists(file_path):
+            return jsonify({"error": f"Data for year {year} not found"}), 404
+            
+        df = pd.read_parquet(file_path)
         return jsonify(df.to_dict(orient='records'))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -32,7 +35,12 @@ def get_daily_data():
 @app.route('/api/data/weekly')
 def get_weekly_data():
     try:
-        df = pd.read_parquet(os.path.join(DATA_DIR, 'data_weekly.parquet'))
+        year = request.args.get('year', default=2024, type=int)
+        file_path = os.path.join(DATA_DIR, f'data_weekly_{year}.parquet')
+        if not os.path.exists(file_path):
+            return jsonify({"error": f"Data for year {year} not found"}), 404
+            
+        df = pd.read_parquet(file_path)
         return jsonify(df.to_dict(orient='records'))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -40,7 +48,12 @@ def get_weekly_data():
 @app.route('/api/data/monthly')
 def get_monthly_data():
     try:
-        df = pd.read_parquet(os.path.join(DATA_DIR, 'data_monthly.parquet'))
+        year = request.args.get('year', default=2024, type=int)
+        file_path = os.path.join(DATA_DIR, f'data_monthly_{year}.parquet')
+        if not os.path.exists(file_path):
+            return jsonify({"error": f"Data for year {year} not found"}), 404
+            
+        df = pd.read_parquet(file_path)
         return jsonify(df.to_dict(orient='records'))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -61,7 +74,13 @@ def get_regional_data():
 
         # 2. Fallback: Slow Calculation
         print("Cache miss or no year, calculating...")
-        df = pd.read_parquet(os.path.join(DATA_DIR, 'data_daily.parquet'))
+        target_year = year if year else 2024
+        parquet_file = os.path.join(DATA_DIR, f'data_daily_{target_year}.parquet')
+        
+        if not os.path.exists(parquet_file):
+             return jsonify({"error": f"Data for year {target_year} not found"}), 404
+             
+        df = pd.read_parquet(parquet_file)
         
         if 'date' in df.columns:
             df['date'] = pd.to_datetime(df['date'])
@@ -99,6 +118,45 @@ def get_states_geo():
         return send_from_directory(geo_dir, 'states.geojson')
     except Exception as e:
         return jsonify({"error": str(e)}), 404
+
+@app.route('/api/data/history')
+def get_region_history():
+    try:
+        year = request.args.get('year', type=int)
+        plz = request.args.get('plz', type=str) # string to preserve leading zeros if needed
+        
+        if not plz:
+            return jsonify({"error": "Missing PLZ"}), 400
+
+        # Read Data (using daily for granularity, then agg to month)
+        df = pd.read_parquet(os.path.join(DATA_DIR, 'data_daily.parquet'))
+        
+        if 'date' in df.columns:
+            df['date'] = pd.to_datetime(df['date'])
+            if year:
+                df = df[df['date'].dt.year == year]
+        
+        # Filter by Region (PLZ2)
+        # Ensure string comparison
+        df['region_plz2'] = df['region_plz2'].astype(str)
+        df = df[df['region_plz2'] == str(plz)]
+
+        if df.empty:
+            return jsonify([])
+
+        # Add Month
+        df['month'] = df['date'].dt.month
+        
+        # Group by Month + Fuel
+        agg = df.groupby(['month', 'fuel'])['price_mean'].mean().reset_index()
+        
+        # Pivot: Index=Month, Cols=Fuel
+        pivot = agg.pivot(index='month', columns='fuel', values='price_mean').reset_index()
+        
+        return jsonify(pivot.to_dict(orient='records'))
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     print("Starting Flask Server on Port 5000...")

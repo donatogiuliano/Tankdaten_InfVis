@@ -1,0 +1,3502 @@
+[
+  {
+    "station_name": "Willigs Neu- und Gebrauchtwagenhandel Bad Krozingen",
+    "city": "Bad Krozingen",
+    "latitude": 47.92292,
+    "longitude": 7.70725,
+    "price": 1.6892083333333332
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Landau",
+    "latitude": 49.192554,
+    "longitude": 8.142516,
+    "price": 1.7740413223140494
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "KOENGEN",
+    "latitude": 48.682236,
+    "longitude": 9.369722,
+    "price": 1.7265534591194969
+  },
+  {
+    "station_name": "Shell Sindelfingen Neckarstr. 10",
+    "city": "Sindelfingen",
+    "latitude": 48.703241,
+    "longitude": 9.004975,
+    "price": 1.7701643835616439
+  },
+  {
+    "station_name": "TotalEnergies Truckstop Biebelried",
+    "city": "Biebelried",
+    "latitude": 49.766781,
+    "longitude": 10.075597,
+    "price": 1.7226923076923077
+  },
+  {
+    "station_name": "Riegger Tankpunkt Vockenhausen",
+    "city": "VS-Villingen",
+    "latitude": 48.0865675,
+    "longitude": 8.4457837,
+    "price": 1.6977755102040817
+  },
+  {
+    "station_name": "SB Stuttgart Hackstraße 6",
+    "city": "Stuttgart",
+    "latitude": 48.789095,
+    "longitude": 9.197897,
+    "price": 1.7116315789473684
+  },
+  {
+    "station_name": "Shell Aspach Siemensstr. 15",
+    "city": "Aspach",
+    "latitude": 48.97163,
+    "longitude": 9.386886,
+    "price": 1.762157894736842
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Ichenhausen",
+    "latitude": 48.374,
+    "longitude": 10.311301,
+    "price": 1.699618556701031
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bad Waldsee",
+    "latitude": 47.87763,
+    "longitude": 9.70462,
+    "price": 1.7591612903225806
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "NEUENSTEIN",
+    "latitude": 49.206508,
+    "longitude": 9.640956,
+    "price": 2.230244897959184
+  },
+  {
+    "station_name": "JET EISENBERG AM GIELBRUNNEN 43",
+    "city": "EISENBERG",
+    "latitude": 49.55801,
+    "longitude": 8.08454,
+    "price": 1.7098695652173914
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Otterbach",
+    "latitude": 49.482838,
+    "longitude": 7.730862,
+    "price": 1.7252280701754388
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle FREIBURG SANKT-GEORGENER-STR. 2",
+    "city": "FREIBURG",
+    "latitude": 47.98812,
+    "longitude": 7.79859,
+    "price": 1.652855421686747
+  },
+  {
+    "station_name": "Schneeberg",
+    "city": "Schneeberg",
+    "latitude": 49.641,
+    "longitude": 9.25558,
+    "price": 1.6951702127659576
+  },
+  {
+    "station_name": "JET BIETIGHEIM-BISSINGEN GUSTAV-RAU-STR. 14",
+    "city": "BIETIGHEIM-BISSINGEN",
+    "latitude": 48.94996,
+    "longitude": 9.14803,
+    "price": 1.726719298245614
+  },
+  {
+    "station_name": "tankpoint Tankstelle",
+    "city": "Schorndorf",
+    "latitude": 48.80473,
+    "longitude": 9.535493,
+    "price": 1.7205483870967742
+  },
+  {
+    "station_name": "Shell Deizisau Seewiesenweg 5",
+    "city": "Deizisau",
+    "latitude": 48.714909,
+    "longitude": 9.377562,
+    "price": 1.7167272727272727
+  },
+  {
+    "station_name": "ENI",
+    "city": "Reutlingen-Sondelf.",
+    "latitude": 48.51504,
+    "longitude": 9.22598,
+    "price": 1.7292450980392158
+  },
+  {
+    "station_name": "Freie Tankstelle / Autohaus",
+    "city": "Heimsheim",
+    "latitude": 48.805464,
+    "longitude": 8.868585,
+    "price": 1.718
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Bad Überkingen-Hausen",
+    "latitude": 48.6057,
+    "longitude": 9.76001,
+    "price": 1.678943181818182
+  },
+  {
+    "station_name": "Silke Schreiner",
+    "city": "Freinsheim",
+    "latitude": 49.5073,
+    "longitude": 8.2175,
+    "price": 1.7342380952380954
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "TRIBERG",
+    "latitude": 48.136411,
+    "longitude": 8.236764,
+    "price": 1.7232071005917158
+  },
+  {
+    "station_name": "Leyh GmbH",
+    "city": "Satteldorf",
+    "latitude": 49.171817,
+    "longitude": 10.076473,
+    "price": 1.730818181818182
+  },
+  {
+    "station_name": "bft-Tankstelle Oel- Heimburger GmbH Villingendorf",
+    "city": "Villingendorf ",
+    "latitude": 48.19814,
+    "longitude": 8.59367,
+    "price": 1.767258064516129
+  },
+  {
+    "station_name": "Elan Hirschberg",
+    "city": "Hirschberg",
+    "latitude": 49.510935,
+    "longitude": 8.655649,
+    "price": 1.6871818181818183
+  },
+  {
+    "station_name": "914 Oberdachstetten(CLASSIC)",
+    "city": "Oberdachstetten",
+    "latitude": 49.41507,
+    "longitude": 10.42254,
+    "price": 1.7242892561983472
+  },
+  {
+    "station_name": "TotalEnergies Mannheim",
+    "city": "Mannheim",
+    "latitude": 49.513342,
+    "longitude": 8.484253,
+    "price": 1.702939393939394
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Immenstadt",
+    "latitude": 47.56337,
+    "longitude": 10.22639,
+    "price": 1.7109999999999999
+  },
+  {
+    "station_name": "Shell Kirchardt Sinsheimer Str. 28",
+    "city": "Kirchardt",
+    "latitude": 49.208005,
+    "longitude": 8.989612,
+    "price": 1.6986
+  },
+  {
+    "station_name": "Bad Wildbad (75323), Kernerstrasse 127",
+    "city": "Bad Wildbad",
+    "latitude": 48.7419,
+    "longitude": 8.5479,
+    "price": 1.6982696629213485
+  },
+  {
+    "station_name": "AVIA Bisingen",
+    "city": "Bisingen",
+    "latitude": 48.3055,
+    "longitude": 8.9225,
+    "price": 1.7336308724832212
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Kehl",
+    "latitude": 48.575546,
+    "longitude": 7.81747,
+    "price": 1.761695652173913
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "FREIBURG",
+    "latitude": 47.98017,
+    "longitude": 7.791292,
+    "price": 1.6814093567251462
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "OBERBOIHINGEN",
+    "latitude": 48.653969,
+    "longitude": 9.36638,
+    "price": 1.7158294117647062
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "NEU-ULM",
+    "latitude": 48.392568,
+    "longitude": 10.009206,
+    "price": 1.687054347826087
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Mühlhausen",
+    "latitude": 49.2482,
+    "longitude": 8.735032,
+    "price": 1.6734174757281552
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Salem-Neufrach",
+    "latitude": 47.75969,
+    "longitude": 9.310085,
+    "price": 1.7555957446808512
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "BISINGEN",
+    "latitude": 48.319657,
+    "longitude": 8.913003,
+    "price": 1.7415231788079473
+  },
+  {
+    "station_name": "bft-Tankstelle Seitz",
+    "city": "Edingen-Neckarhausen",
+    "latitude": 49.449867,
+    "longitude": 8.607568,
+    "price": 1.744
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle GOMARINGEN OHMENHAEUSER STR. 15",
+    "city": "GOMARINGEN",
+    "latitude": 48.46109,
+    "longitude": 9.10497,
+    "price": 1.7086938775510203
+  },
+  {
+    "station_name": "STUTTGART - NUERNBERGER STR.",
+    "city": "Stuttgart",
+    "latitude": 48.80584,
+    "longitude": 9.23343,
+    "price": 1.7184557823129252
+  },
+  {
+    "station_name": "Shell Schwaebisch-Hall Stuttgarter Str 153-157",
+    "city": "Schwaebisch-Hall",
+    "latitude": 49.10567,
+    "longitude": 9.701301,
+    "price": 1.7281379310344827
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "FRIEDRICHSHAFEN",
+    "latitude": 47.652412,
+    "longitude": 9.48372,
+    "price": 1.7473392857142858
+  },
+  {
+    "station_name": "Harald Henn",
+    "city": "Ladenburg",
+    "latitude": 49.4718,
+    "longitude": 8.6184,
+    "price": 1.707550724637681
+  },
+  {
+    "station_name": "Stuttgart",
+    "city": "Stuttgart",
+    "latitude": 48.814924,
+    "longitude": 9.1779963,
+    "price": 1.729236220472441
+  },
+  {
+    "station_name": "Tankstelle am E Center",
+    "city": "Lampertheim",
+    "latitude": 49.597163,
+    "longitude": 8.487023,
+    "price": 1.711909090909091
+  },
+  {
+    "station_name": "AVIA XPress",
+    "city": "Heilbronn-Kirchhausen",
+    "latitude": 49.18143,
+    "longitude": 9.115067,
+    "price": 1.7078535031847133
+  },
+  {
+    "station_name": "TotalEnergies Stuttgart",
+    "city": "Stuttgart",
+    "latitude": 48.806115,
+    "longitude": 9.2324,
+    "price": 1.7302820512820514
+  },
+  {
+    "station_name": "V-Markt Burgau",
+    "city": "Burgau",
+    "latitude": 48.42678,
+    "longitude": 10.41814,
+    "price": 1.6823333333333335
+  },
+  {
+    "station_name": "Sb Freudental Pforzheimer Straße 34",
+    "city": "Freudental",
+    "latitude": 49.0079,
+    "longitude": 9.05775,
+    "price": 1.707679245283019
+  },
+  {
+    "station_name": "RAN Station",
+    "city": "Biberach",
+    "latitude": 48.0917,
+    "longitude": 9.7956,
+    "price": 1.7245357142857143
+  },
+  {
+    "station_name": "Giovanni Brucculeri",
+    "city": "Mannheim",
+    "latitude": 49.4491,
+    "longitude": 8.5021,
+    "price": 1.7101111111111111
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Radolfzell",
+    "latitude": 47.741592,
+    "longitude": 8.95478,
+    "price": 1.7873229813664597
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Marxzell",
+    "latitude": 48.86382,
+    "longitude": 8.447864,
+    "price": 1.747447204968944
+  },
+  {
+    "station_name": "Karl Bossler GmbH",
+    "city": "Dettingen u. Teck",
+    "latitude": 48.621342,
+    "longitude": 9.453675,
+    "price": 1.7265324675324676
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Worms",
+    "latitude": 49.646156,
+    "longitude": 8.349439,
+    "price": 1.75290625
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Rot am See",
+    "latitude": 49.24707,
+    "longitude": 10.028508,
+    "price": 1.7348771929824562
+  },
+  {
+    "station_name": "Bft Speyer Landauer Straße 71",
+    "city": "Speyer",
+    "latitude": 49.30821,
+    "longitude": 8.423204,
+    "price": 1.697532110091743
+  },
+  {
+    "station_name": "JET WEINHEIM GRUNDELBACHSTR. 16-18",
+    "city": "WEINHEIM",
+    "latitude": 49.54748,
+    "longitude": 8.67452,
+    "price": 1.6923962264150945
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Oberrot",
+    "latitude": 49.01218,
+    "longitude": 9.67523,
+    "price": 1.7173739837398374
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Worms",
+    "latitude": 49.631912,
+    "longitude": 8.347308,
+    "price": 1.7533410852713178
+  },
+  {
+    "station_name": "Shell Leinfelden-Echterdingen Stuttgarter Str 6",
+    "city": "Leinfelden-Echterdingen",
+    "latitude": 48.694023,
+    "longitude": 9.138979,
+    "price": 1.7394430379746835
+  },
+  {
+    "station_name": "TotalEnergies Esslingen",
+    "city": "Esslingen",
+    "latitude": 48.739577,
+    "longitude": 9.319722,
+    "price": 1.7023333333333335
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Frickenhausen",
+    "latitude": 48.58231,
+    "longitude": 9.368684,
+    "price": 1.734
+  },
+  {
+    "station_name": "Hänßel Mineralöl GmbH",
+    "city": "Rheinmünster",
+    "latitude": 48.777142,
+    "longitude": 8.092515,
+    "price": 1.7338387096774195
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "city": "Ludwigsburg",
+    "latitude": 48.880212,
+    "longitude": 9.218223,
+    "price": 1.6806410256410258
+  },
+  {
+    "station_name": "Holzgerlingen, Im Dörnach 1",
+    "city": "Holzgerlingen",
+    "latitude": 48.639682,
+    "longitude": 9.006324,
+    "price": 1.7336478873239436
+  },
+  {
+    "station_name": "ED-Öhringen Süd",
+    "city": "Öhringen",
+    "latitude": 49.1964818,
+    "longitude": 9.5004003,
+    "price": 1.7548771929824563
+  },
+  {
+    "station_name": "Tankstelle Bloechliger GmbH",
+    "city": "Kirrlach",
+    "latitude": 49.251178741455,
+    "longitude": 8.5408201217651,
+    "price": 1.6593795620437957
+  },
+  {
+    "station_name": "MTB Tankstelle",
+    "city": "Zell unter Aichelberg",
+    "latitude": 48.6519249,
+    "longitude": 9.5722607,
+    "price": 1.6472380952380954
+  },
+  {
+    "station_name": "TotalEnergies Autohof Hirschberg",
+    "city": "Hirschberg",
+    "latitude": 49.507398,
+    "longitude": 8.636922,
+    "price": 1.706956989247312
+  },
+  {
+    "station_name": "JET FRANKENTHAL MAHLASTR. 89",
+    "city": "FRANKENTHAL",
+    "latitude": 49.52176,
+    "longitude": 8.35498,
+    "price": 1.7197936507936509
+  },
+  {
+    "station_name": "Tankstelle Denner",
+    "city": "Königseggwald",
+    "latitude": 47.929532,
+    "longitude": 9.419494,
+    "price": 1.739
+  },
+  {
+    "station_name": "ENI",
+    "city": "Muensingen",
+    "latitude": 48.41539,
+    "longitude": 9.47401,
+    "price": 1.6938148148148149
+  },
+  {
+    "station_name": "Shell Jettingen-Scheppach Robert-Bosch-Str. 10",
+    "city": "Jettingen-Scheppach",
+    "latitude": 48.411228,
+    "longitude": 10.439988,
+    "price": 1.7335512820512822
+  },
+  {
+    "station_name": "AGROA Raiffeisen eG",
+    "city": "Affalterbach",
+    "latitude": 48.920868,
+    "longitude": 9.329652,
+    "price": 1.7107910447761194
+  },
+  {
+    "station_name": "ZG Raiffeisen Tankstelle Albbruck",
+    "city": "Albbruck",
+    "latitude": 47.59474,
+    "longitude": 8.138899,
+    "price": 1.7625858585858587
+  },
+  {
+    "station_name": "CLASSIC Langenbrombach",
+    "city": "Langenbrombach",
+    "latitude": 49.7211,
+    "longitude": 8.94843,
+    "price": 1.6980291262135923
+  },
+  {
+    "station_name": "Giovanni Brucculeri",
+    "city": "Ludwigshafen",
+    "latitude": 49.457,
+    "longitude": 8.4002,
+    "price": 1.6964782608695652
+  },
+  {
+    "station_name": "Thaleischweiler-Fröschen, Gewerbege",
+    "city": "Thaleischweiler-Fröschen",
+    "latitude": 49.26708611,
+    "longitude": 7.59251667,
+    "price": 1.709090909090909
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "HEIDELBERG",
+    "latitude": 49.38726,
+    "longitude": 8.662003,
+    "price": 1.7168858695652174
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Gaisbach",
+    "latitude": 49.25546,
+    "longitude": 9.680309,
+    "price": 1.7734999999999999
+  },
+  {
+    "station_name": "Shell Kuhardt Rheinstr. 20",
+    "city": "Kuhardt",
+    "latitude": 49.143947,
+    "longitude": 8.319175,
+    "price": 1.7057226890756303
+  },
+  {
+    "station_name": "Shell Balingen Tübinger Str. 72",
+    "city": "Balingen",
+    "latitude": 48.280702,
+    "longitude": 8.859389,
+    "price": 1.7447971014492754
+  },
+  {
+    "station_name": "Shell Geisingen Bodenseestr. B31/B33 ",
+    "city": "Geisingen",
+    "latitude": 47.917227,
+    "longitude": 8.667885,
+    "price": 1.757253968253968
+  },
+  {
+    "station_name": "SB-Markttankstelle Steinheim Steinbeisstr.",
+    "city": "Steinheim",
+    "latitude": 48.97128,
+    "longitude": 9.265885,
+    "price": 1.7085000000000001
+  },
+  {
+    "station_name": "BK-Tankstelle Manfred Maier",
+    "city": "Ottobeuren",
+    "latitude": 47.94701,
+    "longitude": 10.28942,
+    "price": 1.719
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "BAD WINDSHEIM",
+    "latitude": 49.501684,
+    "longitude": 10.424544,
+    "price": 1.7178944444444444
+  },
+  {
+    "station_name": "Bühl, Industriestraße 18",
+    "city": "Bühl",
+    "latitude": 48.70624,
+    "longitude": 8.126696,
+    "price": 1.7179473684210524
+  },
+  {
+    "station_name": "AVIA Alpirsbach",
+    "city": "Alpirsbach",
+    "latitude": 48.3438,
+    "longitude": 8.39998,
+    "price": 1.701831325301205
+  },
+  {
+    "station_name": "Shell Villingen-Schwenningen Villinger Str. 144",
+    "city": "Villingen-Schwenningen",
+    "latitude": 48.063025,
+    "longitude": 8.513218,
+    "price": 1.7454285714285716
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Schwäbisch Gmünd",
+    "latitude": 48.802795,
+    "longitude": 9.797567,
+    "price": 1.7326805555555556
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bad Buchau",
+    "latitude": 48.059895,
+    "longitude": 9.594575,
+    "price": 1.7681397849462364
+  },
+  {
+    "station_name": "Aral Tankstelle, BAT Alsbach",
+    "city": "Alsbach-Hähnlein",
+    "latitude": 49.733063,
+    "longitude": 8.591964,
+    "price": 2.199
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Lambsheim",
+    "latitude": 49.50482,
+    "longitude": 8.291397,
+    "price": 1.7508181818181818
+  },
+  {
+    "station_name": "BAD KROZINGEN - FREIBURGER STR. 1",
+    "city": "Bad Krozingen",
+    "latitude": 47.91904,
+    "longitude": 7.70299,
+    "price": 1.7032696629213484
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "WEINSBERG",
+    "latitude": 49.150205,
+    "longitude": 9.295875,
+    "price": 1.727462857142857
+  },
+  {
+    "station_name": "Pinoil",
+    "city": "Memmingen",
+    "latitude": 47.97997,
+    "longitude": 10.171886,
+    "price": 1.7317388535031846
+  },
+  {
+    "station_name": "TotalEnergies Waiblingen",
+    "city": "Waiblingen",
+    "latitude": 48.852901,
+    "longitude": 9.296984,
+    "price": 1.7042307692307692
+  },
+  {
+    "station_name": "Bft Leinfelden",
+    "city": "Leinfelden",
+    "latitude": 48.70548,
+    "longitude": 9.143975,
+    "price": 1.7264545454545455
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Höfen",
+    "latitude": 48.80803,
+    "longitude": 8.58397,
+    "price": 1.730271186440678
+  },
+  {
+    "station_name": "AVIA Backnang",
+    "city": "Backnang",
+    "latitude": 48.9499,
+    "longitude": 9.42114,
+    "price": 1.773025974025974
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Wiesentheid",
+    "latitude": 49.78586,
+    "longitude": 10.33994,
+    "price": 1.7294329004329005
+  },
+  {
+    "station_name": "Trigema Tankstelle Altshausen",
+    "city": "Altshausen",
+    "latitude": 47.92416,
+    "longitude": 9.53479,
+    "price": 1.649
+  },
+  {
+    "station_name": "JET CRAILSHEIM ELLWANGER STR. 42",
+    "city": "CRAILSHEIM",
+    "latitude": 49.13089,
+    "longitude": 10.07721,
+    "price": 1.7270645161290323
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "PFINZTAL",
+    "latitude": 49.004485,
+    "longitude": 8.518457,
+    "price": 1.740376712328767
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Schwarzach",
+    "latitude": 49.78962,
+    "longitude": 10.215601,
+    "price": 1.7294
+  },
+  {
+    "station_name": "JET DORNSTADT LERCHENBERGSTR. 7",
+    "city": "DORNSTADT",
+    "latitude": 48.46587,
+    "longitude": 9.94748,
+    "price": 1.6864803149606298
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "SINDELFINGEN",
+    "latitude": 48.707452,
+    "longitude": 9.031415,
+    "price": 1.763456043956044
+  },
+  {
+    "station_name": "ECO Tankstation",
+    "city": "Messkirch",
+    "latitude": 47.992141723633,
+    "longitude": 9.0865421295166,
+    "price": 1.6664074074074076
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Neresheim",
+    "latitude": 48.754295,
+    "longitude": 10.336607,
+    "price": 1.7454028776978416
+  },
+  {
+    "station_name": "CRAILSHEIM-ROSSFELD - HALLER STR. 2",
+    "city": "Crailsheim-Rossfeld",
+    "latitude": 49.139422,
+    "longitude": 10.026471,
+    "price": 1.7416315789473684
+  },
+  {
+    "station_name": "Udo Henrich",
+    "city": "Glanbrücken",
+    "latitude": 49.6123,
+    "longitude": 7.5289,
+    "price": 1.7006666666666668
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Ludwigshafen",
+    "latitude": 49.49206,
+    "longitude": 8.383311,
+    "price": 1.7397142857142858
+  },
+  {
+    "station_name": "Stefan Schmid",
+    "city": "Hohentengen",
+    "latitude": 48.03528,
+    "longitude": 9.36961,
+    "price": 1.7096666666666667
+  },
+  {
+    "station_name": "JAF TANK GmbH",
+    "city": "Speyer",
+    "latitude": 49.323661,
+    "longitude": 8.446009,
+    "price": 1.700065573770492
+  },
+  {
+    "station_name": "ZG Raiffeisen/Honeck-Waldschütz Tanstelle Lahr",
+    "city": "Lahr-Mietersheim",
+    "latitude": 48.33157,
+    "longitude": 7.845663,
+    "price": 1.7105853658536585
+  },
+  {
+    "station_name": "Shell Heilbronn Allee 80",
+    "city": "Heilbronn",
+    "latitude": 49.145767,
+    "longitude": 9.223725,
+    "price": 1.730181818181818
+  },
+  {
+    "station_name": "TP-Tankstelle Brötzingen",
+    "city": "Pforzheim",
+    "latitude": 48.889618,
+    "longitude": 8.665294,
+    "price": 1.7086551724137933
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Frankenthal",
+    "latitude": 49.52605,
+    "longitude": 8.354932,
+    "price": 1.7512047244094489
+  },
+  {
+    "station_name": "Shell Alzey Bahnhofstr. 81",
+    "city": "Alzey",
+    "latitude": 49.746588,
+    "longitude": 8.106635,
+    "price": 1.7342439024390244
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bruchsal",
+    "latitude": 49.08014,
+    "longitude": 8.549252,
+    "price": 1.7102698412698412
+  },
+  {
+    "station_name": "PS-Laden Tankstelle Max Hagmeyer e.K",
+    "city": "Amstetten",
+    "latitude": 48.573881,
+    "longitude": 9.877417,
+    "price": 1.6923333333333332
+  },
+  {
+    "station_name": "Tankcenter Elztal",
+    "city": "Elztal",
+    "latitude": 49.388617,
+    "longitude": 9.193242,
+    "price": 1.7063972602739728
+  },
+  {
+    "station_name": "Heinz Memmer",
+    "city": "Freckenfeld",
+    "latitude": 49.06866,
+    "longitude": 8.125779,
+    "price": 1.7578461538461538
+  },
+  {
+    "station_name": "Sixt-Tankstelle",
+    "city": "Madertal",
+    "latitude": 48.3676271,
+    "longitude": 10.123456,
+    "price": 1.809
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Tettnang",
+    "latitude": 47.668537,
+    "longitude": 9.56114,
+    "price": 1.7631000000000001
+  },
+  {
+    "station_name": "Shell Sindelfingen Berliner Str. 18",
+    "city": "Sindelfingen",
+    "latitude": 48.71832,
+    "longitude": 8.965096,
+    "price": 1.7338484848484848
+  },
+  {
+    "station_name": "Freie Tankstelle Asch",
+    "city": "Ammerbuch-Altingen",
+    "latitude": 48.565109,
+    "longitude": 8.908403,
+    "price": 1.7711985815602838
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "LANDSTUHL",
+    "latitude": 49.415203,
+    "longitude": 7.579874,
+    "price": 1.6781222222222223
+  },
+  {
+    "station_name": "JET LAUPHEIM KAESSBOHRERSTR. 2",
+    "city": "LAUPHEIM",
+    "latitude": 48.24142,
+    "longitude": 9.87421,
+    "price": 1.7050655737704918
+  },
+  {
+    "station_name": "Shell Muehlacker Lienzingerstr. 76",
+    "city": "Muehlacker",
+    "latitude": 48.958489,
+    "longitude": 8.857699,
+    "price": 1.7236969696969697
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Rothenburg o.d.T.",
+    "latitude": 49.36757,
+    "longitude": 10.19603,
+    "price": 1.7662254335260117
+  },
+  {
+    "station_name": "AVIA Oberndorf",
+    "city": "Oberndorf",
+    "latitude": 48.3127,
+    "longitude": 8.56994,
+    "price": 1.6870645161290323
+  },
+  {
+    "station_name": "Tankcenter Sinzheim",
+    "city": "Sinzheim",
+    "latitude": 48.764402,
+    "longitude": 8.169496,
+    "price": 1.7316153846153848
+  },
+  {
+    "station_name": "ZG Raiffeisen Tankstelle Bühl",
+    "city": "Bühl Vimbuch",
+    "latitude": 48.71326,
+    "longitude": 8.120908,
+    "price": 1.7208279569892473
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Rottweil",
+    "latitude": 48.15331,
+    "longitude": 8.639625,
+    "price": 1.75755421686747
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bühl",
+    "latitude": 48.7021,
+    "longitude": 8.139317,
+    "price": 1.7593100775193797
+  },
+  {
+    "station_name": "AVIA XPress",
+    "city": "Bensheim",
+    "latitude": 49.69572,
+    "longitude": 8.660591,
+    "price": 1.7220909090909091
+  },
+  {
+    "station_name": "JET OFFENBURG OKENSTR. 76",
+    "city": "OFFENBURG",
+    "latitude": 48.4828,
+    "longitude": 7.94741,
+    "price": 1.7581129032258065
+  },
+  {
+    "station_name": "TotalEnergies Speyer",
+    "city": "Speyer",
+    "latitude": 49.337856,
+    "longitude": 8.429663,
+    "price": 1.7121451612903227
+  },
+  {
+    "station_name": "ZG Raiffeisen Tankstelle Meßkirch",
+    "city": "Meßkirch",
+    "latitude": 47.99583,
+    "longitude": 9.11574,
+    "price": 1.6403333333333334
+  },
+  {
+    "station_name": "V-Markt Illertissen",
+    "city": "Illertissen",
+    "latitude": 48.23068,
+    "longitude": 10.10018,
+    "price": 1.6840000000000002
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle EDINGEN-NECKARH. ROSENSTR. 70",
+    "city": "EDINGEN-NECKARH.",
+    "latitude": 49.45314,
+    "longitude": 8.58714,
+    "price": 1.700232876712329
+  },
+  {
+    "station_name": "Bad Bergzabern, Weinstr. 63",
+    "city": "Bad Bergzabern",
+    "latitude": 49.10106666,
+    "longitude": 8.00035,
+    "price": 1.6924108527131783
+  },
+  {
+    "station_name": "Shell Kaiserslautern Merkurstr. 20",
+    "city": "Kaiserslautern",
+    "latitude": 49.443273,
+    "longitude": 7.726655,
+    "price": 1.7045357142857145
+  },
+  {
+    "station_name": "TS LD Zweibrücker Str. 6",
+    "city": "Landau",
+    "latitude": 49.191827,
+    "longitude": 8.111852,
+    "price": 1.7624653465346534
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle LUDWIGSHAFEN OGGERSHEIM ODERSTR. 2",
+    "city": "LUDWIGSHAFEN OGGERSHEIM",
+    "latitude": 49.48872,
+    "longitude": 8.35119,
+    "price": 1.7057521367521369
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "MILTENBERG",
+    "latitude": 49.70478,
+    "longitude": 9.259041,
+    "price": 1.7196000000000002
+  },
+  {
+    "station_name": "Shell Reichenbach Stuttgarter Str. 84",
+    "city": "Reichenbach",
+    "latitude": 48.707949,
+    "longitude": 9.452944,
+    "price": 1.7213015873015873
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "SCHORNDORF",
+    "latitude": 48.813475,
+    "longitude": 9.525273,
+    "price": 1.7467668161434977
+  },
+  {
+    "station_name": "AVIA Rheinstetten",
+    "city": "Rheinstetten",
+    "latitude": 48.9746,
+    "longitude": 8.31436,
+    "price": 1.7232051282051282
+  },
+  {
+    "station_name": "Tankstelle Möbel Inhofer",
+    "city": "Senden",
+    "latitude": 48.32817,
+    "longitude": 10.03625,
+    "price": 1.6623333333333334
+  },
+  {
+    "station_name": "Shell Herbolzheim Breisgauallee 2",
+    "city": "Herbolzheim",
+    "latitude": 48.226961,
+    "longitude": 7.754698,
+    "price": 1.700793103448276
+  },
+  {
+    "station_name": "TotalEnergies Viernheim",
+    "city": "Viernheim",
+    "latitude": 49.54346,
+    "longitude": 8.574265,
+    "price": 1.703731182795699
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Elzach",
+    "latitude": 48.184723,
+    "longitude": 8.085626,
+    "price": 1.7131176470588236
+  },
+  {
+    "station_name": "Shell Babenhausen Bahnhofstr. 7",
+    "city": "Babenhausen",
+    "latitude": 48.140729,
+    "longitude": 10.248084,
+    "price": 1.721888888888889
+  },
+  {
+    "station_name": "Tankstelle Wertheim",
+    "city": "Wertheim",
+    "latitude": 49.763601,
+    "longitude": 9.510927,
+    "price": 1.712
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Feuchtwangen",
+    "latitude": 49.15665,
+    "longitude": 10.32987,
+    "price": 1.7625204081632653
+  },
+  {
+    "station_name": "BOMMER",
+    "city": "Überlingen",
+    "latitude": 47.775619506836,
+    "longitude": 9.1995887756348,
+    "price": 1.8051764705882352
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Worms",
+    "latitude": 49.654736,
+    "longitude": 8.359395,
+    "price": 1.7464193548387097
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "ULM",
+    "latitude": 48.397065,
+    "longitude": 9.976389,
+    "price": 1.7227848837209303
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Schwäbisch Hall",
+    "latitude": 49.09328,
+    "longitude": 9.838456,
+    "price": 1.7487142857142857
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Stuttgart-Möhringen",
+    "latitude": 48.71431845,
+    "longitude": 9.16586553,
+    "price": 1.7130119760479041
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "LANDAU",
+    "latitude": 49.19546,
+    "longitude": 8.10619,
+    "price": 1.774662857142857
+  },
+  {
+    "station_name": "Pinoil",
+    "city": "Roggenburg-Biberach",
+    "latitude": 48.288063,
+    "longitude": 10.213991,
+    "price": 1.689077519379845
+  },
+  {
+    "station_name": "Calpam Tankstelle",
+    "city": "Alsbach",
+    "latitude": 49.73656463623,
+    "longitude": 8.5666990280151,
+    "price": 0.9761706161137442
+  },
+  {
+    "station_name": "Shell Stuttgart Epplestr. 90-96",
+    "city": "Stuttgart",
+    "latitude": 48.74102,
+    "longitude": 9.169032,
+    "price": 1.7277333333333336
+  },
+  {
+    "station_name": "Shell Heilbronn Karl-Wuest-Str. 7",
+    "city": "Heilbronn",
+    "latitude": 49.169814,
+    "longitude": 9.211137,
+    "price": 1.7379719626168224
+  },
+  {
+    "station_name": "Shell Rottenburg/Neckar Schuhstr. 74",
+    "city": "Rottenburg/Neckar",
+    "latitude": 48.479485,
+    "longitude": 8.950249,
+    "price": 1.7526196319018406
+  },
+  {
+    "station_name": "BFT",
+    "city": "Wangen",
+    "latitude": 47.69018,
+    "longitude": 9.828876,
+    "price": 1.7137904191616768
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "NUERTINGEN",
+    "latitude": 48.633605,
+    "longitude": 9.328116,
+    "price": 1.7191974522292992
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Aalen-Fachsenfeld",
+    "latitude": 48.878487,
+    "longitude": 10.049996,
+    "price": 1.78518320610687
+  },
+  {
+    "station_name": "TotalEnergies Schutterwald",
+    "city": "Schutterwald",
+    "latitude": 48.465678,
+    "longitude": 7.879933,
+    "price": 1.754462962962963
+  },
+  {
+    "station_name": "MANNHEIM - MAGDEBURGER STRASSE",
+    "city": "Mannheim",
+    "latitude": 49.51429,
+    "longitude": 8.54696,
+    "price": 1.7009587628865979
+  },
+  {
+    "station_name": "Shell Sonthofen Oberstdorfer Str. 5 A",
+    "city": "Sonthofen",
+    "latitude": 47.507964,
+    "longitude": 10.275724,
+    "price": 1.7579655172413795
+  },
+  {
+    "station_name": "JET FRIEDRICHSHAFEN ZEPPELINSTR. 190",
+    "city": "FRIEDRICHSHAFEN",
+    "latitude": 47.66205,
+    "longitude": 9.43381,
+    "price": 1.7375567010309279
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Ludwigshafen",
+    "latitude": 49.51465,
+    "longitude": 8.40614,
+    "price": 1.7263743016759778
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "ENKENBACH-ALSENBORN",
+    "latitude": 49.489321,
+    "longitude": 7.897673,
+    "price": 1.729574561403509
+  },
+  {
+    "station_name": "AVIA Villingen-Schwenningen",
+    "city": "Villingen-Schwenningen",
+    "latitude": 48.0714,
+    "longitude": 8.4467,
+    "price": 1.6995940594059404
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle MUTTERSTADT AN DER FOHLENWEIDE 19",
+    "city": "MUTTERSTADT",
+    "latitude": 49.42533,
+    "longitude": 8.36537,
+    "price": 1.7038275862068966
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Pirmasens",
+    "latitude": 49.21394,
+    "longitude": 7.597454,
+    "price": 1.7266470588235294
+  },
+  {
+    "station_name": "BAD FRIEDRICHSHALL - HEILBRONNER ST",
+    "city": "Bad Friedrichshall",
+    "latitude": 49.21915,
+    "longitude": 9.21513,
+    "price": 1.7245
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Heubach",
+    "latitude": 48.79364,
+    "longitude": 9.930763,
+    "price": 1.7214742268041237
+  },
+  {
+    "station_name": "Shell Gschwend Gmuender Str. 43",
+    "city": "Gschwend",
+    "latitude": 48.930931,
+    "longitude": 9.741649,
+    "price": 1.7275620915032681
+  },
+  {
+    "station_name": "JET ERBACH MARTIN-LUTHER-STR. 16",
+    "city": "ERBACH",
+    "latitude": 49.66077,
+    "longitude": 8.9949,
+    "price": 1.6886428571428571
+  },
+  {
+    "station_name": "Kurt Ogrzall",
+    "city": "Klingenmünster",
+    "latitude": 49.1443,
+    "longitude": 8.02,
+    "price": 1.7167777777777777
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Stuttgart",
+    "latitude": 48.7232,
+    "longitude": 9.159887,
+    "price": 1.7335751633986929
+  },
+  {
+    "station_name": "Shell Immenstaad Am Bodensee Meersburger Str . 26",
+    "city": "Immenstaad Am Bodensee",
+    "latitude": 47.665557,
+    "longitude": 9.358859,
+    "price": 1.7643383458646618
+  },
+  {
+    "station_name": "MTB Tankstelle",
+    "city": "Flein",
+    "latitude": 49.1035572,
+    "longitude": 9.2035582,
+    "price": 1.7102587412587413
+  },
+  {
+    "station_name": "Shell Östringen Hauptstr. 3",
+    "city": "Östringen",
+    "latitude": 49.215361,
+    "longitude": 8.698949,
+    "price": 1.7021617647058824
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Schwetzingen",
+    "latitude": 49.377106,
+    "longitude": 8.560663,
+    "price": 1.6948119658119658
+  },
+  {
+    "station_name": "Tankstelle Englert",
+    "city": "Buchen",
+    "latitude": 49.52524,
+    "longitude": 9.32877,
+    "price": 1.703390243902439
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Weingarten",
+    "latitude": 47.81205,
+    "longitude": 9.64076,
+    "price": 1.7736017699115045
+  },
+  {
+    "station_name": "Shell Ostfildern Felix-Wankel-Str. 3",
+    "city": "Ostfildern",
+    "latitude": 48.713486,
+    "longitude": 9.308548,
+    "price": 1.7114175824175826
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "ELLWANGEN",
+    "latitude": 48.956235,
+    "longitude": 10.182571,
+    "price": 1.7314697674418607
+  },
+  {
+    "station_name": "Shell Grossbottwar Kleinaspacher St. 38",
+    "city": "Grossbottwar",
+    "latitude": 48.995613,
+    "longitude": 9.29771,
+    "price": 1.7292061855670104
+  },
+  {
+    "station_name": "TotalEnergies Reutlingen",
+    "city": "Reutlingen",
+    "latitude": 48.50397,
+    "longitude": 9.21235,
+    "price": 1.7269508196721313
+  },
+  {
+    "station_name": "Access Pforzheim",
+    "city": "Pforzheim",
+    "latitude": 48.883837,
+    "longitude": 8.699208,
+    "price": 1.6925714285714286
+  },
+  {
+    "station_name": "Schmitt-Müller GmbH&Co.KG",
+    "city": "Lorsch",
+    "latitude": 49.644339,
+    "longitude": 8.566569,
+    "price": 1.7248333333333334
+  },
+  {
+    "station_name": "Trigema Tankstelle Burladingen",
+    "city": "Burladingen",
+    "latitude": 48.29227,
+    "longitude": 9.0961,
+    "price": 1.659
+  },
+  {
+    "station_name": "AGROA Raiffeisen eG",
+    "city": "Eppingen",
+    "latitude": 49.13747,
+    "longitude": 8.927902,
+    "price": 1.6937572815533979
+  },
+  {
+    "station_name": "AVIA Ostrach",
+    "city": "Ostrach",
+    "latitude": 47.9516,
+    "longitude": 9.3835,
+    "price": 1.7202994350282486
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "PFORZHEIM",
+    "latitude": 48.88421714,
+    "longitude": 8.699204696,
+    "price": 1.7033314606741572
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Leipheim",
+    "latitude": 48.445885,
+    "longitude": 10.21254,
+    "price": 1.7096422018348625
+  },
+  {
+    "station_name": "TotalEnergies Pirmasens",
+    "city": "Pirmasens",
+    "latitude": 49.191867,
+    "longitude": 7.599652,
+    "price": 1.7157676767676766
+  },
+  {
+    "station_name": "JET TUTTLINGEN BAHNHOFSTR. 72",
+    "city": "TUTTLINGEN",
+    "latitude": 47.98261,
+    "longitude": 8.80833,
+    "price": 1.761016129032258
+  },
+  {
+    "station_name": "Autohaus Gall",
+    "city": "Kaisersbach",
+    "latitude": 48.928939819336,
+    "longitude": 9.6381921768188,
+    "price": 1.7356666666666667
+  },
+  {
+    "station_name": "Tankstelle Framke",
+    "city": "Trossingen",
+    "latitude": 48.07538,
+    "longitude": 8.62537,
+    "price": 1.7306666666666668
+  },
+  {
+    "station_name": "GENGENBACH - LEUTKIRCHSTR. 57",
+    "city": "Gengenbach",
+    "latitude": 48.409263,
+    "longitude": 8.008068,
+    "price": 1.727
+  },
+  {
+    "station_name": "JET REUTLINGEN KONRAD-ADENAUER-STR. 63",
+    "city": "REUTLINGEN",
+    "latitude": 48.49176,
+    "longitude": 9.19802,
+    "price": 1.7197784431137726
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "VILLINGEN-SCHWENNINGEN",
+    "latitude": 48.063857,
+    "longitude": 8.544588,
+    "price": 1.7390055865921787
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Sulzbach",
+    "latitude": 49.005062,
+    "longitude": 9.501942,
+    "price": 1.788264705882353
+  },
+  {
+    "station_name": "tankpoint Tankstelle",
+    "city": "Mauer",
+    "latitude": 49.3422737,
+    "longitude": 8.796946126,
+    "price": 1.7002987012987014
+  },
+  {
+    "station_name": "JET KAISERSLAUTERN MAINZER STR. 83",
+    "city": "KAISERSLAUTERN",
+    "latitude": 49.45304,
+    "longitude": 7.78833,
+    "price": 1.677827160493827
+  },
+  {
+    "station_name": "E-Center, Rossnagel",
+    "city": "Bruchsal",
+    "latitude": 49.1192,
+    "longitude": 8.576495,
+    "price": 1.6735303867403315
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Tuttlingen",
+    "latitude": 47.967968,
+    "longitude": 8.787334,
+    "price": 1.793299065420561
+  },
+  {
+    "station_name": "WINNENDEN - WAIBLINGER STRASSE 67",
+    "city": "Winnenden",
+    "latitude": 48.8732,
+    "longitude": 9.38895,
+    "price": 1.715771653543307
+  },
+  {
+    "station_name": "AVIA Xpress Automatenstation Deggenhausertal",
+    "city": "Deggenhausertal",
+    "latitude": 47.7811,
+    "longitude": 9.3911,
+    "price": 1.7508604651162791
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle HORB HAHNERSTR. 1",
+    "city": "HORB",
+    "latitude": 48.45741,
+    "longitude": 8.69756,
+    "price": 1.7217678571428572
+  },
+  {
+    "station_name": "ENI",
+    "city": "Kempten",
+    "latitude": 47.73111,
+    "longitude": 10.32634,
+    "price": 1.7383939393939394
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "MANNHEIM",
+    "latitude": 49.51409035,
+    "longitude": 8.507157706,
+    "price": 1.704892405063291
+  },
+  {
+    "station_name": "TotalEnergies Wildberg",
+    "city": "Wildberg",
+    "latitude": 48.636672,
+    "longitude": 8.746805,
+    "price": 1.7271250000000002
+  },
+  {
+    "station_name": "Schindele Handels GmbH & Co. KG",
+    "city": "Herbertingen",
+    "latitude": 48.063242,
+    "longitude": 9.4213534,
+    "price": 1.709
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Karlsbad",
+    "latitude": 48.917313,
+    "longitude": 8.499941,
+    "price": 1.76775
+  },
+  {
+    "station_name": "AVIA XPress",
+    "city": "Renchen",
+    "latitude": 48.58272,
+    "longitude": 8.006322,
+    "price": 1.7586103896103897
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Mannheim",
+    "latitude": 49.496582,
+    "longitude": 8.487706,
+    "price": 1.7537402597402598
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "WIESLOCH",
+    "latitude": 49.29177,
+    "longitude": 8.70202,
+    "price": 1.674490291262136
+  },
+  {
+    "station_name": "bft Tankstelle Autohaus Roll GmbH",
+    "city": "Schliengen",
+    "latitude": 47.763271,
+    "longitude": 7.578751,
+    "price": 1.74
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "SINDELFINGEN",
+    "latitude": 48.716042,
+    "longitude": 8.971585,
+    "price": 1.7142592592592591
+  },
+  {
+    "station_name": "REWE-Tankstelle",
+    "city": "Heppenheim",
+    "latitude": 49.637096,
+    "longitude": 8.6187,
+    "price": 1.7031935483870966
+  },
+  {
+    "station_name": "Alessandro Di Napoli",
+    "city": "Hemsbach",
+    "latitude": 49.5933,
+    "longitude": 8.638,
+    "price": 1.6910512820512822
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Künzelsau",
+    "latitude": 49.284447,
+    "longitude": 9.684491,
+    "price": 1.7913770491803278
+  },
+  {
+    "station_name": "Shell Ingersheim Besigheimer Str. 11",
+    "city": "Ingersheim",
+    "latitude": 48.961069,
+    "longitude": 9.176015,
+    "price": 1.7473703703703705
+  },
+  {
+    "station_name": "JET EMMENDINGEN FREIBURGER STR. 20",
+    "city": "EMMENDINGEN",
+    "latitude": 48.11292,
+    "longitude": 7.853,
+    "price": 1.6748870967741936
+  },
+  {
+    "station_name": "SB Tankstelle",
+    "city": "Waldshut-Tiengen",
+    "latitude": 47.63465,
+    "longitude": 8.284,
+    "price": 1.7712826086956521
+  },
+  {
+    "station_name": "Backnang, Sulzbacher Str. 152",
+    "city": "Backnang",
+    "latitude": 48.957053,
+    "longitude": 9.430753,
+    "price": 1.7613636363636365
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Aldingen",
+    "latitude": 48.091747,
+    "longitude": 8.690419,
+    "price": 1.755549295774648
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bondorf",
+    "latitude": 48.50676,
+    "longitude": 8.83585,
+    "price": 1.7415694444444445
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Stuttgart",
+    "latitude": 48.807537,
+    "longitude": 9.194154,
+    "price": 1.7578652482269503
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Würzburg",
+    "latitude": 49.768127,
+    "longitude": 9.940464,
+    "price": 1.7541127819548872
+  },
+  {
+    "station_name": "Shell Ulm Hauptstr. 12",
+    "city": "Ulm",
+    "latitude": 48.358842,
+    "longitude": 9.987839,
+    "price": 1.7193125
+  },
+  {
+    "station_name": "Shell Villingen-Schwenningen Gerwigstr. 8",
+    "city": "Villingen-Schwenningen",
+    "latitude": 48.055285,
+    "longitude": 8.46571,
+    "price": 1.7232975206611572
+  },
+  {
+    "station_name": "SB Ludwigshafen Oppauer Straße 108",
+    "city": "Ludwigshafen",
+    "latitude": 49.533873,
+    "longitude": 8.388695,
+    "price": 1.7122214765100672
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Wald-Michelbach",
+    "latitude": 49.573555,
+    "longitude": 8.823318,
+    "price": 1.7309834710743803
+  },
+  {
+    "station_name": "bft",
+    "city": "Hochdorf",
+    "latitude": 48.693351745605,
+    "longitude": 9.4670400619507,
+    "price": 1.7048
+  },
+  {
+    "station_name": "RUDERSBERG - HEILBRONNER STR. 75",
+    "city": "Rudersberg",
+    "latitude": 48.87864,
+    "longitude": 9.53008,
+    "price": 1.7572758620689655
+  },
+  {
+    "station_name": "TotalEnergies Filderstadt-Harth",
+    "city": "Filderstadt-Harth",
+    "latitude": 48.651634,
+    "longitude": 9.246344,
+    "price": 1.6957883211678833
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Mannheim",
+    "latitude": 49.47571,
+    "longitude": 8.487958,
+    "price": 1.7590000000000001
+  },
+  {
+    "station_name": "Shell Wuerzburg Schweinfurter Str. 5",
+    "city": "Wuerzburg",
+    "latitude": 49.799129,
+    "longitude": 9.946224,
+    "price": 1.7311710526315789
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Remchingen",
+    "latitude": 48.952995,
+    "longitude": 8.570688,
+    "price": 1.7680697674418604
+  },
+  {
+    "station_name": "PIN Service-Station",
+    "city": "Langenau",
+    "latitude": 48.495647,
+    "longitude": 10.117445,
+    "price": 1.701625
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Neu-Ulm",
+    "latitude": 48.4001,
+    "longitude": 10.02161,
+    "price": 1.705138613861386
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Althütte",
+    "latitude": 48.91998,
+    "longitude": 9.57572,
+    "price": 1.752170731707317
+  },
+  {
+    "station_name": "SB Mannheim Waldstraße 58-62",
+    "city": "Mannheim",
+    "latitude": 49.528005,
+    "longitude": 8.490205,
+    "price": 1.692486842105263
+  },
+  {
+    "station_name": "ORLEN Express Tankstelle",
+    "city": "Metzingen",
+    "latitude": 48.548462,
+    "longitude": 9.273639,
+    "price": 1.6117966101694916
+  },
+  {
+    "station_name": "Buchen",
+    "city": "Buchen",
+    "latitude": 49.52632,
+    "longitude": 9.33498,
+    "price": 1.7028095238095238
+  },
+  {
+    "station_name": "Tankstelle Klaus Schelb",
+    "city": "Münstertal",
+    "latitude": 47.855862,
+    "longitude": 7.772001,
+    "price": 1.6887999999999999
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle SCHWAEBISCH HALL STEINBEISWEG 31",
+    "city": "SCHWAEBISCH HALL",
+    "latitude": 49.104,
+    "longitude": 9.70169,
+    "price": 1.7159014084507043
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Sulzfeld",
+    "latitude": 49.109528,
+    "longitude": 8.855131,
+    "price": 1.6856336633663367
+  },
+  {
+    "station_name": "RAN Station",
+    "city": "Stuttgart",
+    "latitude": 48.804,
+    "longitude": 9.101,
+    "price": 1.7022365145228218
+  },
+  {
+    "station_name": "Shell Suessen Heidenheimer Str. 47",
+    "city": "Suessen",
+    "latitude": 48.680097,
+    "longitude": 9.755833,
+    "price": 1.6965438596491227
+  },
+  {
+    "station_name": "KARLSRUHE - NEUREUTER STR. 5",
+    "city": "Karlsruhe",
+    "latitude": 49.01733,
+    "longitude": 8.35405,
+    "price": 1.7111296296296297
+  },
+  {
+    "station_name": "ENI",
+    "city": "Landau i. d. Pfalz",
+    "latitude": 49.199292,
+    "longitude": 8.125336,
+    "price": 1.7491265822784812
+  },
+  {
+    "station_name": "Shell Nuertingen Oberboihinger Str. 51",
+    "city": "Nuertingen",
+    "latitude": 48.636758,
+    "longitude": 9.346773,
+    "price": 1.7237058823529412
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Renningen",
+    "latitude": 48.767975,
+    "longitude": 8.944295,
+    "price": 1.722
+  },
+  {
+    "station_name": "ZG Raiffeisen Tankstelle Kehl-Neumühl",
+    "city": "Kehl-Neumühl",
+    "latitude": 48.568466,
+    "longitude": 7.847972,
+    "price": 1.723862385321101
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Altusried",
+    "latitude": 47.801888,
+    "longitude": 10.225011,
+    "price": 1.7474210526315788
+  },
+  {
+    "station_name": "PIN Service-Station",
+    "city": "Krumbach",
+    "latitude": 48.251785,
+    "longitude": 10.356684,
+    "price": 1.7096976744186048
+  },
+  {
+    "station_name": "Marbach, Rieglingshäuser Str. 25",
+    "city": "Marbach am Neckar",
+    "latitude": 48.943243,
+    "longitude": 9.26805,
+    "price": 1.7036666666666667
+  },
+  {
+    "station_name": "Tankstelle Hirse",
+    "city": "Neuhausen",
+    "latitude": 47.975044250488,
+    "longitude": 8.9261522293091,
+    "price": 1.7616388888888888
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Rüdenhausen",
+    "latitude": 49.76684,
+    "longitude": 10.34155,
+    "price": 1.729473933649289
+  },
+  {
+    "station_name": "JET PIRMASENS TURNSTR. 71",
+    "city": "PIRMASENS",
+    "latitude": 49.21377,
+    "longitude": 7.59513,
+    "price": 1.7072089552238805
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bad Schussenried",
+    "latitude": 48.00025,
+    "longitude": 9.660136,
+    "price": 1.7410740740740742
+  },
+  {
+    "station_name": "OIL! Tankstelle Herbrechtingen",
+    "city": "Herbrechtingen",
+    "latitude": 48.6184,
+    "longitude": 10.1823,
+    "price": 1.7078
+  },
+  {
+    "station_name": "Shell Immendingen Schwarzwaldstr. 90",
+    "city": "Immendingen",
+    "latitude": 47.934931,
+    "longitude": 8.719004,
+    "price": 1.7448870967741936
+  },
+  {
+    "station_name": "TK Diedelsheim 7",
+    "city": "Bretten",
+    "latitude": 49.03989,
+    "longitude": 8.67476,
+    "price": 1.6761666666666668
+  },
+  {
+    "station_name": "Tobias Glowatsch",
+    "city": "Schifferstadt",
+    "latitude": 49.3771,
+    "longitude": 8.3749,
+    "price": 1.7164038461538462
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Reutlingen",
+    "latitude": 48.511715,
+    "longitude": 9.204224,
+    "price": 1.7505432098765434
+  },
+  {
+    "station_name": "Mast & Oehlert",
+    "city": "Pforzheim",
+    "latitude": 48.898241,
+    "longitude": 8.715506,
+    "price": 1.7089090909090907
+  },
+  {
+    "station_name": "JET HEILBRONN GROSSGARTACHER STR. 218",
+    "city": "HEILBRONN",
+    "latitude": 49.1403,
+    "longitude": 9.17676,
+    "price": 1.7104598540145985
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Schwäbisch Gmünd",
+    "latitude": 48.816456,
+    "longitude": 9.778075,
+    "price": 1.7366829268292685
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "WALDENBUCH",
+    "latitude": 48.638607,
+    "longitude": 9.131075,
+    "price": 1.75456875
+  },
+  {
+    "station_name": "Shell Appenweier Ortenauer Str. 3 A",
+    "city": "Appenweier",
+    "latitude": 48.535916,
+    "longitude": 7.977611,
+    "price": 1.7633382352941176
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Ottersweier",
+    "latitude": 48.67359,
+    "longitude": 8.120672,
+    "price": 1.7586153846153847
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Tübingen",
+    "latitude": 48.54541,
+    "longitude": 9.05563,
+    "price": 1.7435641025641027
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle SCHWAEBISCH HALL RAIFFEISENSTR. 24",
+    "city": "SCHWAEBISCH HALL",
+    "latitude": 49.11046,
+    "longitude": 9.79434,
+    "price": 1.7100752688172043
+  },
+  {
+    "station_name": "OIL! Tankstelle Grünstadt",
+    "city": "Grünstadt",
+    "latitude": 49.56015,
+    "longitude": 8.16946,
+    "price": 1.7019655172413792
+  },
+  {
+    "station_name": "Überlingen, Zur Weierhalde 1",
+    "city": "Überlingen",
+    "latitude": 47.77431944,
+    "longitude": 9.19165556,
+    "price": 1.8107094017094016
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Überlingen",
+    "latitude": 47.77176,
+    "longitude": 9.173977,
+    "price": 1.822258426966292
+  },
+  {
+    "station_name": "PLUEDERHAUSEN - JAKOB-SCHUELE-STR.",
+    "city": "Plüderhausen",
+    "latitude": 48.80059,
+    "longitude": 9.59286,
+    "price": 1.7550000000000001
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Rheinstetten",
+    "latitude": 48.98718,
+    "longitude": 8.33331,
+    "price": 1.7227765957446808
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "RADOLFZELL",
+    "latitude": 47.744669,
+    "longitude": 8.958875,
+    "price": 1.7829014084507042
+  },
+  {
+    "station_name": "Shell Stuttgart Pforzheimer Str. 261",
+    "city": "Stuttgart",
+    "latitude": 48.814368,
+    "longitude": 9.124166,
+    "price": 1.7321550802139039
+  },
+  {
+    "station_name": "JET ROTTENBURG TUEBINGER STR. 60",
+    "city": "ROTTENBURG",
+    "latitude": 48.47203,
+    "longitude": 8.94514,
+    "price": 1.734253164556962
+  },
+  {
+    "station_name": "Shell Herrenberg Tuebinger Str. 71",
+    "city": "Herrenberg",
+    "latitude": 48.591472,
+    "longitude": 8.87824,
+    "price": 1.7452025316455697
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bellheim",
+    "latitude": 49.19558,
+    "longitude": 8.277498,
+    "price": 1.7024057971014495
+  },
+  {
+    "station_name": "Freie Tankstelle Thome",
+    "city": "Esslingen",
+    "latitude": 48.75709,
+    "longitude": 9.2994,
+    "price": 1.7097920792079206
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle KARLSRUHE ORTENBERGSTR. 8",
+    "city": "KARLSRUHE",
+    "latitude": 48.99113,
+    "longitude": 8.37698,
+    "price": 1.7138453608247421
+  },
+  {
+    "station_name": "JET PFEDELBACH DIESELSTR. 1",
+    "city": "PFEDELBACH",
+    "latitude": 49.18395,
+    "longitude": 9.49914,
+    "price": 1.7581891891891892
+  },
+  {
+    "station_name": "JET LANDAU NEUSTAEDTER STR. 20",
+    "city": "LANDAU",
+    "latitude": 49.20312,
+    "longitude": 8.11544,
+    "price": 1.7508000000000001
+  },
+  {
+    "station_name": "Shell Rutesheim Leonberger Str. 56",
+    "city": "Rutesheim",
+    "latitude": 48.806682,
+    "longitude": 8.952925,
+    "price": 1.7249748427672957
+  },
+  {
+    "station_name": "Sprit Shop GmbH",
+    "city": "Ehrenkirchen",
+    "latitude": 47.92085,
+    "longitude": 7.726913,
+    "price": 1.6916271186440677
+  },
+  {
+    "station_name": "AVIA Kuppenheim",
+    "city": "Kuppenheim",
+    "latitude": 48.8245,
+    "longitude": 8.25255,
+    "price": 1.7437619047619048
+  },
+  {
+    "station_name": "WEILER-SIMMERBERG - BREGENZER STR.",
+    "city": "Weiler-Simmerberg",
+    "latitude": 47.579725,
+    "longitude": 9.901643,
+    "price": 1.7282972972972974
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "BACKNANG",
+    "latitude": 48.934382,
+    "longitude": 9.437374,
+    "price": 1.7607884615384615
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Herrenberg",
+    "latitude": 48.60055,
+    "longitude": 8.873095,
+    "price": 1.7354052287581698
+  },
+  {
+    "station_name": "AVIA Xpress Automatestation Ubstadt-Weiher",
+    "city": "Ubstadt-Weiher",
+    "latitude": 49.1732,
+    "longitude": 8.6171,
+    "price": 1.6669385474860337
+  },
+  {
+    "station_name": "JET WAIBLINGEN WESTTANGENTE 5",
+    "city": "WAIBLINGEN",
+    "latitude": 48.83041,
+    "longitude": 9.30164,
+    "price": 1.6993529411764705
+  },
+  {
+    "station_name": "Tank u. Waschpark Ötigheim GmbH",
+    "city": "Ötigheim",
+    "latitude": 48.88804,
+    "longitude": 8.2429,
+    "price": 1.7293496503496504
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bad Dürkheim",
+    "latitude": 49.46323,
+    "longitude": 8.186616,
+    "price": 1.7438571428571428
+  },
+  {
+    "station_name": "Tankstelle am E-Center",
+    "city": "Waldshut-Tiengen",
+    "latitude": 47.627508,
+    "longitude": 8.262922,
+    "price": 1.7756857142857143
+  },
+  {
+    "station_name": "Autohaus am Kaiserstuhl",
+    "city": "Endingen",
+    "latitude": 48.142528533935,
+    "longitude": 7.7108869552612,
+    "price": 1.694
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Oberstaufen",
+    "latitude": 47.56467,
+    "longitude": 10.01564,
+    "price": 1.7572222222222222
+  },
+  {
+    "station_name": "Albrecht GmbH",
+    "city": "Gundersheim",
+    "latitude": 49.7011379,
+    "longitude": 8.1932708,
+    "price": 1.7055277777777778
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Donzdorf",
+    "latitude": 48.68615,
+    "longitude": 9.79036,
+    "price": 1.7215730994152048
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "FREIBURG",
+    "latitude": 48.010207,
+    "longitude": 7.812219,
+    "price": 1.6720489130434781
+  },
+  {
+    "station_name": "Winkler-Massenbachhausen",
+    "city": "Massenbachhausen",
+    "latitude": 49.174891,
+    "longitude": 9.047925,
+    "price": 1.687958115183246
+  },
+  {
+    "station_name": "Shell Forst A5 Bruchsal Ost ",
+    "city": "Forst",
+    "latitude": 49.16091,
+    "longitude": 8.569026,
+    "price": 2.217
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Biberach",
+    "latitude": 48.096916,
+    "longitude": 9.791901,
+    "price": 1.7481
+  },
+  {
+    "station_name": "bft-Station",
+    "city": "Freiburg",
+    "latitude": 47.9929,
+    "longitude": 7.80839,
+    "price": 1.629
+  },
+  {
+    "station_name": "JET MANNHEIM NECKARAUER STR. 98",
+    "city": "MANNHEIM",
+    "latitude": 49.46307,
+    "longitude": 8.48907,
+    "price": 1.7146603773584905
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Aalen",
+    "latitude": 48.82172,
+    "longitude": 10.12129,
+    "price": 1.7913756906077347
+  },
+  {
+    "station_name": "Shell Offenburg Freiburger Str. 1",
+    "city": "Offenburg",
+    "latitude": 48.47553,
+    "longitude": 7.941317,
+    "price": 1.7736774193548388
+  },
+  {
+    "station_name": "Shell Bietigheim-Bissingen Berliner Str. 40",
+    "city": "Bietigheim-Bissingen",
+    "latitude": 48.941596,
+    "longitude": 9.140512,
+    "price": 1.739873786407767
+  },
+  {
+    "station_name": "Shell Gruenstadt Kirchheimer Str 58",
+    "city": "Gruenstadt",
+    "latitude": 49.559209,
+    "longitude": 8.16964,
+    "price": 1.719
+  },
+  {
+    "station_name": "mit Tankautomat",
+    "city": "Todtnau",
+    "latitude": 47.8417002,
+    "longitude": 7.93169,
+    "price": 1.689
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Sankt Georgen",
+    "latitude": 48.12531,
+    "longitude": 8.340573,
+    "price": 1.721560975609756
+  },
+  {
+    "station_name": "JET GUENZBURG LOCHFELBENSTR. 39",
+    "city": "GUENZBURG",
+    "latitude": 48.47027,
+    "longitude": 10.28383,
+    "price": 1.6831964285714285
+  },
+  {
+    "station_name": "TotalEnergies Aspach",
+    "city": "Aspach",
+    "latitude": 48.971858,
+    "longitude": 9.387147,
+    "price": 1.7562222222222221
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "KEHL",
+    "latitude": 48.501643,
+    "longitude": 7.822382,
+    "price": 1.7415573770491803
+  },
+  {
+    "station_name": "Shell Neckarsulm Kanalstr. 1",
+    "city": "Neckarsulm",
+    "latitude": 49.188175,
+    "longitude": 9.218356,
+    "price": 1.71636
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "BREISACH",
+    "latitude": 48.026081,
+    "longitude": 7.589387,
+    "price": 1.6798972602739728
+  },
+  {
+    "station_name": "Shell Kirchheim / Teck Kruichling 15",
+    "city": "Kirchheim / Teck",
+    "latitude": 48.644046,
+    "longitude": 9.429249,
+    "price": 1.7649210526315788
+  },
+  {
+    "station_name": "Schindele Handels GmbH & Co. KG",
+    "city": "Meckenbeuren",
+    "latitude": 47.681369781494,
+    "longitude": 9.5525979995728,
+    "price": 1.714294117647059
+  },
+  {
+    "station_name": "ZG Raiffeisen Tankstelle Karlsruhe",
+    "city": "Karlsruhe",
+    "latitude": 48.99651,
+    "longitude": 8.409487,
+    "price": 1.6954117647058826
+  },
+  {
+    "station_name": "Shell Marbach Koenig-Wilhelm-Platz 11",
+    "city": "Marbach",
+    "latitude": 48.937391,
+    "longitude": 9.258705,
+    "price": 1.7372307692307694
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle OESTRINGEN THOMAS-HOWIE-STR. 7-2",
+    "city": "OESTRINGEN",
+    "latitude": 49.2148,
+    "longitude": 8.69753,
+    "price": 1.67275
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Kandel",
+    "latitude": 49.085266,
+    "longitude": 8.210204,
+    "price": 1.7420681818181818
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Stuttgart-Vaihingen",
+    "latitude": 48.72771,
+    "longitude": 9.123991,
+    "price": 1.7322638888888888
+  },
+  {
+    "station_name": "AVIA XPress",
+    "city": "Weinstadt-Schnait",
+    "latitude": 48.79478,
+    "longitude": 9.398458,
+    "price": 1.7147894736842104
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Schorndorf",
+    "latitude": 48.826996,
+    "longitude": 9.549957,
+    "price": 1.7675889570552148
+  },
+  {
+    "station_name": "bft- Tankstelle Autohaus Karl Funk e.k",
+    "city": "Abtsgmünd",
+    "latitude": 48.89462,
+    "longitude": 10.00812,
+    "price": 1.7764149659863944
+  },
+  {
+    "station_name": "AVIA Unterroth",
+    "city": "Unterroth",
+    "latitude": 48.1982,
+    "longitude": 10.1754,
+    "price": 1.723550561797753
+  },
+  {
+    "station_name": "tankpoint Tankstelle",
+    "city": "Abtsgmünd",
+    "latitude": 48.894632436113,
+    "longitude": 10.000474044614,
+    "price": 1.767076923076923
+  },
+  {
+    "station_name": "BFT",
+    "city": "Wangen",
+    "latitude": 47.67764,
+    "longitude": 9.840585,
+    "price": 1.7137904191616768
+  },
+  {
+    "station_name": "TotalEnergies Wiesloch",
+    "city": "Wiesloch",
+    "latitude": 49.306022,
+    "longitude": 8.738884,
+    "price": 1.6853247863247862
+  },
+  {
+    "station_name": "MTB Tankstelle",
+    "city": "Villingen-Schwenningen",
+    "latitude": 48.06902,
+    "longitude": 8.46717,
+    "price": 1.6969746835443038
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "LEONBERG",
+    "latitude": 48.785359,
+    "longitude": 9.01871,
+    "price": 1.7274798206278028
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Titisee-Neustadt",
+    "latitude": 47.91818,
+    "longitude": 8.20693,
+    "price": 1.7442777777777778
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "BLAUSTEIN",
+    "latitude": 48.420261,
+    "longitude": 9.907628,
+    "price": 1.7124295302013424
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Worms-Pfeddersheim",
+    "latitude": 49.634335,
+    "longitude": 8.280931,
+    "price": 1.7408852459016393
+  },
+  {
+    "station_name": "OPEMA Mineralöle GmbH SB Tankstelle / Heizölhandel  - 2",
+    "city": "Hockenheim",
+    "latitude": 49.33639,
+    "longitude": 8.52651,
+    "price": 1.625
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Untermünkheim",
+    "latitude": 49.15158,
+    "longitude": 9.73444,
+    "price": 1.7279655172413793
+  },
+  {
+    "station_name": "Sb Pforzheim Eutinger Str. 38",
+    "city": "Pforzheim",
+    "latitude": 48.8982,
+    "longitude": 8.72532,
+    "price": 1.6781379310344828
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "GUNDELSHEIM",
+    "latitude": 49.279383,
+    "longitude": 9.156686,
+    "price": 1.7033333333333331
+  },
+  {
+    "station_name": "Fischer-Laichingen",
+    "city": "Laichingen",
+    "latitude": 48.49353,
+    "longitude": 9.71036,
+    "price": 1.6870188679245284
+  },
+  {
+    "station_name": "Shell Schoenaich Steinenbronner Str. 30",
+    "city": "Schoenaich",
+    "latitude": 48.661896,
+    "longitude": 9.071075,
+    "price": 1.7634776119402984
+  },
+  {
+    "station_name": "JET OPPENWEILER HAUPTSTR. 10",
+    "city": "OPPENWEILER",
+    "latitude": 48.9811,
+    "longitude": 9.45754,
+    "price": 1.757527607361963
+  },
+  {
+    "station_name": "IDEAL-Tankstelle",
+    "city": "Winterlingen",
+    "latitude": 48.18099,
+    "longitude": 9.109771,
+    "price": 1.699
+  },
+  {
+    "station_name": "AVIA Gaggenau",
+    "city": "Gaggenau",
+    "latitude": 48.7989,
+    "longitude": 8.32335,
+    "price": 1.7586954314720813
+  },
+  {
+    "station_name": "BayWa Tankstelle Röthenbach ",
+    "city": "Röthenbach",
+    "latitude": 47.625191,
+    "longitude": 9.947703,
+    "price": 1.7336058091286308
+  },
+  {
+    "station_name": "Freie Tankstelle Aalen",
+    "city": "Aalen",
+    "latitude": 48.83509,
+    "longitude": 10.08867,
+    "price": 1.7486428571428572
+  },
+  {
+    "station_name": "AVIA Xpress Automatenstation Offenburg-Elgersweier",
+    "city": "Offenburg-Elgersweier",
+    "latitude": 48.4399,
+    "longitude": 7.9479,
+    "price": 1.743015748031496
+  },
+  {
+    "station_name": "bft Tankstelle Josef Kessler",
+    "city": "Frickingen-Leustetten",
+    "latitude": 47.80549,
+    "longitude": 9.29393,
+    "price": 1.7475714285714286
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Katzweiler",
+    "latitude": 49.50465,
+    "longitude": 7.692398,
+    "price": 1.7154814814814814
+  },
+  {
+    "station_name": "bft-Tankstelle Förster, Wörth",
+    "city": "Wörth",
+    "latitude": 49.79769,
+    "longitude": 9.15683,
+    "price": 1.6856666666666669
+  },
+  {
+    "station_name": "bft-Tankstelle Oberle",
+    "city": "Ottenheim",
+    "latitude": 48.38431,
+    "longitude": 7.7571,
+    "price": 1.7628709677419354
+  },
+  {
+    "station_name": "AVIA XPress",
+    "city": "Stuttgart-Ost",
+    "latitude": 48.78238,
+    "longitude": 9.20912,
+    "price": 1.7160491803278688
+  },
+  {
+    "station_name": "TotalEnergies Truckstop Wiesloch",
+    "city": "Wiesloch",
+    "latitude": 49.283479,
+    "longitude": 8.686314,
+    "price": 1.6861052631578948
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Sinsheim-Hoffenheim",
+    "latitude": 49.26843,
+    "longitude": 8.842881,
+    "price": 1.6861090047393366
+  },
+  {
+    "station_name": "Erich Knecht GmbH",
+    "city": "Pliezhausen",
+    "latitude": 48.566185,
+    "longitude": 9.195961,
+    "price": 1.689
+  },
+  {
+    "station_name": "ZG Raiffeisen Tankstelle Königsbach-Stein",
+    "city": "Königsbach-Stein",
+    "latitude": 48.958687,
+    "longitude": 8.64026,
+    "price": 1.7242380952380951
+  },
+  {
+    "station_name": "Autohaus Schmid GmbH & Co. KG",
+    "city": "Donzdorf",
+    "latitude": 48.686553955078,
+    "longitude": 9.8022241592407,
+    "price": 1.654
+  },
+  {
+    "station_name": "MTB Tankstelle",
+    "city": "Altensteig",
+    "latitude": 48.5855942,
+    "longitude": 8.6158775,
+    "price": 1.7161851851851853
+  },
+  {
+    "station_name": "Tankstelle am Waschpark",
+    "city": "Kaiserslautern",
+    "latitude": 49.43837,
+    "longitude": 7.72531,
+    "price": 1.6621147540983605
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Ebersbach a. d. Fils",
+    "latitude": 48.7137,
+    "longitude": 9.513178,
+    "price": 1.728044117647059
+  },
+  {
+    "station_name": "Shell Waghaeusel Waghaeuseler Str. 124",
+    "city": "Waghaeusel",
+    "latitude": 49.245511,
+    "longitude": 8.536555,
+    "price": 1.6838666666666668
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "REUTLINGEN",
+    "latitude": 48.497615,
+    "longitude": 9.184568,
+    "price": 1.7360473372781065
+  },
+  {
+    "station_name": "ENI",
+    "city": "Albstadt",
+    "latitude": 48.206171176958,
+    "longitude": 9.034452534372,
+    "price": 1.6929166666666666
+  },
+  {
+    "station_name": "Bensheim, Berliner Ring 139",
+    "city": "Bensheim",
+    "latitude": 49.69940555,
+    "longitude": 8.61089722,
+    "price": 1.7257924528301887
+  },
+  {
+    "station_name": "JET NECKARTENZLINGEN SCHLEIERAECKER 1",
+    "city": "NECKARTENZLINGEN",
+    "latitude": 48.57911,
+    "longitude": 9.25261,
+    "price": 1.6615925925925925
+  },
+  {
+    "station_name": "Tankstelle Werner Mäder",
+    "city": "Aldingen",
+    "latitude": 48.096073,
+    "longitude": 8.716621,
+    "price": 1.75025
+  },
+  {
+    "station_name": "TotalEnergies Gottmadingen",
+    "city": "Gottmadingen",
+    "latitude": 47.736601,
+    "longitude": 8.788061,
+    "price": 1.7841181102362205
+  },
+  {
+    "station_name": "Autohaus-Weis GmbH",
+    "city": "Neuler",
+    "latitude": 48.933487,
+    "longitude": 10.06412,
+    "price": 1.679
+  },
+  {
+    "station_name": "Shell Illertissen Memminger Str. 49",
+    "city": "Illertissen",
+    "latitude": 48.217251,
+    "longitude": 10.102786,
+    "price": 1.7292285714285716
+  },
+  {
+    "station_name": "Großtankstelle Lorinser",
+    "city": "Waiblingen",
+    "latitude": 48.821806,
+    "longitude": 9.314896,
+    "price": 1.7015000000000002
+  },
+  {
+    "station_name": "ENI",
+    "city": "Burgau",
+    "latitude": 48.413358626,
+    "longitude": 10.4288783,
+    "price": 2.192469387755102
+  },
+  {
+    "station_name": "OIL! Tankstelle Edenkoben",
+    "city": "Edenkoben",
+    "latitude": 49.2842,
+    "longitude": 8.14074,
+    "price": 1.7201965811965811
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Meckesheim",
+    "latitude": 49.319862,
+    "longitude": 8.814378,
+    "price": 1.7175964912280703
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Zwiefalten",
+    "latitude": 48.23343,
+    "longitude": 9.459884,
+    "price": 1.7337120418848169
+  },
+  {
+    "station_name": "Shell Freudenstadt Stuttgarter Str 70",
+    "city": "Freudenstadt",
+    "latitude": 48.465187,
+    "longitude": 8.420671,
+    "price": 1.7045555555555556
+  },
+  {
+    "station_name": "Nijal Kaya",
+    "city": "Fahrenbach",
+    "latitude": 49.4276,
+    "longitude": 9.1536,
+    "price": 1.7205625
+  },
+  {
+    "station_name": "AVIA XPress Rutesheim",
+    "city": "Rutesheim",
+    "latitude": 48.807,
+    "longitude": 8.9421,
+    "price": 1.6989444444444444
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Heidelberg",
+    "latitude": 49.408024,
+    "longitude": 8.67828,
+    "price": 1.7198029197080291
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Lindau",
+    "latitude": 47.547695,
+    "longitude": 9.728079,
+    "price": 1.7652790697674419
+  },
+  {
+    "station_name": "Shell Eislingen Ulmer Str. 32",
+    "city": "Eislingen",
+    "latitude": 48.693193,
+    "longitude": 9.709904,
+    "price": 1.7011142857142856
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Aalen",
+    "latitude": 48.84853,
+    "longitude": 10.09746,
+    "price": 1.7626979166666665
+  },
+  {
+    "station_name": "Shell Calw Stuttgarter Str. B295/B296",
+    "city": "Calw",
+    "latitude": 48.708201,
+    "longitude": 8.765949,
+    "price": 1.7197058823529414
+  },
+  {
+    "station_name": "TotalEnergies Rheinau-Freistett",
+    "city": "Rheinau-Freistett",
+    "latitude": 48.68094,
+    "longitude": 7.922804,
+    "price": 1.747728813559322
+  },
+  {
+    "station_name": "ENI",
+    "city": "Mahlberg/Baden",
+    "latitude": 48.310888,
+    "longitude": 7.789959,
+    "price": 2.209
+  },
+  {
+    "station_name": "Shell Edesheim A65 Pfaelzer Weinstrasse West",
+    "city": "Edesheim",
+    "latitude": 49.269738,
+    "longitude": 8.15341,
+    "price": 2.1405000000000003
+  },
+  {
+    "station_name": "Gianni Belli",
+    "city": "Oberzent",
+    "latitude": 49.5941,
+    "longitude": 8.9897,
+    "price": 1.6709298245614035
+  },
+  {
+    "station_name": "STUTTGART - KRIEGSBERGSTRASSE 55 A",
+    "city": "Stuttgart",
+    "latitude": 48.78229,
+    "longitude": 9.17149,
+    "price": 1.7359655172413793
+  },
+  {
+    "station_name": "Shell Goeppingen Heiningerstr. 23",
+    "city": "Goeppingen",
+    "latitude": 48.69564,
+    "longitude": 9.665029,
+    "price": 1.6917472527472528
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Marktbergel",
+    "latitude": 49.44616,
+    "longitude": 10.36261,
+    "price": 1.7432666666666667
+  },
+  {
+    "station_name": "Supermarkt-Tankstelle ETTENHEIM AM BAHNDAMM 5",
+    "city": "ETTENHEIM",
+    "latitude": 48.25967,
+    "longitude": 7.8095,
+    "price": 1.6669545454545456
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Neckarsulm",
+    "latitude": 49.199272,
+    "longitude": 9.23295,
+    "price": 1.7277179487179488
+  },
+  {
+    "station_name": "OIL! Tankstelle Pirmasens",
+    "city": "Pirmasens",
+    "latitude": 49.1914,
+    "longitude": 7.60874,
+    "price": 1.699909090909091
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "GERMERSHEIM",
+    "latitude": 49.216259,
+    "longitude": 8.365101,
+    "price": 1.6875089820359284
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Kaiserslautern",
+    "latitude": 49.455753,
+    "longitude": 7.795879,
+    "price": 1.71396
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Fellbach",
+    "latitude": 48.831349300458,
+    "longitude": 9.2608534981476,
+    "price": 1.7192808988764043
+  },
+  {
+    "station_name": "Shell Murrhardt Siegelsberger Str. 4",
+    "city": "Murrhardt",
+    "latitude": 48.980804,
+    "longitude": 9.580074,
+    "price": 1.7781911764705882
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Kirchheimbolanden",
+    "latitude": 49.66857,
+    "longitude": 8.02008,
+    "price": 1.7672178217821783
+  },
+  {
+    "station_name": "Shell Neustadt an der Weinstr. Mussbacher Landstr. 16",
+    "city": "Neustadt an der Weinstr.",
+    "latitude": 49.359376,
+    "longitude": 8.151276,
+    "price": 1.7338958333333334
+  },
+  {
+    "station_name": "JET WUERZBURG HOECHBERGER STR. 10",
+    "city": "WUERZBURG",
+    "latitude": 49.79275,
+    "longitude": 9.91668,
+    "price": 1.7163548387096776
+  },
+  {
+    "station_name": "Freie Service Tankstelle Ehmann",
+    "city": "Weinsberg",
+    "latitude": 49.153568267822,
+    "longitude": 9.2791585922241,
+    "price": 1.7143333333333333
+  },
+  {
+    "station_name": "Harald Henn",
+    "city": "Mannheim",
+    "latitude": 49.4995,
+    "longitude": 8.4959,
+    "price": 1.7319032258064517
+  },
+  {
+    "station_name": "Freie Tankstelle",
+    "city": "Offenburg",
+    "latitude": 48.481575,
+    "longitude": 7.936881,
+    "price": 1.7612480620155038
+  },
+  {
+    "station_name": "Laufenburg-Luttingen",
+    "city": "Laufenburg-Luttingen",
+    "latitude": 47.570302,
+    "longitude": 8.091492,
+    "price": 1.7456860465116277
+  },
+  {
+    "station_name": "Shell Wilburgstetten Nördlinger Str 4",
+    "city": "Wilburgstetten",
+    "latitude": 49.02559,
+    "longitude": 10.389867,
+    "price": 1.7728888888888887
+  },
+  {
+    "station_name": "Shell Böblingen Wolfgang-Brumme-Allee 22",
+    "city": "Böblingen",
+    "latitude": 48.688035,
+    "longitude": 9.008868,
+    "price": 1.7624959349593496
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Bockenheim",
+    "latitude": 49.608467,
+    "longitude": 8.181643,
+    "price": 1.7342898550724637
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "PIRMASENS",
+    "latitude": 49.192141,
+    "longitude": 7.589887,
+    "price": 1.7112032967032969
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "DENKENDORF",
+    "latitude": 48.694185,
+    "longitude": 9.327501,
+    "price": 1.7090696202531646
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "STUTTGART",
+    "latitude": 48.730809,
+    "longitude": 9.098163,
+    "price": 1.7338781725888326
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "KARLSRUHE",
+    "latitude": 48.990093,
+    "longitude": 8.372119,
+    "price": 1.7098632478632478
+  },
+  {
+    "station_name": "Bft Tankstelle Autohaus Wehle e.k",
+    "city": "Waldachtal-Salzstetten",
+    "latitude": 48.49022,
+    "longitude": 8.59959,
+    "price": 1.719
+  },
+  {
+    "station_name": "OMV Tankstelle",
+    "city": "Bad Säckingen",
+    "latitude": 47.55987,
+    "longitude": 7.96361,
+    "price": 1.7871714285714286
+  },
+  {
+    "station_name": "AVIA Pfullingen",
+    "city": "Pfullingen",
+    "latitude": 48.4688,
+    "longitude": 9.22664,
+    "price": 1.737989898989899
+  },
+  {
+    "station_name": "Minera Creditank Dettenheim",
+    "city": "Dettenheim-Liedolsheim",
+    "latitude": 49.166,
+    "longitude": 8.4156,
+    "price": 1.6923333333333335
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "HASSLOCH",
+    "latitude": 49.355641,
+    "longitude": 8.256116,
+    "price": 1.694962025316456
+  },
+  {
+    "station_name": "Globus Handelshof St. Wendel GmbH & Co. KG Betriebsstätte Grünstadt",
+    "city": "Grünstadt",
+    "latitude": 49.55763,
+    "longitude": 8.18225,
+    "price": 1.6999313725490197
+  },
+  {
+    "station_name": "Autohaus Wankmüller GmbH",
+    "city": "Böblingen",
+    "latitude": 48.690902709961,
+    "longitude": 8.9874696731567,
+    "price": 1.750470588235294
+  },
+  {
+    "station_name": "Frei Tankstelle Debnar Wasgaugarage GmbH",
+    "city": "Hauenstein",
+    "latitude": 49.19949,
+    "longitude": 7.83732,
+    "price": 1.7854864864864866
+  },
+  {
+    "station_name": "ENI",
+    "city": "Weinstadt",
+    "latitude": 48.81448,
+    "longitude": 9.370891,
+    "price": 1.7251682242990654
+  },
+  {
+    "station_name": "ENI",
+    "city": "Münstertal",
+    "latitude": 47.854263,
+    "longitude": 7.779238,
+    "price": 1.7074146341463416
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Obergünzburg",
+    "latitude": 47.843044,
+    "longitude": 10.416526,
+    "price": 1.7365862068965519
+  },
+  {
+    "station_name": "TotalEnergies Frankenthal",
+    "city": "Frankenthal",
+    "latitude": 49.551535,
+    "longitude": 8.348149,
+    "price": 1.727108108108108
+  },
+  {
+    "station_name": "ENI",
+    "city": "Pforzheim",
+    "latitude": 48.90378,
+    "longitude": 8.65506,
+    "price": 1.7184845360824743
+  },
+  {
+    "station_name": "JET VIERNHEIM MANNHEIMER STR. 125",
+    "city": "VIERNHEIM",
+    "latitude": 49.52771,
+    "longitude": 8.5623,
+    "price": 1.6921313131313134
+  },
+  {
+    "station_name": "Mannheim Möhlstraße",
+    "city": "Mannheim",
+    "latitude": 49.47509,
+    "longitude": 8.4874,
+    "price": 1.704
+  },
+  {
+    "station_name": "REWE-Tankstelle",
+    "city": "Michelstadt",
+    "latitude": 49.691074,
+    "longitude": 9.003704,
+    "price": 1.7154957264957265
+  },
+  {
+    "station_name": "Aral Tankstelle, KUTTENKEULER GMBH",
+    "city": "Appenweier",
+    "latitude": 48.561718,
+    "longitude": 7.956888,
+    "price": 2.199
+  },
+  {
+    "station_name": "JET BIRKENAU HAUPTSTR. 159",
+    "city": "BIRKENAU",
+    "latitude": 49.56817,
+    "longitude": 8.70948,
+    "price": 1.6880833333333334
+  },
+  {
+    "station_name": "Weinheim, Bergstr. 197",
+    "city": "Weinheim",
+    "latitude": 49.566014,
+    "longitude": 8.663726,
+    "price": 1.692047619047619
+  },
+  {
+    "station_name": "Marktkaufstation Schwäbisch-Gmünd",
+    "city": "Schwäbisch-Gmünd",
+    "latitude": 48.804362,
+    "longitude": 9.807284,
+    "price": 1.6903124999999999
+  },
+  {
+    "station_name": "TS Biederbach",
+    "city": "Biederbach",
+    "latitude": 48.192501068115,
+    "longitude": 8.0434103012085,
+    "price": 1.659
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Schelklingen",
+    "latitude": 48.37083,
+    "longitude": 9.732629,
+    "price": 1.7366595744680853
+  },
+  {
+    "station_name": "Tankstelle am E-Center",
+    "city": "Singen",
+    "latitude": 47.761169,
+    "longitude": 8.893267,
+    "price": 1.7799146341463414
+  },
+  {
+    "station_name": "Tankstelle Dietrich",
+    "city": "Tengen",
+    "latitude": 47.820114135742,
+    "longitude": 8.6614589691162,
+    "price": 1.7435762711864407
+  },
+  {
+    "station_name": "TANKHOF GRÜN - Willstätt",
+    "city": "Willstätt-Sand",
+    "latitude": 48.5361328125,
+    "longitude": 7.9189109802246,
+    "price": 1.7326290322580646
+  },
+  {
+    "station_name": "bft Tankstelle Mayer GmbH",
+    "city": "Heitersheim",
+    "latitude": 47.87283,
+    "longitude": 7.65081,
+    "price": 1.7523333333333333
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Künzelsau",
+    "latitude": 49.281937,
+    "longitude": 9.691381,
+    "price": 1.7939999999999998
+  },
+  {
+    "station_name": "JET MUTLANGEN SPRAITBACHER STR. 78",
+    "city": "MUTLANGEN",
+    "latitude": 48.83314,
+    "longitude": 9.79253,
+    "price": 1.714235294117647
+  },
+  {
+    "station_name": "JET HEILBRONN OSTSTR. 106",
+    "city": "HEILBRONN",
+    "latitude": 49.14366,
+    "longitude": 9.23031,
+    "price": 1.7179922480620156
+  },
+  {
+    "station_name": "Tobias Lehre GmbH",
+    "city": "Haiterbach",
+    "latitude": 48.543681,
+    "longitude": 8.672976,
+    "price": 1.7165213675213675
+  },
+  {
+    "station_name": "TotalEnergies Offenburg",
+    "city": "Offenburg",
+    "latitude": 48.47251,
+    "longitude": 7.927314,
+    "price": 1.7689038461538462
+  },
+  {
+    "station_name": "Shell Schopfheim Lusring 14",
+    "city": "Schopfheim",
+    "latitude": 47.642795,
+    "longitude": 7.81546,
+    "price": 1.7846521739130434
+  },
+  {
+    "station_name": "CLASSIC Elmstein",
+    "city": "Elmstein",
+    "latitude": 49.3481,
+    "longitude": 7.94848,
+    "price": 1.7189999999999999
+  },
+  {
+    "station_name": "t/s/g Treffinger gmbH",
+    "city": "Oberderdingen",
+    "latitude": 49.066491,
+    "longitude": 8.803929,
+    "price": 1.7123333333333335
+  },
+  {
+    "station_name": "bft Tankstelle Fritz",
+    "city": "Lichtenau",
+    "latitude": 48.72161,
+    "longitude": 8.00142,
+    "price": 1.779
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "BAD WURZACH",
+    "latitude": 47.908723,
+    "longitude": 9.891853,
+    "price": 1.6924859813084112
+  },
+  {
+    "station_name": "T Lahr",
+    "city": "Lahr",
+    "latitude": 48.34102,
+    "longitude": 7.87974,
+    "price": 1.7149493670886076
+  },
+  {
+    "station_name": "Calpam Tankstelle",
+    "city": "Großheubach",
+    "latitude": 49.721042633057,
+    "longitude": 9.2309761047363,
+    "price": 1.6896458797327396
+  },
+  {
+    "station_name": "Baden-Baden, Gewerbepark Cité 8",
+    "city": "Baden-Baden",
+    "latitude": 48.78397222,
+    "longitude": 8.19429444,
+    "price": 1.7354150943396227
+  },
+  {
+    "station_name": "JET PFORZHEIM LUISENSTR. 16",
+    "city": "PFORZHEIM",
+    "latitude": 48.8937,
+    "longitude": 8.69659,
+    "price": 1.695421052631579
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Heiningen",
+    "latitude": 48.65683,
+    "longitude": 9.649846,
+    "price": 1.6735137157107234
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "SONTHOFEN",
+    "latitude": 47.519035,
+    "longitude": 10.281966,
+    "price": 1.7427479674796749
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Hagenbach",
+    "latitude": 49.02205,
+    "longitude": 8.251543,
+    "price": 1.7263387096774194
+  },
+  {
+    "station_name": "PIN Service-Station",
+    "city": "Neckarsteinach",
+    "latitude": 49.399082,
+    "longitude": 8.845576,
+    "price": 1.711121212121212
+  },
+  {
+    "station_name": "ED-Tankpunkt Ö",
+    "city": "Öhringen",
+    "latitude": 49.204579911754,
+    "longitude": 9.4890964189802,
+    "price": 1.7542459016393444
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "LINDAU",
+    "latitude": 47.565066,
+    "longitude": 9.70483,
+    "price": 1.7312032967032966
+  },
+  {
+    "station_name": "Blaufelden",
+    "city": "Blaufelden",
+    "latitude": 49.29938,
+    "longitude": 9.96666,
+    "price": 1.711941176470588
+  },
+  {
+    "station_name": "Auto-Schmidt E.K. Gabriele Lessing",
+    "city": "Meisenheim",
+    "latitude": 49.711449,
+    "longitude": 7.6714,
+    "price": 1.6906666666666665
+  },
+  {
+    "station_name": "TotalEnergies Truckstop Friedenweiler - Rötenbach",
+    "city": "Friedenweiler",
+    "latitude": 47.897428,
+    "longitude": 8.274385,
+    "price": 1.737048780487805
+  },
+  {
+    "station_name": "TotalEnergies Biberach",
+    "city": "Biberach",
+    "latitude": 48.09555,
+    "longitude": 9.779523,
+    "price": 1.7377951807228915
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Meckenbeuren",
+    "latitude": 47.69338,
+    "longitude": 9.559551,
+    "price": 1.7707021276595745
+  },
+  {
+    "station_name": "Rentschler",
+    "city": "Schömberg",
+    "latitude": 48.786625,
+    "longitude": 8.643501,
+    "price": 1.679
+  },
+  {
+    "station_name": "JET ROSENGARTEN WESTRING 2",
+    "city": "ROSENGARTEN",
+    "latitude": 49.07327,
+    "longitude": 9.72417,
+    "price": 1.7125833333333333
+  },
+  {
+    "station_name": "Autohaus König Inh. Stefan König e.K.",
+    "city": "Wyhl",
+    "latitude": 48.16309,
+    "longitude": 7.65385,
+    "price": 1.639
+  },
+  {
+    "station_name": "Aral Tankstelle",
+    "city": "Göppingen",
+    "latitude": 48.696903,
+    "longitude": 9.659792,
+    "price": 1.7116623376623377
+  },
+  {
+    "station_name": "AVIA Tankstelle",
+    "city": "Ellwangen (Jagst)",
+    "latitude": 48.97248,
+    "longitude": 10.12005,
+    "price": 1.7285132743362832
+  },
+  {
+    "station_name": "bft Tankstelle Emir",
+    "city": "Heppenehim",
+    "latitude": 49.648336,
+    "longitude": 8.69286,
+    "price": 1.6924810126582281
+  },
+  {
+    "station_name": "Shell Gernsheim Mainzer Str. 5",
+    "city": "Gernsheim",
+    "latitude": 49.755216,
+    "longitude": 8.481699,
+    "price": 1.7089107142857143
+  },
+  {
+    "station_name": "ENI",
+    "city": "Nufringen",
+    "latitude": 48.615126,
+    "longitude": 8.906238,
+    "price": 2.1806666666666668
+  },
+  {
+    "station_name": "Frankenthal, Wormser Straße 128",
+    "city": "Frankenthal",
+    "latitude": 49.548357,
+    "longitude": 8.353794,
+    "price": 1.7182857142857144
+  },
+  {
+    "station_name": "TotalEnergies Bad Duerrheim",
+    "city": "Bad Duerrheim",
+    "latitude": 48.021233,
+    "longitude": 8.527893,
+    "price": 1.7278541666666667
+  },
+  {
+    "station_name": "Tankhof Wiebelskircher",
+    "city": "Maxdorf",
+    "latitude": 49.48181,
+    "longitude": 8.28411,
+    "price": 1.7289999999999999
+  },
+  {
+    "station_name": "Tankstelle am E-Center",
+    "city": "Mannheim-Neuostheim",
+    "latitude": 49.47353,
+    "longitude": 8.536847,
+    "price": 1.7023333333333333
+  },
+  {
+    "station_name": "Esso Tankstelle",
+    "city": "HARDHEIM",
+    "latitude": 49.610138,
+    "longitude": 9.480372,
+    "price": 1.6998451612903225
+  },
+  {
+    "station_name": "Autohaus Hasenfuß",
+    "city": "Külsheim-Hundheim",
+    "latitude": 49.6939,
+    "longitude": 9.4653,
+    "price": 1.7114539877300612
+  },
+  {
+    "station_name": "Schindele Handels GmbH & Co. KG",
+    "city": "Bad Waldsee",
+    "latitude": 47.92648,
+    "longitude": 9.75699,
+    "price": 1.734
+  },
+  {
+    "station_name": "JET CALW STUTTGARTER STR. 92 - 1",
+    "city": "CALW",
+    "latitude": 48.70951,
+    "longitude": 8.75883,
+    "price": 1.7035360824742267
+  },
+  {
+    "station_name": "JET GOEPPINGEN ULMER STR. 44",
+    "city": "GOEPPINGEN",
+    "latitude": 48.69803,
+    "longitude": 9.66845,
+    "price": 1.674485436893204
+  },
+  {
+    "station_name": "CLASSIC Freudenberg",
+    "city": "Freudenberg",
+    "latitude": 49.75037,
+    "longitude": 9.32593,
+    "price": 1.6957777777777778
+  },
+  {
+    "station_name": "Pinoil",
+    "city": "Korb",
+    "latitude": 48.83841,
+    "longitude": 9.366056,
+    "price": 1.7039411764705883
+  },
+  {
+    "station_name": "Q1 Tankstelle",
+    "city": "Karlsruhe",
+    "latitude": 49.0141,
+    "longitude": 8.3552,
+    "price": 1.7006666666666665
+  },
+  {
+    "station_name": "Shell Annweiler Landauer Str. 24",
+    "city": "Annweiler",
+    "latitude": 49.203808,
+    "longitude": 7.969361,
+    "price": 1.7793496503496504
+  }
+]

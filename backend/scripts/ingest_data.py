@@ -34,13 +34,13 @@ def load_stations_map():
     df['plz'] = pd.to_numeric(df['post_code'], errors='coerce')
     df = df.dropna(subset=['plz', 'latitude', 'longitude'])
     df = df[(df['plz'] >= 1000) & (df['plz'] <= 99999)]
-    df['plz2'] = df['post_code'].astype(str).str.zfill(5).str[:2]
+    df['plz3'] = df['post_code'].astype(str).str.zfill(5).str[:3]
     
     # Map for processing
-    station_map = df.set_index('uuid')['plz2'].to_dict()
+    station_map = df.set_index('uuid')['plz3'].to_dict()
     
     # Calculate Centroids
-    centroids = df.groupby('plz2')[['latitude', 'longitude']].mean().reset_index()
+    centroids = df.groupby('plz3')[['latitude', 'longitude']].mean().reset_index()
     centroids.rename(columns={'latitude': 'lat', 'longitude': 'lon'}, inplace=True)
     
     return station_map, centroids
@@ -75,21 +75,21 @@ def process_single_file(file_path, station_map=None):
         current_date = pd.to_datetime(filename_date)
         
         if station_map:
-            df['region_plz2'] = df['station_uuid'].map(station_map)
-            df = df.dropna(subset=['region_plz2'])
+            df['region_plz3'] = df['station_uuid'].map(station_map)
+            df = df.dropna(subset=['region_plz3'])
         else:
             return None
             
         for col in ['diesel', 'e5', 'e10']:
             df[col] = pd.to_numeric(df[col], errors='coerce')
             
-        df_melt = df.melt(id_vars=['region_plz2'], value_vars=['diesel', 'e5', 'e10'], 
+        df_melt = df.melt(id_vars=['region_plz3'], value_vars=['diesel', 'e5', 'e10'], 
                           var_name='fuel', value_name='price')
         df_melt = df_melt[df_melt['price'] > 0.1]
         
         if df_melt.empty: return None
 
-        agg = df_melt.groupby(['region_plz2', 'fuel'])['price'].agg(['mean', 'std', 'min', 'max']).reset_index()
+        agg = df_melt.groupby(['region_plz3', 'fuel'])['price'].agg(['mean', 'std', 'min', 'max']).reset_index()
         agg['date'] = current_date
         agg.rename(columns={'mean': 'price_mean', 'std': 'price_std', 'min': 'price_min', 'max': 'price_max'}, inplace=True)
         agg['price_std'] = agg['price_std'].fillna(0)
@@ -124,12 +124,12 @@ def main():
 
     # Concat & Sort
     df_full = pd.concat(daily_aggregated, ignore_index=True)
-    df_full.sort_values(['date', 'region_plz2', 'fuel'], inplace=True)
+    df_full.sort_values(['date', 'region_plz3', 'fuel'], inplace=True)
     
     # Merge Centroids (Lat/Lon)
     print("Merging Lat/Lon Centroids...")
-    df_full = df_full.merge(centroids, left_on='region_plz2', right_on='plz2', how='left')
-    df_full.drop(columns=['plz2'], inplace=True)
+    df_full = df_full.merge(centroids, left_on='region_plz3', right_on='plz3', how='left')
+    df_full.drop(columns=['plz3'], inplace=True)
 
     # Macro
     print("Merging Macro Data...")
@@ -138,9 +138,9 @@ def main():
     
     # Features
     print("Calculating Features...")
-    df_full['ma_7d'] = df_full.groupby(['region_plz2', 'fuel'])['price_mean'] \
+    df_full['ma_7d'] = df_full.groupby(['region_plz3', 'fuel'])['price_mean'] \
                         .transform(lambda x: x.rolling(window=7, min_periods=1).mean())
-    df_full['trend_slope'] = df_full.groupby(['region_plz2', 'fuel'])['price_mean'].diff(7).fillna(0)
+    df_full['trend_slope'] = df_full.groupby(['region_plz3', 'fuel'])['price_mean'].diff(7).fillna(0)
 
     # Save Daily (Overwrite)
     out_daily = os.path.join(OUTPUT_DIR, 'data_daily.parquet')
@@ -152,13 +152,13 @@ def main():
     df_full['year_week'] = df_full['date'].dt.isocalendar().year.astype(str) + "-W" + \
                            df_full['date'].dt.isocalendar().week.astype(str).str.zfill(2)
                            
-    df_weekly = df_full.groupby(['year_week', 'region_plz2', 'fuel']).agg({
+    df_weekly = df_full.groupby(['year_week', 'region_plz3', 'fuel']).agg({
         'price_mean': 'mean', 'price_std': 'mean',
         'brent_oil_eur': 'mean', 'exchange_rate_eur_usd': 'mean', 'date': 'min',
         'lat': 'first', 'lon': 'first' # Preserve Coordinates
     }).reset_index()
     
-    df_weekly['change_pct'] = df_weekly.groupby(['region_plz2', 'fuel'])['price_mean'].pct_change().fillna(0)
+    df_weekly['change_pct'] = df_weekly.groupby(['region_plz3', 'fuel'])['price_mean'].pct_change().fillna(0)
     df_weekly['rank'] = df_weekly.groupby(['year_week', 'fuel'])['price_mean'].rank(method='min').astype(int)
     
     out_weekly = os.path.join(OUTPUT_DIR, 'data_weekly.parquet')
@@ -167,7 +167,7 @@ def main():
     # Monthly
     print("Aggregating Monthly...")
     df_full['year_month'] = df_full['date'].dt.strftime('%Y-%m')
-    df_monthly = df_full.groupby(['year_month', 'region_plz2', 'fuel']).agg({
+    df_monthly = df_full.groupby(['year_month', 'region_plz3', 'fuel']).agg({
         'price_mean': 'mean', 'price_std': 'mean',
         'brent_oil_eur': 'mean', 'exchange_rate_eur_usd': 'mean', 'date': 'min',
         'lat': 'first', 'lon': 'first' # Preserve Coordinates

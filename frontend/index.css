@@ -275,7 +275,7 @@ html {
 }
 
 .content-grid {
-    padding: 2rem;
+    padding: 0.5rem 1rem;
     overflow-y: auto;
     height: calc(100vh - var(--header-height));
     display: block !important;

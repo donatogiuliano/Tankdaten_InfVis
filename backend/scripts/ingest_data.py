@@ -4,6 +4,8 @@ import os
 import glob
 import concurrent.futures
 from functools import partial
+import argparse
+import sys
 
 # PATHS
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -12,12 +14,11 @@ RAW_DATA_ROOT = os.path.join(BASE_DIR, 'data', 'tankerkoenig_historic')
 # Output: Always backend/data
 OUTPUT_DIR = os.path.join(BASE_DIR, 'data')
 
-def load_stations_map():
-    print("Loading Stations Metadata...")
-    # Try different locations for robustness
+def load_stations_map(year):
+    print(f"Loading Stations Metadata for {year}...")
+    # Try specific year first, then wildcard
     search_patterns = [
-        os.path.join(RAW_DATA_ROOT, "stations", "2024", "12", "*-stations.csv"),
-        os.path.join(RAW_DATA_ROOT, "stations", "**", "*-stations.csv")
+        os.path.join(RAW_DATA_ROOT, "stations", str(year), "**", "*-stations.csv"),
     ]
     
     stations_files = []
@@ -25,8 +26,13 @@ def load_stations_map():
         stations_files.extend(glob.glob(p, recursive=True))
     
     if not stations_files:
+        print(f"Warning: No specific stations found for {year}, trying all...")
+        stations_files = glob.glob(os.path.join(RAW_DATA_ROOT, "stations", "**", "*-stations.csv"), recursive=True)
+
+    if not stations_files:
         raise FileNotFoundError(f"No stations found in {RAW_DATA_ROOT}")
         
+    # Use the latest file available for that year (or overall)
     target_file = sorted(stations_files)[-1]
     print(f"Using Stations File: {target_file}")
     
@@ -45,25 +51,7 @@ def load_stations_map():
     
     return station_map, centroids
 
-def generate_macro_data(date_range):
-    # Deterministic simulation for reproducibility
-    np.random.seed(42)
-    brent_base = 77.0
-    brent_prices = [brent_base]
-    fx_base = 1.10
-    fx_rates = [fx_base]
-    
-    for _ in range(len(date_range) - 1):
-        brent_prices.append(max(60, brent_prices[-1] + np.random.normal(0, 1.5)))
-        fx_rates.append(max(0.95, fx_rates[-1] + np.random.normal(0, 0.005)))
-        
-    df = pd.DataFrame({
-        'date': date_range,
-        'brent_oil_usd': np.round(brent_prices, 2),
-        'exchange_rate_eur_usd': np.round(fx_rates, 4)
-    })
-    df['brent_oil_eur'] = round(df['brent_oil_usd'] / df['exchange_rate_eur_usd'], 2)
-    return df
+# Macro data generation removed as per user request to avoid simulated data.
 
 def process_single_file(file_path, station_map=None):
     cols_to_use = ['date', 'station_uuid', 'diesel', 'e5', 'e10']
@@ -100,15 +88,28 @@ def process_single_file(file_path, station_map=None):
         return None
 
 def main():
+    parser = argparse.ArgumentParser(description='Process Tankerkoenig data for a specific year.')
+    parser.add_argument('--year', type=int, required=True, help='Year to process (e.g., 2019, 2024)')
+    args = parser.parse_args()
+    
+    year = args.year
+    print(f"Processing data for YEAR: {year}")
+
     if not os.path.exists(RAW_DATA_ROOT):
         print(f"ERROR: Raw Data Path not found: {RAW_DATA_ROOT}")
         return
 
-    station_map, centroids = load_stations_map()
-    price_files = glob.glob(os.path.join(RAW_DATA_ROOT, "prices", "2024", "**", "*-prices.csv"), recursive=True)
+    station_map, centroids = load_stations_map(year)
+    
+    # Prices path for specific year
+    price_files = glob.glob(os.path.join(RAW_DATA_ROOT, "prices", str(year), "**", "*-prices.csv"), recursive=True)
     price_files.sort()
     
-    print(f"Found {len(price_files)} daily files. Starting processing...")
+    print(f"Found {len(price_files)} daily files for {year}. Starting processing...")
+    
+    if not price_files:
+        print(f"No price files found for year {year} in {os.path.join(RAW_DATA_ROOT, 'prices', str(year))}")
+        return
     
     daily_aggregated = []
     
@@ -119,7 +120,7 @@ def main():
     daily_aggregated = [r for r in results if r is not None]
     
     if not daily_aggregated:
-        print("No data found!")
+        print("No data found after processing!")
         return
 
     # Concat & Sort
@@ -131,10 +132,9 @@ def main():
     df_full = df_full.merge(centroids, left_on='region_plz3', right_on='plz3', how='left')
     df_full.drop(columns=['plz3'], inplace=True)
 
-    # Macro
-    print("Merging Macro Data...")
-    df_macro = generate_macro_data(df_full['date'].unique())
-    df_full = df_full.merge(df_macro, on='date', how='left')
+    # Macro Data Generation removed
+    # df_macro = generate_macro_data(df_full['date'].unique())
+    # df_full = df_full.merge(df_macro, on='date', how='left')
     
     # Features
     print("Calculating Features...")
@@ -142,8 +142,8 @@ def main():
                         .transform(lambda x: x.rolling(window=7, min_periods=1).mean())
     df_full['trend_slope'] = df_full.groupby(['region_plz3', 'fuel'])['price_mean'].diff(7).fillna(0)
 
-    # Save Daily (Overwrite)
-    out_daily = os.path.join(OUTPUT_DIR, 'data_daily.parquet')
+    # Save Daily
+    out_daily = os.path.join(OUTPUT_DIR, f'data_daily_{year}.parquet')
     print(f"Saving Daily: {out_daily}")
     df_full.to_parquet(out_daily, index=False)
     
@@ -154,14 +154,14 @@ def main():
                            
     df_weekly = df_full.groupby(['year_week', 'region_plz3', 'fuel']).agg({
         'price_mean': 'mean', 'price_std': 'mean',
-        'brent_oil_eur': 'mean', 'exchange_rate_eur_usd': 'mean', 'date': 'min',
+        'date': 'min',
         'lat': 'first', 'lon': 'first' # Preserve Coordinates
     }).reset_index()
     
     df_weekly['change_pct'] = df_weekly.groupby(['region_plz3', 'fuel'])['price_mean'].pct_change().fillna(0)
     df_weekly['rank'] = df_weekly.groupby(['year_week', 'fuel'])['price_mean'].rank(method='min').astype(int)
     
-    out_weekly = os.path.join(OUTPUT_DIR, 'data_weekly.parquet')
+    out_weekly = os.path.join(OUTPUT_DIR, f'data_weekly_{year}.parquet')
     df_weekly.to_parquet(out_weekly, index=False)
     
     # Monthly
@@ -169,12 +169,12 @@ def main():
     df_full['year_month'] = df_full['date'].dt.strftime('%Y-%m')
     df_monthly = df_full.groupby(['year_month', 'region_plz3', 'fuel']).agg({
         'price_mean': 'mean', 'price_std': 'mean',
-        'brent_oil_eur': 'mean', 'exchange_rate_eur_usd': 'mean', 'date': 'min',
+        'date': 'min',
         'lat': 'first', 'lon': 'first' # Preserve Coordinates
     }).reset_index()
     df_monthly['rank'] = df_monthly.groupby(['year_month', 'fuel'])['price_mean'].rank(method='min').astype(int)
     
-    out_monthly = os.path.join(OUTPUT_DIR, 'data_monthly.parquet')
+    out_monthly = os.path.join(OUTPUT_DIR, f'data_monthly_{year}.parquet')
     df_monthly.to_parquet(out_monthly, index=False)
     
     print("ALL DONE.")

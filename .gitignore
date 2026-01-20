@@ -19,3 +19,5 @@ npm-debug.log
 backend/data/tankerkoenig_historic/
 output/
 *.csv
+*.xlsx
+backend/data/excel_exports

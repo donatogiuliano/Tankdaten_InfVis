@@ -119,6 +119,29 @@ def get_states_geo():
     except Exception as e:
         return jsonify({"error": str(e)}), 404
 
+@app.route('/api/data/corona')
+def get_corona_data():
+    """Get aggregated 2020 fuel price data for Corona crisis analysis."""
+    try:
+        file_path = os.path.join(DATA_DIR, 'data_daily_2020.parquet')
+        if not os.path.exists(file_path):
+            return jsonify({"error": "2020 data not found"}), 404
+        
+        df = pd.read_parquet(file_path)
+        
+        # Aggregate by date and fuel type (average across all regions)
+        agg = df.groupby(['date', 'fuel']).agg({
+            'price_mean': 'mean',
+            'brent_oil_eur': 'first'
+        }).reset_index()
+        
+        # Convert date to string for JSON
+        agg['date'] = agg['date'].dt.strftime('%Y-%m-%d')
+        
+        return jsonify(agg.to_dict(orient='records'))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 @app.route('/api/data/history')
 def get_region_history():
     try:

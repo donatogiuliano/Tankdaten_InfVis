@@ -157,6 +157,10 @@ export class CrisisPage {
             ])
             .range([height, 0]);
 
+        const yOil = d3.scaleLinear()
+            .domain([0, d3.max(fuelData, d => d.brent_oil_eur) * 1.1])
+            .range([height, 0]);
+
         // Gridlines
         svg.append('g')
             .attr('class', 'grid')
@@ -193,6 +197,18 @@ export class CrisisPage {
                 .attr('font-weight', '600')
                 .text(`${event.icon} ${event.label}`);
         });
+
+        // Oil Price Area (Background)
+        const areaOil = d3.area()
+            .x(d => x(d.parsedDate))
+            .y0(height)
+            .y1(d => yOil(d.brent_oil_eur))
+            .curve(d3.curveMonotoneX);
+
+        svg.append('path')
+            .datum(fuelData)
+            .attr('fill', 'rgba(255, 193, 7, 0.15)')
+            .attr('d', areaOil);
 
         // Main Price Line
         const line = d3.line()
@@ -265,6 +281,14 @@ export class CrisisPage {
             .selectAll('text')
             .style('font-size', '11px');
 
+        // Y Axis Right (Oil)
+        svg.append('g')
+            .attr('transform', `translate(${width},0)`)
+            .call(d3.axisRight(yOil).ticks(5).tickFormat(d => d.toFixed(0) + ' €'))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .style('fill', '#ff9800');
+
         // Axis Labels
         svg.append('text')
             .attr('transform', 'rotate(-90)')
@@ -274,6 +298,15 @@ export class CrisisPage {
             .attr('font-size', '12px')
             .attr('fill', '#1e88e5')
             .text('Kraftstoffpreis (€/L)');
+
+        svg.append('text')
+            .attr('transform', 'rotate(-90)')
+            .attr('y', width + 55)
+            .attr('x', -height / 2)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '11px')
+            .attr('fill', '#ff9800')
+            .text('Rohölpreis Brent (€/Barrel)');
 
         // Interactive Overlay for Tooltip
         const tooltip = d3.select(chartContainer)
@@ -303,7 +336,8 @@ export class CrisisPage {
                         .style('top', (yPrice(d.price_mean) + margin.top - 10) + 'px')
                         .html(`
                             <strong>${d3.timeFormat('%d. %B %Y')(d.parsedDate)}</strong><br>
-                            Preis: ${d.price_mean.toFixed(3)} €
+                            Preis: ${d.price_mean.toFixed(3)} €<br>
+                            Öl: ${d.brent_oil_eur.toFixed(2)} €
                         `);
                 }
             })

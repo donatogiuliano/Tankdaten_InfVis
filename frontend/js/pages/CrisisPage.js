@@ -11,7 +11,6 @@ export class CrisisPage {
         // Corona-Event Markers
         this.coronaEvents = [
             { date: '2020-03-22', label: '1. Lockdown', color: '#e53935', icon: '🔒' },
-            { date: '2020-04-29', label: 'Preis-Tief', color: '#ff9800', icon: '📉' },
             { date: '2020-05-06', label: 'Lockerungen', color: '#4caf50', icon: '🔓' },
             { date: '2020-11-02', label: '2. Lockdown', color: '#e53935', icon: '🔒' }
         ];
@@ -176,18 +175,20 @@ export class CrisisPage {
             // Stagger Y position to avoid overlap (alternate between -10 and -25)
             const yOffset = index % 2 === 0 ? -12 : -28;
             
-            // Vertical Line
-            svg.append('line')
-                .attr('x1', xPos)
-                .attr('x2', xPos)
-                .attr('y1', yOffset + 8)
-                .attr('y2', height)
-                .attr('stroke', event.color)
-                .attr('stroke-width', 2)
-                .attr('stroke-dasharray', '5,5')
-                .style('opacity', 0.7);
+            // Vertical Line (Exclude for Price-Tief)
+            if (event.label !== 'Preis-Tief') {
+                svg.append('line')
+                    .attr('x1', xPos)
+                    .attr('x2', xPos)
+                    .attr('y1', yOffset + 8)
+                    .attr('y2', height)
+                    .attr('stroke', '#37474f') // Dark Slate Grey (High Contrast)
+                    .attr('stroke-width', 2)
+                    .attr('stroke-dasharray', '4,4')
+                    .style('opacity', 1);
+            }
             
-            // Label
+            // Label (Keep original color for readability)
             svg.append('text')
                 .attr('x', xPos)
                 .attr('y', yOffset)
@@ -198,7 +199,7 @@ export class CrisisPage {
                 .text(`${event.icon} ${event.label}`);
         });
 
-        // Oil Price Area (Background)
+        // Oil Price Area (Slate Grey)
         const areaOil = d3.area()
             .x(d => x(d.parsedDate))
             .y0(height)
@@ -207,7 +208,7 @@ export class CrisisPage {
 
         svg.append('path')
             .datum(fuelData)
-            .attr('fill', 'rgba(255, 193, 7, 0.15)')
+            .attr('fill', 'rgba(84, 110, 122, 0.15)') // #546E7A at 15%
             .attr('d', areaOil);
 
         // Main Price Line
@@ -241,7 +242,7 @@ export class CrisisPage {
                 .attr('stroke-width', 2);
             svg.append('text')
                 .attr('x', x(minEntry.parsedDate))
-                .attr('y', yPrice(minEntry.price_mean) + 22)
+                .attr('y', yPrice(minEntry.price_mean) - 15) // Position ABOVE point
                 .attr('text-anchor', 'middle')
                 .attr('font-size', '10px')
                 .attr('fill', '#009688')
@@ -281,13 +282,13 @@ export class CrisisPage {
             .selectAll('text')
             .style('font-size', '11px');
 
-        // Y Axis Right (Oil)
+        // Y Axis Right (Oil - Slate Grey)
         svg.append('g')
             .attr('transform', `translate(${width},0)`)
             .call(d3.axisRight(yOil).ticks(5).tickFormat(d => d.toFixed(0) + ' €'))
             .selectAll('text')
             .style('font-size', '11px')
-            .style('fill', '#ff9800');
+            .style('fill', '#546E7A'); // Slate Grey
 
         // Axis Labels
         svg.append('text')
@@ -305,7 +306,7 @@ export class CrisisPage {
             .attr('x', -height / 2)
             .attr('text-anchor', 'middle')
             .attr('font-size', '11px')
-            .attr('fill', '#ff9800')
+            .attr('fill', '#546E7A') // Slate Grey
             .text('Rohölpreis Brent (€/Barrel)');
 
         // Interactive Overlay for Tooltip

@@ -18,3 +18,4 @@ npm-debug.log
 # Large Data
 backend/data/tankerkoenig_historic/
 output/
+*.csv

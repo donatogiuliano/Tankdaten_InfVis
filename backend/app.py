@@ -131,8 +131,7 @@ def get_corona_data():
         
         # Aggregate by date and fuel type (average across all regions)
         agg = df.groupby(['date', 'fuel']).agg({
-            'price_mean': 'mean',
-            'brent_oil_eur': 'first'
+            'price_mean': 'mean'
         }).reset_index()
         
         # Convert date to string for JSON

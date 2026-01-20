@@ -137,6 +137,7 @@ export class RegionalPage {
             };
 
             yearInput.addEventListener('blur', handleYearChange);
+            yearInput.addEventListener('change', handleYearChange); // Auto-update on spinner click
             yearInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     yearInput.blur(); // Triggers blur handler

@@ -38,8 +38,8 @@ export class CrisisPage {
                     
                     <div style="display: flex; gap: 1rem; margin-left: auto;">
                         ${this.coronaEvents.map(e => `
-                            <div style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; color: #666;">
-                                <span style="width: 12px; height: 12px; background: ${e.color}; border-radius: 2px;"></span>
+                            <div style="display: flex; align-items: center; gap: 4px; font-size: 0.95rem; color: #5f6368; font-weight: 500;">
+                                <span style="width: 12px; height: 12px; background: ${e.color}; border-radius: 3px;"></span>
                                 ${e.icon} ${e.label}
                             </div>
                         `).join('')}

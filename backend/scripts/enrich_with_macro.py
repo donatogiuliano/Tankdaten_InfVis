@@ -60,7 +60,10 @@ def enrich_file(filename):
     print("Done.")
 
 if __name__ == "__main__":
+    # Enrich 2020 (Corona)
     enrich_file('data_daily_2020.parquet')
-    # Also monthly/weekly if needed, but Daily is used for the chart
-    enrich_file('data_weekly_2020.parquet')
-    enrich_file('data_monthly_2020.parquet')
+    
+    # Enrich 2022 (Ukraine Crisis)
+    enrich_file('data_daily_2022.parquet')
+    enrich_file('data_weekly_2022.parquet')
+    enrich_file('data_monthly_2022.parquet')

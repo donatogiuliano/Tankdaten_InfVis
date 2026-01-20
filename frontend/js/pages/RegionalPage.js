@@ -363,13 +363,18 @@ export class RegionalPage {
         const year = state.get('year') || new Date().getFullYear();
         const fuel = state.get('fuelType').toUpperCase();
 
-        // Helper to extract PLZ2 safe string
-        const getPlz = (d) => d.region_plz2 ? d.region_plz2.toString() : null;
-        const plz1 = getPlz(d1);
-        const plz2 = getPlz(d2);
+        // Helper to create region ID from coordinates (since cache doesn't have PLZ)
+        const getRegionId = (d) => {
+            if (d.lat !== undefined && d.lon !== undefined) {
+                return `${d.lat.toFixed(1)}_${d.lon.toFixed(1)}`;
+            }
+            return null;
+        };
+        const regionId1 = getRegionId(d1);
+        const regionId2 = getRegionId(d2);
 
-        if (!plz1 || !plz2) {
-            alert("Fehler: Konnte Regions-IDs nicht ermitteln. Bitte wähle Regionen mit gültiger PLZ.");
+        if (!regionId1 || !regionId2) {
+            alert("Fehler: Konnte Regions-IDs nicht ermitteln. Bitte wähle Regionen mit gültiger Position.");
             return;
         }
 
@@ -381,12 +386,12 @@ export class RegionalPage {
             </div>
         `);
 
-        // Fetch Real History
+        // Fetch Real History using lat/lon
         let hist1 = [], hist2 = [];
         try {
             const [res1, res2] = await Promise.all([
-                fetch(`/api/data/history?year=${year}&plz=${plz1}`).then(r => r.json()),
-                fetch(`/api/data/history?year=${year}&plz=${plz2}`).then(r => r.json())
+                fetch(`/api/data/history?year=${year}&lat=${d1.lat}&lon=${d1.lon}`).then(r => r.json()),
+                fetch(`/api/data/history?year=${year}&lat=${d2.lat}&lon=${d2.lon}`).then(r => r.json())
             ]);
             hist1 = res1;
             hist2 = res2;
@@ -400,11 +405,13 @@ export class RegionalPage {
         }
 
         // Calculate Yearly Averages (Real Data)
+        // Note: API returns lowercase fuel keys (e5, e10, diesel)
+        const fuelKeyLower = state.get('fuelType').toLowerCase();
         const getAvg = (hist) => {
             if (!hist || !hist.length) return 0;
-            const valid = hist.filter(h => h[state.get('fuelType')] != null);
+            const valid = hist.filter(h => h[fuelKeyLower] != null);
             if (!valid.length) return 0;
-            const sum = valid.reduce((acc, curr) => acc + (parseFloat(curr[state.get('fuelType')]) || 0), 0);
+            const sum = valid.reduce((acc, curr) => acc + (parseFloat(curr[fuelKeyLower]) || 0), 0);
             return sum / valid.length;
         };
 
@@ -483,9 +490,9 @@ export class RegionalPage {
         `;
         document.body.insertAdjacentHTML('beforeend', modalHtml);
 
-        // Render Chart
+        // Render Chart - use lowercase fuelKey since API returns lowercase field names
         setTimeout(() => {
-            this.renderComparisonChart('#comp-chart-container', hist1, hist2, colorA, colorB, state.get('fuelType'));
+            this.renderComparisonChart('#comp-chart-container', hist1, hist2, colorA, colorB, state.get('fuelType').toLowerCase());
         }, 300);
     }
 

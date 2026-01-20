@@ -4,6 +4,8 @@ import os
 import glob
 import concurrent.futures
 from functools import partial
+import requests
+import xml.etree.ElementTree as ET
 import argparse
 import sys
 
@@ -51,7 +53,67 @@ def load_stations_map(year):
     
     return station_map, centroids
 
-# Macro data generation removed as per user request to avoid simulated data.
+# External Data Configuration
+OIL_URL = "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls"
+ECB_URL = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/usd.xml"
+
+def fetch_real_macro_data(date_range):
+    """Fetches real Oil and FX data and merges it with the target date range."""
+    print("Fetching Real Macro Data...")
+    
+    # 1. Fetch Oil (Brent USD)
+    print(f"  - Fetching Oil from {OIL_URL}...")
+    try:
+        df_oil = pd.read_excel(OIL_URL, sheet_name="Data 1", skiprows=2, engine="xlrd")
+        df_oil.columns = ["date", "brent_oil_usd"]
+        df_oil = df_oil.dropna()
+        df_oil["date"] = pd.to_datetime(df_oil["date"])
+        df_oil.set_index("date", inplace=True)
+    except Exception as e:
+        print(f"    WARNING: Failed to fetch Oil data ({e}). Using fallback.")
+        df_oil = pd.DataFrame()
+
+    # 2. Fetch FX (USD/EUR)
+    print(f"  - Fetching FX from {ECB_URL}...")
+    try:
+        response = requests.get(ECB_URL)
+        response.raise_for_status()
+        root = ET.fromstring(response.content)
+        records = []
+        for obs in root.iter():
+            if obs.tag.endswith("Obs") and obs.attrib.get("TIME_PERIOD"):
+                try:
+                    records.append({
+                        "date": pd.to_datetime(obs.attrib.get("TIME_PERIOD")),
+                        "exchange_rate_eur_usd": float(obs.attrib.get("OBS_VALUE"))
+                    })
+                except: continue
+        df_fx = pd.DataFrame(records)
+        df_fx.set_index("date", inplace=True)
+    except Exception as e:
+        print(f"    WARNING: Failed to fetch FX data ({e}). Using fallback.")
+        df_fx = pd.DataFrame()
+
+    # 3. Create Base DataFrame from Input Date Range
+    df_base = pd.DataFrame({'date': date_range})
+    df_base.set_index('date', inplace=True)
+    df_base.sort_index(inplace=True)
+
+    # 4. Merge and Forward Fill (Stocks closed on weekends)
+    df_macro = df_base.join(df_oil, how='left').join(df_fx, how='left')
+    df_macro.fillna(method='ffill', inplace=True)
+    df_macro.fillna(method='bfill', inplace=True)
+
+    # 5. Calculate Euro Price
+    if 'brent_oil_usd' in df_macro.columns and 'exchange_rate_eur_usd' in df_macro.columns:
+        df_macro['brent_oil_eur'] = round(df_macro['brent_oil_usd'] / df_macro['exchange_rate_eur_usd'], 2)
+    else:
+        df_macro['brent_oil_eur'] = 0.0
+
+    return df_macro.reset_index()
+
+def generate_macro_data(date_range):
+    return fetch_real_macro_data(date_range)
 
 def process_single_file(file_path, station_map=None):
     cols_to_use = ['date', 'station_uuid', 'diesel', 'e5', 'e10']
@@ -132,9 +194,10 @@ def main():
     df_full = df_full.merge(centroids, left_on='region_plz3', right_on='plz3', how='left')
     df_full.drop(columns=['plz3'], inplace=True)
 
-    # Macro Data Generation removed
-    # df_macro = generate_macro_data(df_full['date'].unique())
-    # df_full = df_full.merge(df_macro, on='date', how='left')
+    # Macro Data Generation (Real Data)
+    print("Fetching/Merging Macro Data...")
+    df_macro = generate_macro_data(df_full['date'].unique())
+    df_full = df_full.merge(df_macro, on='date', how='left')
     
     # Features
     print("Calculating Features...")
@@ -154,7 +217,7 @@ def main():
                            
     df_weekly = df_full.groupby(['year_week', 'region_plz3', 'fuel']).agg({
         'price_mean': 'mean', 'price_std': 'mean',
-        'date': 'min',
+        'brent_oil_eur': 'mean', 'exchange_rate_eur_usd': 'mean', 'date': 'min',
         'lat': 'first', 'lon': 'first' # Preserve Coordinates
     }).reset_index()
     
@@ -169,7 +232,7 @@ def main():
     df_full['year_month'] = df_full['date'].dt.strftime('%Y-%m')
     df_monthly = df_full.groupby(['year_month', 'region_plz3', 'fuel']).agg({
         'price_mean': 'mean', 'price_std': 'mean',
-        'date': 'min',
+        'brent_oil_eur': 'mean', 'exchange_rate_eur_usd': 'mean', 'date': 'min',
         'lat': 'first', 'lon': 'first' # Preserve Coordinates
     }).reset_index()
     df_monthly['rank'] = df_monthly.groupby(['year_month', 'fuel'])['price_mean'].rank(method='min').astype(int)

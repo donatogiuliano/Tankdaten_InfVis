@@ -1,10 +1,10 @@
-# 🛢️ FuelIntel Germany - Tankpreis-Analyse Dashboard
+# Tankpreis-Analyse Dashboard
 
 > **Interaktives Dashboard zur Visualisierung von Tankpreisen**
 
 ---
 
-## 📚 Projektinformationen
+## Projektinformationen
 
 | | |
 |---|---|
@@ -13,7 +13,7 @@
 | **Semester** | Wintersemester 2025/26 |
 | **Gruppe** | Gruppe 9 |
 
-### 👥 Gruppenmitglieder
+### Gruppenmitglieder
 
 | Name | Matrikelnummer |
 |------|----------------|
@@ -25,7 +25,7 @@
 
 ---
 
-## 🎯 Fragestellungen & Visualisierungen
+## Fragestellungen & Visualisierungen
 
 Dieses Dashboard beantwortet vier zentrale Fragestellungen zur Entwicklung von Kraftstoffpreisen.
 

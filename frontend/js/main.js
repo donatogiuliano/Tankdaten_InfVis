@@ -18,7 +18,7 @@ class App {
         this.container.innerHTML = '';
 
         // Render ALL Sections (Hidden by default via CSS or JS)
-        await this.renderSection('overview', OverviewPage);
+        // await this.renderSection('overview', OverviewPage); // Removed as requested
         await this.renderSection('trends', TrendsPage);
         await this.renderSection('analysis', CrisisPage);
         await this.renderSection('ukraine', UkrainePage);
@@ -42,12 +42,12 @@ class App {
     }
 
     handleRoute() {
-        // Get Hash or Default to #overview
-        let hash = window.location.hash.slice(1) || 'overview';
-        const validRoutes = ['overview', 'trends', 'analysis', 'ukraine', 'map'];
+        // Get Hash or Default to #trends
+        let hash = window.location.hash.slice(1) || 'trends';
+        const validRoutes = ['trends', 'analysis', 'ukraine', 'map'];
 
         if (!validRoutes.includes(hash)) {
-            hash = 'overview';
+            hash = 'trends';
         }
 
         // Hide all sections, Show active

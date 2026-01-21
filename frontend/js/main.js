@@ -48,12 +48,12 @@ class App {
     }
 
     handleRoute() {
-        // Get Hash or Default to #overview
-        let hash = window.location.hash.slice(1) || 'overview';
-        const validRoutes = ['overview', 'trends', 'analysis', 'ukraine', 'phases', 'map'];
+        // Get Hash or Default to #analysis
+        let hash = window.location.hash.slice(1) || 'analysis';
+        const validRoutes = ['analysis', 'ukraine', 'phases', 'map'];
 
         if (!validRoutes.includes(hash)) {
-            hash = 'trends';
+            hash = 'analysis';
         }
 
         // Hide all sections, Show active

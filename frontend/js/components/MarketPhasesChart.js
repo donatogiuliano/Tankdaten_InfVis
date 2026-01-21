@@ -2,13 +2,12 @@ export class MarketPhasesChart {
     constructor(container, colors) {
         this.container = container;
         this.colors = colors || {
-            fuel: '#1976d2',
-            oil: '#546e7a',
-            band: 'rgba(25, 118, 210, 0.2)',
+            fuel: '#1e88e5',                   // Kräftiges Blau
+            oil: '#2c3e50',                    // Dunkles Marineblau (fast schwarz)
+            band: 'rgba(30, 136, 229, 0.12)',  // Dezenteres Blau für das Band
             phase: {
-                'GLEICHLAUF': 'rgba(100, 100, 100, 0.1)', // Grau
-                'ASYMMETRIE': 'rgba(229, 57, 53, 0.1)', // Rot
-                'INTERNE_VOLATILITÄT': 'rgba(255, 160, 0, 0.15)' // Orange
+                'ASYMMETRIE': '#FFB74D',           // Hellorange - Spannung
+                'INTERNE_FAKTOREN': '#9575CD'   // Sanftes Violett - Interne Faktoren
             }
         };
 
@@ -60,13 +59,16 @@ export class MarketPhasesChart {
             ])
             .range([height, 0]);
 
+        // Define dotted patterns for phases
+
+
         // Draw Phases Background (Filtered)
         if (meta) {
             // Filter phases based on state
             const visiblePhases = meta.filter(d => {
-                if (d.phase === 'GLEICHLAUF') return state.showPhaseGleichlauf;
+
                 if (d.phase === 'ASYMMETRIE') return state.showPhaseAsymmetrie;
-                if (d.phase === 'INTERNE_VOLATILITÄT') return state.showPhaseVolatility;
+                if (d.phase === 'INTERNE_FAKTOREN') return state.showPhaseVolatility;
                 return false;
             });
 
@@ -79,15 +81,26 @@ export class MarketPhasesChart {
                 .attr('y', 0)
                 .attr('height', height)
                 .attr('fill', d => this.colors.phase[d.phase] || 'transparent')
+                .attr('fill-opacity', 0.2)
                 .on('mouseover', (e, d) => {
                     this.tooltip.style('display', 'block');
+                    const phaseNames = {
+                        'ASYMMETRIE': 'Asymmetrie',
+                        'INTERNE_FAKTOREN': 'Interne Faktoren'
+                    };
+                    const descriptions = {
+                        'ASYMMETRIE': 'Tankpreise reagieren asymmetrisch auf Ölpreisänderungen',
+                        'INTERNE_FAKTOREN': 'Preisänderungen durch regionale oder interne Faktoren'
+                    };
                     this.tooltip.html(`
-                        <strong>Phase: ${d.phase}</strong><br>
-                        ${d.start_date} bis ${d.end_date}<br>
-                        Dauer: ${d.duration_days} Tage<br>
-                        <div style="margin-top:4px; font-size:0.8em; color:#666;">
-                            Ø Korrelation: ${d.avg_correlation ? d.avg_correlation.toFixed(2) : '-'}<br>
-                            Ø Lag: ${d.avg_lag ? d.avg_lag.toFixed(1) : '-'} Tage
+                        <strong>${phaseNames[d.phase] || d.phase}</strong><br>
+                        <em style="color: #666; font-size: 0.85em;">${descriptions[d.phase] || ''}</em><br>
+                        <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #eee;">
+                            📅 ${d.start_date} bis ${d.end_date}<br>
+                            ⏱️ Dauer: ${d.duration_days} Tage<br>
+                            ${d.avg_correlation ? `📊 Ø Korrelation: ${d.avg_correlation.toFixed(2)}<br>` : ''}
+                            ${d.avg_lag ? `⏳ Ø Verzögerung: ${d.avg_lag.toFixed(1)} Tage<br>` : ''}
+                            ${d.avg_vol_ratio ? `📈 Ø Vol.-Ratio: ${d.avg_vol_ratio.toFixed(2)}` : ''}
                         </div>
                     `);
                 })
@@ -102,14 +115,23 @@ export class MarketPhasesChart {
         }
 
         // Axes
+        // X-Axis (Bottom)
         svg.append('g')
             .attr('transform', `translate(0,${height})`)
-            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')));
+            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')))
+            .call(g => g.select('.domain').attr('stroke', '#333'))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .style('fill', '#222');
 
+        // Y-Axis (Left)
         svg.append('g')
             .call(d3.axisLeft(yFuel).ticks(5))
-            .call(g => g.select('.domain').remove())
-            .call(g => g.selectAll('.tick line').attr('stroke-opacity', 0.1).attr('x2', width)); // Grid lines
+            .call(g => g.select('.domain').attr('stroke', '#333'))
+            .call(g => g.selectAll('.tick line').attr('stroke-opacity', 0.1).attr('x2', width))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .style('fill', '#222');
 
         // Add Oil Axis if toggled
         if (state.showOil && metaData.oil_available) {
@@ -120,10 +142,11 @@ export class MarketPhasesChart {
                 ])
                 .range([height, 0]);
 
-            svg.append('g')
-                .attr('transform', `translate(${width}, 0)`)
-                .call(d3.axisRight(yOil).ticks(5))
-                .call(g => g.selectAll('text').attr('fill', this.colors.oil));
+            // Oil axis removed - no right Y-axis
+            // svg.append('g')
+            //     .attr('transform', `translate(${width}, 0)`)
+            //     .call(d3.axisRight(yOil).ticks(5))
+            //     .call(g => g.selectAll('text').attr('fill', this.colors.oil));
 
             // Oil Line
             const lineOil = d3.line()
@@ -155,14 +178,14 @@ export class MarketPhasesChart {
             .attr('stroke-width', 3)
             .attr('d', lineFuel);
 
-        // Volatility Band (Mean +/- StdDev)
+        // Volatility Band (MA7 +/- StdDev)
         if (state.showBand) {
             const areaBand = d3.area()
-                .defined(d => d.price_mean !== null && d.price_std !== null)
+                .defined(d => d.price_ma7 !== null && d.price_std !== null)
                 .x(d => x(d.parsedDate))
-                .y0(d => yFuel(d.price_mean - d.price_std))
-                .y1(d => yFuel(d.price_mean + d.price_std))
-                .curve(d3.curveLinear);
+                .y0(d => yFuel(d.price_ma7 - d.price_std))
+                .y1(d => yFuel(d.price_ma7 + d.price_std))
+                .curve(d3.curveMonotoneX);  // Gleiche Kurve wie Linie
 
             svg.append('path')
                 .datum(data)

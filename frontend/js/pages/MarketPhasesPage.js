@@ -14,24 +14,22 @@ export class MarketPhasesPage {
             year: 2022,
             fuel: state.get('fuelType') || 'e10',
             region: '',
-            showOil: false,
+            showOil: true,           // Standardmäßig an
             // Phase Toggles
-            showPhaseGleichlauf: true,
             showPhaseAsymmetrie: true,
             showPhaseVolatility: true,
-            showBand: false
+            showBand: true           // Standardmäßig an
         };
 
         this.colors = {
             phase: {
-                'GLEICHLAUF': 'rgba(224, 224, 255, 0.4)', // #e0e0ff
-                'ASYMMETRIE': 'rgba(255, 224, 204, 0.4)', // #ffe0cc
-                'INTERNE_VOLATILITÄT': 'rgba(232, 213, 242, 0.4)', // #e8d5f2
+                'ASYMMETRIE': '#FFB74D',           // Hellorange - Spannung
+                'INTERNE_FAKTOREN': '#9575CD',  // Sanftes Violett - Interne Faktoren
                 'KEINE': 'transparent'
             },
-            fuel: '#2196F3',
-            oil: '#555',
-            band: 'rgba(33, 150, 243, 0.15)'
+            fuel: '#1e88e5',                   // Kräftiges Blau
+            oil: '#2c3e50',                    // Dunkles Marineblau
+            band: 'rgba(30, 136, 229, 0.12)'   // Dezenteres Blau
         };
     }
 
@@ -46,7 +44,7 @@ export class MarketPhasesPage {
                 <!-- Header -->
                 <div style="margin-bottom: 1rem;">
                     <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="font-size: 1.8rem;">📊</span> Marktphasen-Analyse
+                        <span style="font-size: 1.8rem;">📊</span> Markttrends
                     </h1>
                 </div>
 
@@ -89,11 +87,7 @@ export class MarketPhasesPage {
                     <div style="display: flex; gap: 1rem; align-items: center;">
                         <span style="font-size: 0.85rem; font-weight: 600; color: #555;">Phasen:</span>
                         
-                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
-                            <input type="checkbox" id="mp-toggle-p-gleichlauf" checked>
-                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['GLEICHLAUF']}; border: 1px solid #ccc; display: inline-block;"></span>
-                            Gleichlauf
-                        </label>
+
 
                         <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
                             <input type="checkbox" id="mp-toggle-p-asymmetrie" checked>
@@ -103,8 +97,8 @@ export class MarketPhasesPage {
 
                         <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
                             <input type="checkbox" id="mp-toggle-p-volatility" checked>
-                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['INTERNE_VOLATILITÄT']}; border: 1px solid #ccc; display: inline-block;"></span>
-                            Interne Vol.
+                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['INTERNE_FAKTOREN']}; border: 1px solid #ccc; display: inline-block;"></span>
+                            Interne Faktoren
                         </label>
                     </div>
 
@@ -113,17 +107,17 @@ export class MarketPhasesPage {
                     <!-- Ölpreis & Vol.-Band -->
                     <div class="toggles" style="display: flex; gap: 1rem; align-items: center;">
                         <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
-                            <input type="checkbox" id="mp-toggle-oil"> Ölpreis
+                            <input type="checkbox" id="mp-toggle-oil" checked> Ölpreis
                         </label>
                         <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
-                            <input type="checkbox" id="mp-toggle-band"> Vol.-Band
+                            <input type="checkbox" id="mp-toggle-band" checked> Volatilität
                         </label>
                     </div>
                 </div>
 
                 <!-- Chart Container -->
-                <div class="chart-card" id="mp-chart-container" style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; min-height: 400px; position: relative; display: flex; flex-direction: column;">
-                    <div id="mp-chart" style="width: 100%; flex: 1; position: relative;"></div>
+                <div class="chart-card" id="mp-chart-container" style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; min-height: 480px; position: relative; display: flex; flex-direction: column;">
+                    <div id="mp-chart" style="width: 100%; height: 350px; position: relative;"></div>
                     
                     <!-- Legend (Only visible when data is loaded) -->
                     <div id="mp-legend" style="margin-top: 1rem; display: none; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.8rem; color: #666; border-top: 1px solid #eee; padding-top: 1rem;">
@@ -175,7 +169,6 @@ export class MarketPhasesPage {
             if (!this.container) return; // Safety check
 
             this.state.year = this.container.querySelector('#mp-year').value;
-            this.state.year = this.container.querySelector('#mp-year').value;
             // this.state.fuel updated by buttons
 
             // City Input validation
@@ -211,14 +204,12 @@ export class MarketPhasesPage {
         const toggles = () => {
             this.state.showOil = this.container.querySelector('#mp-toggle-oil').checked;
             this.state.showBand = this.container.querySelector('#mp-toggle-band').checked;
-            this.state.showPhaseGleichlauf = this.container.querySelector('#mp-toggle-p-gleichlauf').checked;
             this.state.showPhaseAsymmetrie = this.container.querySelector('#mp-toggle-p-asymmetrie').checked;
             this.state.showPhaseVolatility = this.container.querySelector('#mp-toggle-p-volatility').checked;
 
             this.renderChart(); // Just re-render chart if data exists
         };
 
-        this.container.querySelector('#mp-year').addEventListener('change', update);
         this.container.querySelector('#mp-year').addEventListener('change', update);
 
         // Fuel Buttons Logic
@@ -248,7 +239,6 @@ export class MarketPhasesPage {
 
         this.container.querySelector('#mp-toggle-oil').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-band').addEventListener('change', toggles);
-        this.container.querySelector('#mp-toggle-p-gleichlauf').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-p-asymmetrie').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-p-volatility').addEventListener('change', toggles);
 
@@ -331,9 +321,9 @@ export class MarketPhasesPage {
             this.chart = new MarketPhasesChart(container, this.colors);
         }
 
-        this.chart.update(this.data, this.meta, this.state, this.metaData);
-
-        // Show legend
+        // Show legend BEFORE update to ensure correct container measurement
         if (legend) legend.style.display = 'flex';
+
+        this.chart.update(this.data, this.meta, this.state, this.metaData);
     }
 }

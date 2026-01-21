@@ -2,9 +2,8 @@
 Marktphasen-Analyse für Tankpreisdaten
 
 Berechnet zeitliche Marktphasen basierend auf Tank- und Ölpreisdynamik:
-- GLEICHLAUF: Hohe Korrelation zwischen Tank- und Ölpreisen
 - ASYMMETRIE: Tankpreise reagieren nicht synchron auf Ölpreisänderungen
-- INTERNE_VOLATILITÄT: Hohe Tankpreisvolatilität unabhängig vom Ölpreis
+- INTERNE_FAKTOREN: Preisänderungen durch regionale oder interne Faktoren (hohe Volatilität)
 """
 
 import pandas as pd
@@ -78,7 +77,7 @@ def classify_phase(
 ) -> str:
     """
     Klassifiziert Marktphase basierend auf Metriken.
-    Priorität: INTERNE_VOLATILITÄT > ASYMMETRIE > GLEICHLAUF > KEINE
+    Priorität: ASYMMETRIE > INTERNE_FAKTOREN > KEINE
     """
     # Extrahiere Werte
     rho = row.get('best_correlation', np.nan)
@@ -93,23 +92,22 @@ def classify_phase(
     if pd.isna(vp) or pd.isna(vo):
         return 'KEINE'
     
-    # 1. INTERNE_VOLATILITÄT (höchste Priorität)
-    if (vp >= vp_percentile_80 and vo <= vo_percentile_40) or vol_ratio >= 1.5:
-        return 'INTERNE_VOLATILITÄT'
+    # 0. Sicherheits-Check Korrelation
+    if pd.isna(rho):
+        rho = 0
     
-    # 2. ASYMMETRIE
+    # 1. ASYMMETRIE
     if not pd.isna(zp) and not pd.isna(zo_lagged):
         diff = zp - zo_lagged
-        if diff >= 0.8:  # Öl fällt, Tank reagiert nicht
-            return 'ASYMMETRIE'
-        if diff <= -0.8:  # Öl steigt, Tank überreagiert
+        if abs(diff) >= 1.3:  # Höhere Schwelle für weniger Rauschen
             return 'ASYMMETRIE'
     
-    # 3. GLEICHLAUF
-    if not pd.isna(rho) and rho >= 0.5 and not pd.isna(lag) and lag <= 7:
-        return 'GLEICHLAUF'
+    # 2. INTERNE_FAKTOREN 
+    # Wenn die Korrelation sinkt UND der Tankpreis springt (oder Öl stabil ist)
+    if rho < 0.5:
+        if vol_ratio >= 2.0 or (vp >= vp_percentile_80 and vo <= vo_percentile_40):
+            return 'INTERNE_FAKTOREN'
     
-    # 4. KEINE
     return 'KEINE'
 
 
@@ -176,7 +174,7 @@ def group_phases_to_intervals(df: pd.DataFrame) -> List[Dict]:
 
 
 def merge_close_intervals(intervals: List[Dict], max_gap: int = 1) -> List[Dict]:
-    """Fusioniert Intervalle gleicher Phase, deren Abstand ≤ max_gap Tage beträgt"""
+    """Fusioniert Intervalle gleicher Phase, deren Abstand <= max_gap Tage beträgt"""
     if len(intervals) < 2:
         return intervals
     
@@ -212,7 +210,7 @@ def merge_close_intervals(intervals: List[Dict], max_gap: int = 1) -> List[Dict]
     return merged
 
 
-def filter_short_intervals(intervals: List[Dict], min_days: int = 4) -> List[Dict]:
+def filter_short_intervals(intervals: List[Dict], min_days: int = 5) -> List[Dict]:
     """Entfernt Intervalle mit Dauer < min_days"""
     return [i for i in intervals if i['duration_days'] >= min_days]
 
@@ -307,11 +305,11 @@ def calculate_market_phases(
     # 9. Intervalle erstellen
     intervals = group_phases_to_intervals(daily)
     
-    # 10. Fusionieren (Abstand ≤ 1 Tag)
-    intervals = merge_close_intervals(intervals, max_gap=1)
+    # 10. Fusionieren (Abstand ≤ 2 Tage für aggressiveres Merging)
+    intervals = merge_close_intervals(intervals, max_gap=2)
     
-    # 11. Kurze Intervalle entfernen (< 4 Tage)
-    intervals = filter_short_intervals(intervals, min_days=4)
+    # 11. Kurze Intervalle entfernen (< 5 Tage)
+    intervals = filter_short_intervals(intervals, min_days=5)
     
     # 12. 7-Tage gleitenden Durchschnitt für Visualisierung berechnen
     daily['price_ma7'] = daily['price_mean'].rolling(window=7, min_periods=1).mean()

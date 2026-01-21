@@ -23,8 +23,9 @@ export class UkraineBubbleChart {
         this.pinnedBubble = null;
     }
 
-    update(data, selectedFuel) {
+    update(data, selectedFuel, colorMode = 'default') {
         if (!data) return;
+        this.colorMode = colorMode;
 
         this.container.innerHTML = '';
         const fuelData = data.filter(d => d.fuel === selectedFuel);
@@ -56,7 +57,9 @@ export class UkraineBubbleChart {
 
         const colorScale = d3.scaleLinear()
             .domain([1.70, 1.95, 2.20])
-            .range(['#43a047', '#ffc107', '#e53935'])
+            .range(colorMode === 'accessible'
+                ? ['hsl(240, 70%, 50%)', 'hsl(60, 90%, 90%)', 'hsl(0, 100%, 50%)']
+                : ['#43a047', '#ffc107', '#e53935'])
             .interpolate(d3.interpolateRgb);
 
         const svg = d3.select(this.container)
@@ -111,40 +114,44 @@ export class UkraineBubbleChart {
             });
 
         const parseEventDate = d3.timeParse('%Y-%m-%d');
-        this.events.forEach(e => {
+        this.events.forEach((e, i) => {
             const date = parseEventDate(e.date);
             const xPos = x(date);
+
+            // Find matching data point to get bubble height/radius
+            const dAtDate = fuelData.find(d => d.date === e.date);
+            let y2Pos = height; // Fallback to axis if no bubble found
+            if (dAtDate) {
+                // End at the TOP of the bubble
+                y2Pos = y(dAtDate.price_mean) - radiusScale(dAtDate.price_mean);
+            }
+
+            // Alternating Y-position to prevent overlap (Kriegsausbruch vs Rekordpreis)
+            const yOffset = (i % 2 === 0) ? -10 : -25;
 
             svg.append('line')
                 .attr('x1', xPos)
                 .attr('x2', xPos)
-                .attr('y1', 0)
-                .attr('y2', height)
+                .attr('y1', yOffset + 3)
+                .attr('y2', y2Pos)
                 .attr('stroke', e.color)
                 .attr('stroke-width', 2)
                 .attr('stroke-dasharray', '5,5');
 
+            // Text Label (Increased size, no icon)
             svg.append('text')
                 .attr('x', xPos)
-                .attr('y', -10)
+                .attr('y', yOffset)
                 .attr('text-anchor', 'middle')
                 .attr('fill', e.color)
                 .attr('font-size', '12px')
-                .attr('font-weight', 'bold')
-                .text(e.icon);
-
-            svg.append('text')
-                .attr('x', xPos)
-                .attr('y', -25)
-                .attr('text-anchor', 'middle')
-                .attr('fill', e.color)
-                .attr('font-size', '10px')
+                .attr('font-weight', '700')
                 .text(e.label);
         });
 
         svg.append('g')
             .attr('transform', `translate(0,${height})`)
-            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(3)).tickFormat(d3.timeFormat('%b')))
+            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')))
             .selectAll('text').style('font-size', '11px');
 
         svg.append('g')

@@ -16,20 +16,27 @@ export class UkrainePage {
         this.selectedFuel = state.get('fuelType') || 'diesel';
 
         this.events = [
-            { date: '2022-02-24', label: 'Kriegsausbruch', color: '#d32f2f', icon: '⚔️' },
-            { date: '2022-03-10', label: 'Rekordpreis', color: '#7b1fa2', icon: '📈' },
-            { date: '2022-06-01', label: 'Tankrabatt', color: '#388e3c', icon: '💰' },
-            { date: '2022-08-31', label: 'Rabatt Ende', color: '#f57c00', icon: '🔚' }
+            { date: '2022-02-24', label: 'Kriegsausbruch', color: '#2c3e50', icon: '⚔️' },
+            { date: '2022-03-10', label: 'Rekordpreis', color: '#2c3e50', icon: '📈' },
+            { date: '2022-06-01', label: 'Tankrabatt', color: '#2c3e50', icon: '💰' },
+            { date: '2022-08-31', label: 'Rabatt Ende', color: '#2c3e50', icon: '🔚' }
         ];
 
         container.innerHTML = `
             <div class="ukraine-page" style="padding: 1.5rem; height: 100%; display: flex; flex-direction: column; box-sizing: border-box; overflow-y: auto;">
                 
                 <!-- Header (Light Theme) -->
-                <div style="margin-bottom: 1rem;">
+                <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start;">
                     <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span style="font-size: 1.8rem;">⚔️</span> Ukraine-Schock 2022
                     </h1>
+
+                    <!-- A11y Toggle (Top Right) -->
+                    <button id="ukraine-a11y-toggle" style="background: #fff; border: 2px solid #333; border-radius: 4px; padding: 4px 12px; font-size: 0.9rem; color: #000; cursor: pointer; font-weight: 700; display:flex; align-items:center; gap:8px;" title="Barrierefreie Farben aktivieren">
+                        <span class="state-icon" style="font-size:1.2em; line-height:1;">☐</span>
+                        <span style="font-size:1.3em; line-height:1;">◐</span>
+                        Barrierefrei
+                    </button>
                 </div>
 
                 <!-- Controls + Legend with Prices -->
@@ -41,10 +48,10 @@ export class UkrainePage {
                     </div>
                     
                     <!-- Legend with price ranges -->
-                    <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: #5f6368;">
-                        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 12px; height: 12px; background: #43a047; border-radius: 50%;"></span> Günstig (&lt;1.80€)</span>
-                        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 12px; height: 12px; background: #ffc107; border-radius: 50%;"></span> Mittel (1.80-2.10€)</span>
-                        <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 12px; height: 12px; background: #e53935; border-radius: 50%;"></span> Teuer (&gt;2.10€)</span>
+                    <div id="ukraine-legend" style="display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: #5f6368;">
+                        <span style="display: flex; align-items: center; gap: 4px;"><span class="legend-color" style="width: 12px; height: 12px; background: #43a047; border-radius: 50%;"></span> Günstig (&lt;1.80€)</span>
+                        <span style="display: flex; align-items: center; gap: 4px;"><span class="legend-color" style="width: 12px; height: 12px; background: #ffc107; border-radius: 50%;"></span> Mittel (1.80-2.10€)</span>
+                        <span style="display: flex; align-items: center; gap: 4px;"><span class="legend-color" style="width: 12px; height: 12px; background: #e53935; border-radius: 50%;"></span> Teuer (&gt;2.10€)</span>
                     </div>
                 </div>
 
@@ -74,7 +81,7 @@ export class UkrainePage {
                 <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; padding: 0.75rem 1rem; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
                     ${this.events.map(e => `
                         <div style="display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 24px; height: 24px; background: ${e.color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">${e.icon}</span>
+                            <span style="width: 12px; height: 12px; background: ${e.color}; border-radius: 50%;"></span>
                             <span style="font-size: 0.8rem; font-weight: 500; color: #333;">${e.label}</span>
                         </div>
                     `).join('')}
@@ -86,6 +93,7 @@ export class UkrainePage {
                 .fuel-btn.active { background-color: #333; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
                 .bubble { cursor: pointer; transition: transform 0.2s, filter 0.2s; }
                 .bubble:hover { transform: scale(1.3); filter: brightness(1.2); }
+                #ukraine-a11y-toggle:hover { background: #f0f0f0; }
             </style>
         `;
 
@@ -106,6 +114,21 @@ export class UkrainePage {
             });
         });
 
+        // --- A11y Toggle Logic ---
+        const a11yBtn = this.container.querySelector('#ukraine-a11y-toggle');
+        if (a11yBtn) {
+            a11yBtn.addEventListener('click', () => {
+                const current = state.get('colorMode');
+                const next = current === 'accessible' ? 'default' : 'accessible';
+                state.set('colorMode', next);
+                this.updateA11yUI();
+                this.renderBubbles();
+            });
+
+            // Initial UI sync
+            this.updateA11yUI();
+        }
+
         // Global State Subscription
         state.subscribe((s, key, value) => {
             if (key === 'fuelType') {
@@ -120,6 +143,9 @@ export class UkrainePage {
                 this.selectedFuel = value;
                 this.renderBubbles();
                 this.updateStats();
+            } else if (key === 'colorMode') {
+                this.updateA11yUI();
+                this.renderBubbles();
             }
         });
     }
@@ -156,6 +182,30 @@ export class UkrainePage {
         }
     }
 
+    updateA11yUI() {
+        if (!this.container) return;
+        const isAccessible = state.get('colorMode') === 'accessible';
+        const a11yBtn = this.container.querySelector('#ukraine-a11y-toggle');
+        if (a11yBtn) {
+            const stateIcon = a11yBtn.querySelector('.state-icon');
+            stateIcon.textContent = isAccessible ? '☑' : '☐';
+            a11yBtn.title = isAccessible ? "Modus: Barrierefrei (Aktiv)" : "Modus: Standard (Inaktiv)";
+        }
+
+        // Update Legend Colors
+        const legendColors = this.container.querySelectorAll('.legend-color');
+        if (legendColors.length === 3) {
+            // [Günstig, Mittel, Teuer]
+            const colors = isAccessible
+                ? ['hsl(240, 70%, 50%)', 'hsl(60, 90%, 90%)', 'hsl(0, 100%, 50%)']
+                : ['#43a047', '#ffc107', '#e53935'];
+
+            legendColors.forEach((el, i) => {
+                el.style.background = colors[i];
+            });
+        }
+    }
+
     renderBubbles() {
         if (!this.data) return;
 
@@ -165,7 +215,7 @@ export class UkrainePage {
             this.chart = new UkraineBubbleChart(chartContainer, this.events);
         }
 
-        this.chart.update(this.data, this.selectedFuel);
+        this.chart.update(this.data, this.selectedFuel, state.get('colorMode'));
     }
 
     updateStats() {

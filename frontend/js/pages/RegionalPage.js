@@ -422,23 +422,39 @@ export class RegionalPage {
         const diffAbs = Math.abs(diff);
         const cheapest = diff > 0 ? 'A' : (diff < 0 ? 'B' : 'Equal');
 
-        // Robust Naming
-        const getStateName = (d) => {
-            if (d.region_plz3) return `PLZ-Bereich ${d.region_plz3}XX`;
-            if (this.map) {
-                const stateName = this.map.getStateFromCoordinates(d.lat, d.lon);
-                if (stateName) {
-                    // Check if PLZ exists and is not "undefined" string/type
-                    if (d.region_plz2 && d.region_plz2 !== 'undefined') return `${stateName} (PLZ ${d.region_plz2}..)`;
-                    return stateName;
+        // Load static city lookup JSON (cached after first load)
+        // Format: array of {city, latitude, longitude}
+        if (!window._cityLookupList) {
+            try {
+                const res = await fetch('/api/geo/city_lookup');
+                window._cityLookupList = await res.json();
+            } catch (e) {
+                console.error('City lookup load failed:', e);
+                window._cityLookupList = [];
+            }
+        }
+
+        // Nearest neighbor lookup - find closest city in the list
+        const getCityName = (lat, lon) => {
+            if (!window._cityLookupList || window._cityLookupList.length === 0) {
+                return `${lat.toFixed(1)}°N, ${lon.toFixed(1)}°E`;
+            }
+
+            let minDist = Infinity;
+            let nearestCity = null;
+            for (const entry of window._cityLookupList) {
+                const dist = (entry.latitude - lat) ** 2 + (entry.longitude - lon) ** 2;
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearestCity = entry.city;
                 }
             }
-            if (d.region_plz2 && d.region_plz2 !== 'undefined') return `Region (PLZ ${d.region_plz2}..)`;
-            return `Region`; // Fallback for pure coordinate points
+
+            return nearestCity || `${lat.toFixed(1)}°N, ${lon.toFixed(1)}°E`;
         };
 
-        const name1 = getStateName(d1);
-        const name2 = getStateName(d2);
+        const name1 = getCityName(d1.lat, d1.lon);
+        const name2 = getCityName(d2.lat, d2.lon);
 
         const colorA = '#2e7d32';
         const colorB = '#1565c0';
@@ -477,7 +493,7 @@ export class RegionalPage {
                     <div style="background:${cheapest === 'A' ? '#e8f5e9' : (cheapest === 'B' ? '#e3f2fd' : '#f5f5f5')}; padding:1rem; border-radius:6px; text-align:center; font-size:1.1rem;">
                         ${Math.abs(diff) < 0.001
                 ? "Im Jahresdurchschnitt gleich teuer."
-                : `Im <strong>Jahresdurchschnitt</strong> war Region <strong>${cheapest}</strong> um <strong>${diffAbs.toFixed(3)} €</strong> günstiger.`
+                : `Im <strong>Jahresdurchschnitt</strong> war <strong>${cheapest === 'A' ? name1 : name2}</strong> um <strong>${diffAbs.toFixed(3)} €</strong> günstiger.`
             }
                     </div>
                 </div>
@@ -549,11 +565,11 @@ export class RegionalPage {
         svg.append("g")
             .attr("transform", `translate(0,${height})`)
             .attr("class", "axis")
-            .call(d3.axisBottom(x).ticks(12).format(m => monthNames[m] || m));
+            .call(d3.axisBottom(x).ticks(12).tickFormat(m => monthNames[m] || m));
 
         svg.append("g")
             .attr("class", "axis")
-            .call(d3.axisLeft(y).ticks(5).format(d => d.toFixed(2) + ' €'));
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toFixed(2) + ' €'));
 
         // Gridlines
         svg.append("g")

@@ -1,0 +1,647 @@
+[
+  {
+    "city": "Berlin",
+    "latitude": 52.52,
+    "longitude": 13.405
+  },
+  {
+    "city": "Stuttgart",
+    "latitude": 48.7775,
+    "longitude": 9.18
+  },
+  {
+    "city": "Munich",
+    "latitude": 48.1375,
+    "longitude": 11.575
+  },
+  {
+    "city": "Hamburg",
+    "latitude": 53.55,
+    "longitude": 10.0
+  },
+  {
+    "city": "Cologne",
+    "latitude": 50.9364,
+    "longitude": 6.9528
+  },
+  {
+    "city": "Frankfurt",
+    "latitude": 50.1106,
+    "longitude": 8.6822
+  },
+  {
+    "city": "Düsseldorf",
+    "latitude": 51.2333,
+    "longitude": 6.7833
+  },
+  {
+    "city": "Leipzig",
+    "latitude": 51.34,
+    "longitude": 12.375
+  },
+  {
+    "city": "Dortmund",
+    "latitude": 51.5139,
+    "longitude": 7.4653
+  },
+  {
+    "city": "Essen",
+    "latitude": 51.4508,
+    "longitude": 7.0131
+  },
+  {
+    "city": "Bremen",
+    "latitude": 53.0758,
+    "longitude": 8.8072
+  },
+  {
+    "city": "Dresden",
+    "latitude": 51.05,
+    "longitude": 13.74
+  },
+  {
+    "city": "Hannover",
+    "latitude": 52.3667,
+    "longitude": 9.7167
+  },
+  {
+    "city": "Nuremberg",
+    "latitude": 49.4539,
+    "longitude": 11.0775
+  },
+  {
+    "city": "Duisburg",
+    "latitude": 51.4347,
+    "longitude": 6.7625
+  },
+  {
+    "city": "Bochum",
+    "latitude": 51.4819,
+    "longitude": 7.2158
+  },
+  {
+    "city": "Wuppertal",
+    "latitude": 51.2667,
+    "longitude": 7.1833
+  },
+  {
+    "city": "Bielefeld",
+    "latitude": 52.0211,
+    "longitude": 8.5347
+  },
+  {
+    "city": "Bonn",
+    "latitude": 50.7333,
+    "longitude": 7.1
+  },
+  {
+    "city": "Münster",
+    "latitude": 51.9625,
+    "longitude": 7.6256
+  },
+  {
+    "city": "Mannheim",
+    "latitude": 49.4878,
+    "longitude": 8.4661
+  },
+  {
+    "city": "Karlsruhe",
+    "latitude": 49.0092,
+    "longitude": 8.404
+  },
+  {
+    "city": "Augsburg",
+    "latitude": 48.3689,
+    "longitude": 10.8978
+  },
+  {
+    "city": "Wiesbaden",
+    "latitude": 50.0825,
+    "longitude": 8.24
+  },
+  {
+    "city": "Mönchengladbach",
+    "latitude": 51.2,
+    "longitude": 6.4333
+  },
+  {
+    "city": "Gelsenkirchen",
+    "latitude": 51.5167,
+    "longitude": 7.1
+  },
+  {
+    "city": "Aachen",
+    "latitude": 50.7756,
+    "longitude": 6.0836
+  },
+  {
+    "city": "Braunschweig",
+    "latitude": 52.2667,
+    "longitude": 10.5167
+  },
+  {
+    "city": "Chemnitz",
+    "latitude": 50.8333,
+    "longitude": 12.9167
+  },
+  {
+    "city": "Kiel",
+    "latitude": 54.3233,
+    "longitude": 10.1394
+  },
+  {
+    "city": "Halle",
+    "latitude": 51.4828,
+    "longitude": 11.9697
+  },
+  {
+    "city": "Magdeburg",
+    "latitude": 52.1317,
+    "longitude": 11.6392
+  },
+  {
+    "city": "Freiburg im Breisgau",
+    "latitude": 47.995,
+    "longitude": 7.85
+  },
+  {
+    "city": "Krefeld",
+    "latitude": 51.3333,
+    "longitude": 6.5667
+  },
+  {
+    "city": "Mainz",
+    "latitude": 49.9994,
+    "longitude": 8.2736
+  },
+  {
+    "city": "Lübeck",
+    "latitude": 53.8697,
+    "longitude": 10.6864
+  },
+  {
+    "city": "Oberhausen",
+    "latitude": 51.4967,
+    "longitude": 6.8706
+  },
+  {
+    "city": "Rostock",
+    "latitude": 54.0833,
+    "longitude": 12.1333
+  },
+  {
+    "city": "Kassel",
+    "latitude": 51.3158,
+    "longitude": 9.4979
+  },
+  {
+    "city": "Hagen",
+    "latitude": 51.3667,
+    "longitude": 7.4833
+  },
+  {
+    "city": "Potsdam",
+    "latitude": 52.4,
+    "longitude": 13.0667
+  },
+  {
+    "city": "Saarbrücken",
+    "latitude": 49.2333,
+    "longitude": 7.0
+  },
+  {
+    "city": "Hamm",
+    "latitude": 51.6667,
+    "longitude": 7.8167
+  },
+  {
+    "city": "Ludwigshafen",
+    "latitude": 49.4811,
+    "longitude": 8.4353
+  },
+  {
+    "city": "Oldenburg",
+    "latitude": 53.1439,
+    "longitude": 8.2139
+  },
+  {
+    "city": "Mülheim",
+    "latitude": 51.4275,
+    "longitude": 6.8825
+  },
+  {
+    "city": "Osnabrück",
+    "latitude": 52.2833,
+    "longitude": 8.05
+  },
+  {
+    "city": "Leverkusen",
+    "latitude": 51.0333,
+    "longitude": 6.9833
+  },
+  {
+    "city": "Heidelberg",
+    "latitude": 49.4167,
+    "longitude": 8.7167
+  },
+  {
+    "city": "Darmstadt",
+    "latitude": 49.8722,
+    "longitude": 8.6528
+  },
+  {
+    "city": "Solingen",
+    "latitude": 51.1667,
+    "longitude": 7.0833
+  },
+  {
+    "city": "Regensburg",
+    "latitude": 49.0167,
+    "longitude": 12.0833
+  },
+  {
+    "city": "Herne",
+    "latitude": 51.55,
+    "longitude": 7.2167
+  },
+  {
+    "city": "Paderborn",
+    "latitude": 51.7181,
+    "longitude": 8.7542
+  },
+  {
+    "city": "Neuss",
+    "latitude": 51.2,
+    "longitude": 6.7
+  },
+  {
+    "city": "Ingolstadt",
+    "latitude": 48.7631,
+    "longitude": 11.425
+  },
+  {
+    "city": "Fürth",
+    "latitude": 49.4667,
+    "longitude": 11.0
+  },
+  {
+    "city": "Ulm",
+    "latitude": 48.4,
+    "longitude": 9.9833
+  },
+  {
+    "city": "Heilbronn",
+    "latitude": 49.15,
+    "longitude": 9.2167
+  },
+  {
+    "city": "Pforzheim",
+    "latitude": 48.895,
+    "longitude": 8.705
+  },
+  {
+    "city": "Würzburg",
+    "latitude": 49.7833,
+    "longitude": 9.9333
+  },
+  {
+    "city": "Wolfsburg",
+    "latitude": 52.4231,
+    "longitude": 10.7872
+  },
+  {
+    "city": "Göttingen",
+    "latitude": 51.5339,
+    "longitude": 9.9356
+  },
+  {
+    "city": "Bottrop",
+    "latitude": 51.5247,
+    "longitude": 6.9228
+  },
+  {
+    "city": "Reutlingen",
+    "latitude": 48.4833,
+    "longitude": 9.2167
+  },
+  {
+    "city": "Erlangen",
+    "latitude": 49.5833,
+    "longitude": 11.0167
+  },
+  {
+    "city": "Bremerhaven",
+    "latitude": 53.55,
+    "longitude": 8.5833
+  },
+  {
+    "city": "Koblenz",
+    "latitude": 50.3597,
+    "longitude": 7.5978
+  },
+  {
+    "city": "Bergisch Gladbach",
+    "latitude": 50.9918,
+    "longitude": 7.1303
+  },
+  {
+    "city": "Remscheid",
+    "latitude": 51.1833,
+    "longitude": 7.2
+  },
+  {
+    "city": "Trier",
+    "latitude": 49.7567,
+    "longitude": 6.6414
+  },
+  {
+    "city": "Recklinghausen",
+    "latitude": 51.585,
+    "longitude": 7.1619
+  },
+  {
+    "city": "Jena",
+    "latitude": 50.9272,
+    "longitude": 11.5861
+  },
+  {
+    "city": "Moers",
+    "latitude": 51.4592,
+    "longitude": 6.6197
+  },
+  {
+    "city": "Salzgitter",
+    "latitude": 52.15,
+    "longitude": 10.3333
+  },
+  {
+    "city": "Siegen",
+    "latitude": 50.8833,
+    "longitude": 8.0167
+  },
+  {
+    "city": "Gütersloh",
+    "latitude": 51.9,
+    "longitude": 8.3833
+  },
+  {
+    "city": "Hildesheim",
+    "latitude": 52.15,
+    "longitude": 9.95
+  },
+  {
+    "city": "Hanau",
+    "latitude": 50.1328,
+    "longitude": 8.9169
+  },
+  {
+    "city": "Kaiserslautern",
+    "latitude": 49.4447,
+    "longitude": 7.7689
+  },
+  {
+    "city": "Schwerin",
+    "latitude": 53.6333,
+    "longitude": 11.4167
+  },
+  {
+    "city": "Esslingen",
+    "latitude": 48.7333,
+    "longitude": 9.3167
+  },
+  {
+    "city": "Ludwigsburg",
+    "latitude": 48.8975,
+    "longitude": 9.1922
+  },
+  {
+    "city": "Flensburg",
+    "latitude": 54.7819,
+    "longitude": 9.4367
+  },
+  {
+    "city": "Gladbeck",
+    "latitude": 51.5667,
+    "longitude": 6.9667
+  },
+  {
+    "city": "Rosenheim",
+    "latitude": 47.85,
+    "longitude": 12.1333
+  },
+  {
+    "city": "Herten",
+    "latitude": 51.6,
+    "longitude": 7.1333
+  },
+  {
+    "city": "Sankt Augustin",
+    "latitude": 50.77,
+    "longitude": 7.1867
+  },
+  {
+    "city": "Hilden",
+    "latitude": 51.1714,
+    "longitude": 6.9394
+  },
+  {
+    "city": "Elmshorn",
+    "latitude": 53.7519,
+    "longitude": 9.6511
+  },
+  {
+    "city": "Halle-Neustadt",
+    "latitude": 51.4789,
+    "longitude": 11.9214
+  },
+  {
+    "city": "Fellbach",
+    "latitude": 48.8086,
+    "longitude": 9.2758
+  },
+  {
+    "city": "Pinneberg",
+    "latitude": 53.6333,
+    "longitude": 9.8
+  },
+  {
+    "city": "Siegburg",
+    "latitude": 50.8014,
+    "longitude": 7.2044
+  },
+  {
+    "city": "Germering",
+    "latitude": 48.1333,
+    "longitude": 11.3667
+  },
+  {
+    "city": "Ostfildern",
+    "latitude": 48.7333,
+    "longitude": 9.25
+  },
+  {
+    "city": "Kornwestheim",
+    "latitude": 48.8598,
+    "longitude": 9.1852
+  },
+  {
+    "city": "Unterschleißheim",
+    "latitude": 48.2833,
+    "longitude": 11.5667
+  },
+  {
+    "city": "Hattersheim",
+    "latitude": 50.0722,
+    "longitude": 8.4864
+  },
+  {
+    "city": "Unterhaching",
+    "latitude": 48.0658,
+    "longitude": 11.61
+  },
+  {
+    "city": "Obertshausen",
+    "latitude": 50.0667,
+    "longitude": 8.8333
+  },
+  {
+    "city": "Weingarten",
+    "latitude": 47.8092,
+    "longitude": 9.6444
+  },
+  {
+    "city": "Bad Soden am Taunus",
+    "latitude": 50.1333,
+    "longitude": 8.5
+  },
+  {
+    "city": "Haar",
+    "latitude": 48.1,
+    "longitude": 11.7333
+  },
+  {
+    "city": "Ottobrunn",
+    "latitude": 48.0667,
+    "longitude": 11.6667
+  },
+  {
+    "city": "Eschborn",
+    "latitude": 50.1436,
+    "longitude": 8.57
+  },
+  {
+    "city": "Puchheim",
+    "latitude": 48.15,
+    "longitude": 11.35
+  },
+  {
+    "city": "Bockum",
+    "latitude": 51.3333,
+    "longitude": 6.5667
+  },
+  {
+    "city": "Gröbenzell",
+    "latitude": 48.2,
+    "longitude": 11.3667
+  },
+  {
+    "city": "Schenefeld",
+    "latitude": 53.6028,
+    "longitude": 9.8233
+  },
+  {
+    "city": "Wolfratshausen",
+    "latitude": 47.9133,
+    "longitude": 11.4278
+  },
+  {
+    "city": "Glinde",
+    "latitude": 53.5406,
+    "longitude": 10.2111
+  },
+  {
+    "city": "Eilendorf",
+    "latitude": 50.7794,
+    "longitude": 6.1625
+  },
+  {
+    "city": "Eppelheim",
+    "latitude": 49.4,
+    "longitude": 8.6333
+  },
+  {
+    "city": "Neubiberg",
+    "latitude": 48.0833,
+    "longitude": 11.6833
+  },
+  {
+    "city": "Asperg",
+    "latitude": 48.9,
+    "longitude": 9.1333
+  },
+  {
+    "city": "Wentorf bei Hamburg",
+    "latitude": 53.4931,
+    "longitude": 10.2533
+  },
+  {
+    "city": "Kronshagen",
+    "latitude": 54.3333,
+    "longitude": 10.0833
+  },
+  {
+    "city": "Eichenau",
+    "latitude": 48.1667,
+    "longitude": 11.3167
+  },
+  {
+    "city": "Kriftel",
+    "latitude": 50.0833,
+    "longitude": 8.45
+  },
+  {
+    "city": "Steinbach am Taunus",
+    "latitude": 50.1667,
+    "longitude": 8.5667
+  },
+  {
+    "city": "Weißenthurm",
+    "latitude": 50.4144,
+    "longitude": 7.4606
+  },
+  {
+    "city": "Neulußheim",
+    "latitude": 49.2933,
+    "longitude": 8.5219
+  },
+  {
+    "city": "Eichwalde",
+    "latitude": 52.3667,
+    "longitude": 13.6167
+  },
+  {
+    "city": "Altbach",
+    "latitude": 48.7239,
+    "longitude": 9.3797
+  },
+  {
+    "city": "Merzhausen",
+    "latitude": 47.9664,
+    "longitude": 7.8286
+  },
+  {
+    "city": "Buckenhof",
+    "latitude": 49.5939,
+    "longitude": 11.05
+  },
+  {
+    "city": "Offenbach",
+    "latitude": 50.1006,
+    "longitude": 8.7665
+  },
+  {
+    "city": "Erfurt",
+    "latitude": 50.9781,
+    "longitude": 11.0289
+  }
+]

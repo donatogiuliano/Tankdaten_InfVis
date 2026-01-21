@@ -119,6 +119,15 @@ def get_states_geo():
     except Exception as e:
         return jsonify({"error": str(e)}), 404
 
+@app.route('/api/geo/city_lookup')
+def get_city_lookup():
+    """Serve static city lookup JSON for fast coordinate-to-name mapping."""
+    try:
+        cache_dir = os.path.join(DATA_DIR, 'cache')
+        return send_from_directory(cache_dir, 'city_lookup.json')
+    except Exception as e:
+        return jsonify({"error": str(e)}), 404
+
 @app.route('/api/data/corona')
 def get_corona_data():
     """Get aggregated 2020 fuel price data for Corona crisis analysis."""
@@ -165,6 +174,9 @@ def get_ukraine_data():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Cache for loaded parquet files (prevents repeated disk reads)
+_parquet_cache = {}
+
 @app.route('/api/data/history')
 def get_region_history():
     try:
@@ -177,35 +189,45 @@ def get_region_history():
         if not year:
             year = 2024  # default year
             
-        # Read Data (using daily for granularity, then agg to month)
         file_path = os.path.join(DATA_DIR, f'data_daily_{year}.parquet')
         if not os.path.exists(file_path):
             return jsonify({"error": f"Data for year {year} not found"}), 404
-            
-        df = pd.read_parquet(file_path)
         
-        if 'date' in df.columns:
-            df['date'] = pd.to_datetime(df['date'])
+        # Use cached dataframe or load with only needed columns
+        cache_key = f'daily_{year}'
+        if cache_key not in _parquet_cache:
+            # Only read columns we need for aggregation
+            cols = ['lat', 'lon', 'date', 'fuel', 'price_mean']
+            _parquet_cache[cache_key] = pd.read_parquet(file_path, columns=cols)
+            _parquet_cache[cache_key]['date'] = pd.to_datetime(_parquet_cache[cache_key]['date'])
         
-        # Filter by Region using rounded lat/lon (matching regional data grid)
-        # Round to 0.1 to match the grid used in regional aggregation
-        target_lat = round(lat, 1)
-        target_lon = round(lon, 1)
+        df = _parquet_cache[cache_key]
         
-        df['lat_rounded'] = df['lat'].round(1)
-        df['lon_rounded'] = df['lon'].round(1)
-        df = df[(df['lat_rounded'] == target_lat) & (df['lon_rounded'] == target_lon)]
+        # Pre-filter with bounding box (much faster than distance calc on all rows)
+        bbox_size = 1.0  # degrees
+        df = df[
+            (df['lat'] >= lat - bbox_size) & (df['lat'] <= lat + bbox_size) &
+            (df['lon'] >= lon - bbox_size) & (df['lon'] <= lon + bbox_size)
+        ]
+        
+        if df.empty:
+            return jsonify([])
+        
+        # Now calculate distance only on filtered subset
+        df = df.copy()
+        df['dist'] = ((df['lat'] - lat)**2 + (df['lon'] - lon)**2)**0.5
+        
+        # Find closest stations
+        min_dist = df['dist'].min()
+        tolerance = max(0.5, min_dist + 0.1)
+        df = df[df['dist'] <= tolerance]
 
         if df.empty:
             return jsonify([])
 
-        # Add Month
+        # Add Month and aggregate
         df['month'] = df['date'].dt.month
-        
-        # Group by Month + Fuel
         agg = df.groupby(['month', 'fuel'])['price_mean'].mean().reset_index()
-        
-        # Pivot: Index=Month, Cols=Fuel
         pivot = agg.pivot(index='month', columns='fuel', values='price_mean').reset_index()
         
         return jsonify(pivot.to_dict(orient='records'))

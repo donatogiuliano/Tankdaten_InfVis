@@ -15,20 +15,25 @@ export class RegionalPage {
         const monthNames = ["", "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
         // Force layout constraints on parent container to ensure "One Page" feel
-        this.container.style.padding = '0';
-        this.container.style.height = 'calc(100vh - 70px)';
-        this.container.style.overflow = 'hidden';
-        this.container.style.display = 'block';
+        // this.container.style.padding = '0';
+        // this.container.style.height = 'calc(100vh - 70px)';
+        // this.container.style.overflow = 'hidden';
+        // this.container.style.display = 'block';
 
         this.container.innerHTML = `
-            <div style="display: flex; flex-direction: column; height: 100%; padding: 1rem; padding-bottom: 0.5rem; box-sizing: border-box;">
+            <div style="display: flex; flex-direction: column; height: 85vh; padding: 1.5rem; box-sizing: border-box;">
                 
-                <!-- New Header -->
-                <!-- New Header -->
-                <div class="dashboard-header" style="flex: 0 0 auto; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start;">
+                <!-- Header -->
+                <div style="flex: 0 0 auto; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start;">
                     <div>
                         <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="font-size: 1.8rem;">🇩🇪</span> Regional-Vergleich
+                            <!-- SVG Flag for Windows compatibility -->
+                            <svg width="28" height="20" viewBox="0 0 5 3" style="border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <rect width="5" height="3" y="0" fill="#000"/>
+                                <rect width="5" height="2" y="1" fill="#DD0000"/>
+                                <rect width="5" height="1" y="2" fill="#FFCE00"/>
+                            </svg>
+                            Regional-Vergleich
                         </h1>
                         <p style="margin: 0; color: #666; font-size: 0.9rem;">
                             Regionale Preisunterschiede auf PLZ3-Ebene analysieren und vergleichen.

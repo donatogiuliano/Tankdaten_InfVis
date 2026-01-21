@@ -9,16 +9,12 @@ import xml.etree.ElementTree as ET
 import argparse
 import sys
 
-# PATHS
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# Input: Local to this workspace
 RAW_DATA_ROOT = os.path.join(BASE_DIR, 'data', 'tankerkoenig_historic')
-# Output: Always backend/data
 OUTPUT_DIR = os.path.join(BASE_DIR, 'data')
 
 def load_stations_map(year):
     print(f"Loading Stations Metadata for {year}...")
-    # Try specific year first, then wildcard
     search_patterns = [
         os.path.join(RAW_DATA_ROOT, "stations", str(year), "**", "*-stations.csv"),
     ]
@@ -34,7 +30,6 @@ def load_stations_map(year):
     if not stations_files:
         raise FileNotFoundError(f"No stations found in {RAW_DATA_ROOT}")
         
-    # Use the latest file available for that year (or overall)
     target_file = sorted(stations_files)[-1]
     print(f"Using Stations File: {target_file}")
     
@@ -44,16 +39,13 @@ def load_stations_map(year):
     df = df[(df['plz'] >= 1000) & (df['plz'] <= 99999)]
     df['plz3'] = df['post_code'].astype(str).str.zfill(5).str[:3]
     
-    # Map for processing
     station_map = df.set_index('uuid')['plz3'].to_dict()
     
-    # Calculate Centroids
     centroids = df.groupby('plz3')[['latitude', 'longitude']].mean().reset_index()
     centroids.rename(columns={'latitude': 'lat', 'longitude': 'lon'}, inplace=True)
     
     return station_map, centroids
 
-# External Data Configuration
 OIL_URL = "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls"
 ECB_URL = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/usd.xml"
 
@@ -61,7 +53,6 @@ def fetch_real_macro_data(date_range):
     """Fetches real Oil and FX data and merges it with the target date range."""
     print("Fetching Real Macro Data...")
     
-    # 1. Fetch Oil (Brent USD)
     print(f"  - Fetching Oil from {OIL_URL}...")
     try:
         df_oil = pd.read_excel(OIL_URL, sheet_name="Data 1", skiprows=2, engine="xlrd")

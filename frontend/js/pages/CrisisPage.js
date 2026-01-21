@@ -188,8 +188,7 @@ export class CrisisPage {
             this.resizeObserver = null;
         }
         if (this.chart) {
-            // Optional: calls destroy if chart has listeners
-            // this.chart.destroy(); 
+
         }
     }
 }

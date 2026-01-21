@@ -22,12 +22,6 @@ def generate_mapping():
     if not os.path.exists(parquet_path):
         print("Error: No data file found.")
         return
-
-    # Read minimal columns: region_plz3, lat, lon
-    # Note: 'lat' and 'lon' might be named differently or aggregated? 
-    # Based on app.py history endpoint, columns 'lat' and 'lon' exist.
-    # But wait, data_daily usually aggregates by region_plz2? No, region_plz3?
-    # Let's check columns properly first. Since I can't interactively check, I'll try-catch.
     
     try:
         df = pd.read_parquet(parquet_path, columns=['region_plz3', 'lat', 'lon'])
@@ -37,13 +31,8 @@ def generate_mapping():
         df = pd.read_parquet(parquet_path)
         if 'lat' not in df.columns:
             print("Lat/Lon not in daily data! Checking if we have a station list...")
-            # If aggregated daily data doesn't have lat/lon (it might be by region), we need another source.
-            # But earlier check of app.py history endpoint used 'data_daily_...' with 'lat', 'lon'.
-            # So likely raw data has it, but it might be huge.
             pass
 
-    # Drop duplicates to get unique locations per PLZ3
-    # We want valid PLZ3
     locations = df[['region_plz3', 'lat', 'lon']].dropna().drop_duplicates()
     
     # Calculate Centroid for each PLZ3
@@ -71,10 +60,7 @@ def generate_mapping():
         min_dist = float('inf')
         
         for city in cities:
-            # Simple Euclidean distance is enough for this scale (lat/lon approx)
-            # Correct would be Haversine but for sorting "nearest" locally it's fine
-            # deg to km approx: lat ~111km, lon ~70km (at 50deg)
-            # dist^2 = (dlat * 111)^2 + (dlon * 70)^2
+
             d_lat = (city['latitude'] - r_lat) * 111
             d_lon = (city['longitude'] - r_lon) * 70
             dist = d_lat**2 + d_lon**2

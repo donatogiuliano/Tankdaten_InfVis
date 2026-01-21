@@ -25,7 +25,6 @@ def prepare_regional_data(year):
     df['date'] = pd.to_datetime(df['date'])
     df['year'] = df['date'].dt.year
 
-    # Filter for the specific year just in case
     df = df[df['year'] == year]
 
     if df.empty:
@@ -33,7 +32,7 @@ def prepare_regional_data(year):
         return
 
     # Grid Configuration
-    GRID_STEP = 0.1 # High Resolution (approx 7-11km)
+    GRID_STEP = 0.1 
 
     print(f"Processing {year}...")
     
@@ -66,7 +65,6 @@ def prepare_regional_data(year):
         if mpoints.empty: continue
         
         # Convert to numpy for fast distance calc
-        # coords: (N, 2)
         src_coords = mpoints[['lat', 'lon']].values
         src_e5 = mpoints['e5'].values
         src_e10 = mpoints['e10'].values
@@ -79,8 +77,6 @@ def prepare_regional_data(year):
         flat_glon = grid_lon.ravel()
         target_coords = np.column_stack((flat_glat, flat_glon)) # (M, 2)
         
-        # Expand dims: Target (M, 1, 2) - Source (1, N, 2)
-        # Note: Optimization for large datasets would involve KDTree, but brute force is fine here
         dists_sq = np.sum((target_coords[:, np.newaxis, :] - src_coords[np.newaxis, :, :]) ** 2, axis=2)
         min_indices = np.argmin(dists_sq, axis=1) # (M,) indices of closest source
         min_dists = np.sqrt(np.min(dists_sq, axis=1)) # (M,) degrees
@@ -114,7 +110,6 @@ def prepare_regional_data(year):
                 'diesel': float(sel_diesel[idx]) if sel_diesel[idx] is not None and np.isfinite(sel_diesel[idx]) else None
             })
     
-    # Save straight away
     out_file = os.path.join(CACHE_DIR, f'regional_{year}.json')
     with open(out_file, 'w') as f:
         json.dump(final_rows, f)

@@ -2,11 +2,6 @@ export class UkraineBubbleChart {
     constructor(container, events) {
         this.container = container;
         this.events = events || [];
-        // Attempt to find tooltip within current scope or create it
-        // Note: UkrainePage keeps tooltip outside of the chart div technically (#bubble-chart's sibling)
-        // But for component purity, the chart should ideally manage its tooltip or look for it relative to its container.
-        // We will assume the container passed IS #bubble-chart's container (the card)? No, Page passes #bubble-chart.
-        // We will stick to creating/finding a tooltip associated with this instance.
 
         let tp = d3.select(this.container.parentNode).select('#bubble-tooltip');
         if (tp.empty()) {

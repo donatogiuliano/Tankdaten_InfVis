@@ -38,17 +38,11 @@ def enrich_file(filename):
         traceback.print_exc()
         return
     
-    # Prepare for Merge
-    # df_macro has 'date', 'brent_oil_usd', 'exchange_rate_eur_usd', 'brent_oil_eur'
-    # df has 'date'
-    
-    # Drop existing macro columns if they exist
     cols_to_drop = ['brent_oil_usd', 'exchange_rate_eur_usd', 'brent_oil_eur']
     df.drop(columns=[c for c in cols_to_drop if c in df.columns], inplace=True)
     
     # Merge
     print("Merging...")
-    # Ensure date types match
     df['date'] = pd.to_datetime(df['date'])
     df_macro['date'] = pd.to_datetime(df_macro['date'])
     

@@ -1,10 +1,10 @@
 export class RegionalMap {
     constructor(container, data, options = {}) {
         this.container = container;
-        this.data = data; // Array of {region_plz2, e5, e10, diesel}
+        this.data = data;
         this.options = {
             fuelType: 'e10',
-            month: 1, // Default January
+            month: 1,
             year: new Date().getFullYear(),
             onRegionSelect: null,
             colorMode: 'default',

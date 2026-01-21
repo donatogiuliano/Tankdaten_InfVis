@@ -193,7 +193,7 @@ def merge_close_intervals(intervals: List[Dict], max_gap: int = 1) -> List[Dict]
             gap = (next_start - current_end).days
             
             if gap <= max_gap + 1:  # +1 weil end_date inklusive
-                # Fusioniere
+                # Fusionieren
                 current['end_date'] = next_interval['end_date']
                 total_days = current['duration_days'] + next_interval['duration_days']
                 # Gewichteter Durchschnitt der Metriken

@@ -59,10 +59,9 @@ export class LineChart {
         const fuel = this.options.fuelType;
 
         // Parse Data if needed (assume backend returns nice JSON)
-        // Ensure Date objects
         this.data.forEach(d => {
             if (typeof d.date === 'string') d.date = new Date(d.date);
-            d.value = +d[fuel]; // Dynamic based on fuel type
+            d.value = +d[fuel];
         });
 
         // Domains

@@ -175,7 +175,7 @@ def get_ukraine_data():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Cache for loaded parquet files (prevents repeated disk reads)
+# Cache for loaded parquet files
 _parquet_cache = {}
 
 @app.route('/api/data/history')
@@ -194,18 +194,15 @@ def get_region_history():
         if not os.path.exists(file_path):
             return jsonify({"error": f"Data for year {year} not found"}), 404
         
-        # Use cached dataframe or load with only needed columns
         cache_key = f'daily_{year}'
         if cache_key not in _parquet_cache:
-            # Only read columns we need for aggregation
             cols = ['lat', 'lon', 'date', 'fuel', 'price_mean']
             _parquet_cache[cache_key] = pd.read_parquet(file_path, columns=cols)
             _parquet_cache[cache_key]['date'] = pd.to_datetime(_parquet_cache[cache_key]['date'])
         
         df = _parquet_cache[cache_key]
-        
-        # Pre-filter with bounding box (much faster than distance calc on all rows)
-        bbox_size = 1.0  # degrees
+    
+        bbox_size = 1.0 
         df = df[
             (df['lat'] >= lat - bbox_size) & (df['lat'] <= lat + bbox_size) &
             (df['lon'] >= lon - bbox_size) & (df['lon'] <= lon + bbox_size)
@@ -214,11 +211,9 @@ def get_region_history():
         if df.empty:
             return jsonify([])
         
-        # Now calculate distance only on filtered subset
         df = df.copy()
         df['dist'] = ((df['lat'] - lat)**2 + (df['lon'] - lon)**2)**0.5
         
-        # Find closest stations
         min_dist = df['dist'].min()
         tolerance = max(0.5, min_dist + 0.1)
         df = df[df['dist'] <= tolerance]
@@ -226,7 +221,6 @@ def get_region_history():
         if df.empty:
             return jsonify([])
 
-        # Add Month and aggregate
         df['month'] = df['date'].dt.month
         agg = df.groupby(['month', 'fuel'])['price_mean'].mean().reset_index()
         pivot = agg.pivot(index='month', columns='fuel', values='price_mean').reset_index()

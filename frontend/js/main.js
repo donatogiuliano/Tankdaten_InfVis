@@ -1,5 +1,3 @@
-import { OverviewPage } from './pages/OverviewPage.js';
-import { TrendsPage } from './pages/TrendsPage.js';
 import { CrisisPage } from './pages/CrisisPage.js';
 import { UkrainePage } from './pages/UkrainePage.js';
 import { RegionalPage } from './pages/RegionalPage.js';
@@ -19,8 +17,6 @@ class App {
         this.container.innerHTML = '';
 
         // Render ALL Sections (Hidden by default via CSS or JS)
-        // await this.renderSection('overview', OverviewPage); // Removed as requested
-        await this.renderSection('trends', TrendsPage);
         await this.renderSection('analysis', CrisisPage);
         await this.renderSection('ukraine', UkrainePage);
         try {

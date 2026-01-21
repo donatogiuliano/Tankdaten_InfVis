@@ -48,17 +48,25 @@ export class MarketPhasesPage {
                     <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span style="font-size: 1.8rem;">📊</span> Marktphasen-Analyse
                     </h1>
-                    <p style="margin: 0; color: #666; font-size: 0.9rem;">
-                        Erkennt Marktstabilität, Asymmetrien und Volatilität basierend auf Ölpreis-Dynamik.
-                    </p>
                 </div>
 
                 <!-- Controls -->
                 <div class="controls-bar" style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
                     
+                    <!-- Kraftstoff -->
                     <div class="control-group">
-                        <label style="font-size: 0.8rem; font-weight: 600; color: #555; display: block; margin-bottom: 4px;">Jahr</label>
-                        <select id="mp-year" style="padding: 6px; border-radius: 4px; border: 1px solid #ddd;">
+                        <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
+                            <button class="fuel-btn ${this.state.fuel === 'e5' ? 'active' : ''}" data-value="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
+                            <button class="fuel-btn ${this.state.fuel === 'e10' ? 'active' : ''}" data-value="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
+                            <button class="fuel-btn ${this.state.fuel === 'diesel' ? 'active' : ''}" data-value="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
+                        </div>
+                    </div>
+                    
+                    <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
+
+                    <!-- Jahr -->
+                    <div class="control-group">
+                        <select id="mp-year" style="font-size: 0.95rem; font-weight: 600; padding: 6px; border-radius: 4px; border: 1px solid #ddd;">
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
                             <option value="2022" selected>2022</option>
@@ -68,30 +76,41 @@ export class MarketPhasesPage {
                         </select>
                     </div>
 
+                    <!-- Stadt / Region -->
                     <div class="control-group">
-                        <label style="font-size: 0.8rem; font-weight: 600; color: #555; display: block; margin-bottom: 4px;">Kraftstoff</label>
-                        <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
-                            <button class="fuel-btn ${this.state.fuel === 'e5' ? 'active' : ''}" data-value="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
-                            <button class="fuel-btn ${this.state.fuel === 'e10' ? 'active' : ''}" data-value="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
-                            <button class="fuel-btn ${this.state.fuel === 'diesel' ? 'active' : ''}" data-value="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
-                        </div>
-                    </div>
-                    
-                    <style>
-                        .fuel-btn:hover { background-color: rgba(0,0,0,0.05); }
-                        .fuel-btn.active { background-color: #333; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-                    </style>
-
-                    <div class="control-group">
-                        <label style="font-size: 0.8rem; font-weight: 600; color: #555; display: block; margin-bottom: 4px;">Stadt / Region</label>
                         <div style="position: relative;">
-                             <input type="text" id="mp-city-input" placeholder="Stadt eingeben..." style="padding: 6px; border-radius: 4px; border: 1px solid #ddd; width: 140px;">
-                             <!-- No Datalist -->
+                             <input type="text" id="mp-city-input" placeholder="Stadt eingeben..." value="Stuttgart" style="font-size: 0.95rem; padding: 6px; border-radius: 4px; border: 1px solid #ddd; width: 140px;">
                         </div>
                     </div>
 
                     <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
 
+                    <!-- Phasen anzeigen -->
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <span style="font-size: 0.85rem; font-weight: 600; color: #555;">Phasen:</span>
+                        
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
+                            <input type="checkbox" id="mp-toggle-p-gleichlauf" checked>
+                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['GLEICHLAUF']}; border: 1px solid #ccc; display: inline-block;"></span>
+                            Gleichlauf
+                        </label>
+
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
+                            <input type="checkbox" id="mp-toggle-p-asymmetrie" checked>
+                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['ASYMMETRIE']}; border: 1px solid #ccc; display: inline-block;"></span>
+                            Asymmetrie
+                        </label>
+
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
+                            <input type="checkbox" id="mp-toggle-p-volatility" checked>
+                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['INTERNE_VOLATILITÄT']}; border: 1px solid #ccc; display: inline-block;"></span>
+                            Interne Vol.
+                        </label>
+                    </div>
+
+                    <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
+
+                    <!-- Ölpreis & Vol.-Band -->
                     <div class="toggles" style="display: flex; gap: 1rem; align-items: center;">
                         <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
                             <input type="checkbox" id="mp-toggle-oil"> Ölpreis
@@ -100,29 +119,6 @@ export class MarketPhasesPage {
                             <input type="checkbox" id="mp-toggle-band"> Vol.-Band
                         </label>
                     </div>
-                </div>
-
-                <!-- Filters for Phases -->
-                 <div class="phase-filters" style="background: white; padding: 0.8rem 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 1rem; display: flex; gap: 1.5rem; justify-content: flex-start; align-items: center;">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">Phasen anzeigen:</span>
-                    
-                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
-                        <input type="checkbox" id="mp-toggle-p-gleichlauf" checked> 
-                        <span style="width: 10px; height: 10px; background: ${this.colors.phase['GLEICHLAUF']}; border: 1px solid #ccc; display: inline-block;"></span>
-                        Gleichlauf
-                    </label>
-
-                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
-                        <input type="checkbox" id="mp-toggle-p-asymmetrie" checked>
-                        <span style="width: 10px; height: 10px; background: ${this.colors.phase['ASYMMETRIE']}; border: 1px solid #ccc; display: inline-block;"></span>
-                        Asymmetrie
-                    </label>
-
-                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
-                        <input type="checkbox" id="mp-toggle-p-volatility" checked>
-                        <span style="width: 10px; height: 10px; background: ${this.colors.phase['INTERNE_VOLATILITÄT']}; border: 1px solid #ccc; display: inline-block;"></span>
-                        Interne Volatilität
-                    </label>
                 </div>
 
                 <!-- Chart Container -->

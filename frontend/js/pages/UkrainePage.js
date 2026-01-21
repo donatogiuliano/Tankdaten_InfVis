@@ -30,9 +30,6 @@ export class UkrainePage {
                     <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span style="font-size: 1.8rem;">⚔️</span> Ukraine-Schock 2022
                     </h1>
-                    <p style="margin: 0; color: #666; font-size: 0.9rem;">
-                        Bubble-Visualisierung: Jede Blase = ein Tag, Größe = Preis
-                    </p>
                 </div>
 
                 <!-- Controls + Legend with Prices -->

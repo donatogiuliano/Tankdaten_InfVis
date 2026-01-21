@@ -10,6 +10,7 @@ class App {
     constructor() {
         this.container = document.getElementById('content-area');
         this.pages = {};
+        this.pageInstances = {};  // Store page instances for lifecycle methods
     }
 
     async init() {
@@ -41,15 +42,16 @@ class App {
         const pageInstance = new PageClass();
         await pageInstance.render(section);
         this.pages[id] = section;
+        this.pageInstances[id] = pageInstance;  // Store instance
     }
 
     handleRoute() {
-        // Get Hash or Default to #analysis
-        let hash = window.location.hash.slice(1) || 'analysis';
+        // Get Hash or Default to #phases
+        let hash = window.location.hash.slice(1) || 'phases';
         const validRoutes = ['analysis', 'ukraine', 'phases', 'map'];
 
         if (!validRoutes.includes(hash)) {
-            hash = 'analysis';
+            hash = 'phases';
         }
 
         // Hide all sections, Show active
@@ -57,6 +59,11 @@ class App {
         if (this.pages[hash]) {
             this.pages[hash].style.display = 'block';
             this.pages[hash].style.animation = 'fadeIn 0.3s ease-in-out';
+
+            // Call onShow() if the page instance has this method
+            if (this.pageInstances[hash] && typeof this.pageInstances[hash].onShow === 'function') {
+                this.pageInstances[hash].onShow();
+            }
         }
 
         // Update Active Nav

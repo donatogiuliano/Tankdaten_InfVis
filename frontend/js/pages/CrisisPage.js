@@ -29,9 +29,6 @@ export class CrisisPage {
                     <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span style="font-size: 1.8rem;">🦠</span> Corona-Krisenanalyse 2020
                     </h1>
-                    <p style="margin: 0; color: #666; font-size: 0.9rem;">
-                        Auswirkungen der COVID-19 Pandemie auf die Kraftstoffpreise in Deutschland
-                    </p>
                 </div>
 
                 <!-- Controls -->

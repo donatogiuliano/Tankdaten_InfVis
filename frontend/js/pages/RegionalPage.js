@@ -35,9 +35,6 @@ export class RegionalPage {
                             </svg>
                             Regional-Vergleich
                         </h1>
-                        <p style="margin: 0; color: #666; font-size: 0.9rem;">
-                            Regionale Preisunterschiede auf PLZ3-Ebene analysieren und vergleichen.
-                        </p>
                     </div>
 
                     <!-- A11y Toggle (Top Right) -->
@@ -766,10 +763,20 @@ export class RegionalPage {
             mapContainer.innerHTML = `
                 <div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#fee; color:#c00;">
                     <div style="font-size:3rem; margin-bottom:1rem;">⚠️</div>
-                    <div style="font-size:1.5rem; font-weight:bold; margin-bottom:0.5rem;">Fehler beim Laden</div>
+                    <div style="font-size:1.5rem; font-weight:bold; margin-bottom:0.5rem;">Fehler beim  Laden</div>
                     <div>${err.message || 'Ein unbekannter Fehler ist aufgetreten.'}</div>
                 </div>
             `;
+        }
+    }
+
+    // Called when page becomes visible to fix map rendering issues
+    onShow() {
+        if (this.map && this.map.map) {
+            // Force Leaflet to recalculate map size
+            setTimeout(() => {
+                this.map.map.invalidateSize();
+            }, 100);
         }
     }
 }

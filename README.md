@@ -1,85 +1,154 @@
 # 🛢️ FuelIntel Germany - Tankpreis-Analyse Dashboard
 
-> **Interaktives Dashboard zur Visualisierung und Analyse deutscher Kraftstoffpreise**
-
-Ein modernes, responsives Web-Dashboard zur Analyse von Tankstellenpreisen in Deutschland. Das Projekt visualisiert historische Preisdaten und zeigt die Auswirkungen globaler Krisen (Corona-Pandemie, Ukraine-Krieg) auf die Kraftstoffpreise.
+> **Interaktives Dashboard zur Visualisierung von Tankpreisen**
 
 ---
 
-## 📸 Screenshots
+## 📚 Projektinformationen
 
-### Übersicht Dashboard
+| | |
+|---|---|
+| **Hochschule** | Hochschule für Technik Stuttgart |
+| **Vorlesung** | [Informationsvisualisierung und Visual Analytics] |
+| **Semester** | Wintersemester 2025/26 |
+| **Gruppe** | Gruppe 9 |
 
-![Dashboard Overview](frontend/img/logo.png)
+### 👥 Gruppenmitglieder
 
-### Corona-Krisenanalyse 2020
-
-Interaktive Visualisierung der COVID-19 Auswirkungen auf Kraftstoffpreise mit Lockdown-Markierungen.
-
-### Ukraine-Schock 2022 (Bubble Chart)
-
-Einzigartige Bubble-Chart Visualisierung - jede Blase repräsentiert einen Tag, Größe = Preis, Farbe = Preisniveau.
-
----
-
-## ✨ Features
-
-### 📊 Visualisierungen
-
-- **Übersicht**: Aktuelle Durchschnittspreise und Tagestrends
-- **Preistrends**: Historische Preisentwicklung mit interaktiven Charts
-- **Krisen-Analyse (Corona 2020)**: Korrelation zwischen Lockdowns und Preisverfall
-- **Ukraine-Schock 2022**: Bubble-Chart mit animierten Tagesblasen
-- **Regional-Vergleich**: Kartenbasierte Preisunterschiede nach Bundesland
-
-### 🎨 Design
-
-- Modernes Light-Theme Design
-- Responsive Layout für alle Bildschirmgrößen
-- Animierte Übergänge und Hover-Effekte
-- Interaktive Tooltips mit "Click-to-Pin" Funktion
-
-### 🔧 Technische Features
-
-- Echtzeit-Datenvisualisierung mit D3.js
-- ResizeObserver für responsive Charts
-- Flask REST API Backend
-- Modulare JavaScript Architektur
+| Name | Matrikelnummer |
+|------|----------------|
+| [Giuliano Donato] |
+| [Klempar Sheyenne] |
+| [Nakay Selcuk] |
+| [Yanik Enes] |
+| [Yansulak Tayfun] |
 
 ---
 
-## 🚀 Installation
+## 🎯 Fragestellungen & Visualisierungen
+
+Dieses Dashboard beantwortet vier zentrale Fragestellungen zur Entwicklung von Kraftstoffpreisen.
+
+---
+
+### Markttrends
+**Fragestellung:** *Wie bewegen sich generell die Tankpreise, welche Marktphasen sind zu beobachten?*
+
+| | |
+|---|---|
+| **Diagrammtyp** | Interaktives Liniendiagramm |S
+| **Interaktion** | Auswahl von Kraftstoffart, Jahr und Ort • Ein-/Ausschalten von Marktphasen, Ölpreis-Referenz und Volatilitätsband • Detaillierter Tooltip bei Hover |
+
+**Designbegründung:**
+- Der **gleitende Durchschnitt** glättet tägliche Preisschwankungen und macht Trends sichtbar.
+- Das **Volatilitätsband** visualisiert die Unsicherheit im Markt.
+- Marktphasen werden als dezente **Hintergrund-Farbflächen** dargestellt, um Marktmechanismen verständlich zu machen.
+
+---
+
+### Regional-Vergleich
+**Fragestellung:** *Welche regionalen Unterschiede in Deutschland sind zu erkennen?*
+
+| | |
+|---|---|
+| **Diagrammtyp** | Grid-basierte Heatmap
+| **Interaktion** | Zeitsteuerung über Jahr und Monat • Barrierefrei-Modus (Grün-Rot → Blau-Rot) • Detailvergleich zweier Regionen (Slot A/B) mit Modal-Fenster |
+
+**Designbegründung:**
+- Das **Gitter-Raster** ermöglicht eine flächendeckende Darstellung Deutschlands.
+- Die **Perzentil-Skalierung** filtert statistische Ausreißer.
+- Der Detail-Vergleich erlaubt eine präzise, punktuelle Analyse ohne Informationsüberflutung.
+
+---
+
+### Corona-Krise 2020
+**Fragestellung:** *Wie haben sich die Kraftstoffpreise während der Corona-Pandemie verändert und welche Muster sind erkennbar?*
+
+| | |
+|---|---|
+| **Diagrammtyp** | Multi-Layer Liniendiagramm|
+| **Interaktion** | Umschalten der Kraftstoffart • Event-Analyse durch fest verankerte Zeitmarker (Lockdowns) • Statistische Übersichtskarten (Tiefst-/Höchstwert) |
+
+**Designbegründung:**
+- Die direkte Verknüpfung von **politischen Ereignissen** (Lockdowns) mit der Preiskurve zeigt Kausalitäten auf.
+- Der **Rohölpreis (Brent)** ist als graue Fläche im Hintergrund hinterlegt, um die Entkoppelung von Rohstoff- und Endverbraucherpreis während der Krise zu verdeutlichen.
+
+---
+
+### Ukraine-Schock 2022
+**Fragestellung:** *Welchen Einfluss hatte der Ukraine-Krieg auf die Kraftstoffpreise in Deutschland?*
+
+| | |
+|---|---|
+| **Diagrammtyp** | Bubble Chart mit Zeitachse |
+| **Interaktion** | Barrierefrei-Modus für die Farbskala • Fixieren von Blasen (Pins) zur dauerhaften Anzeige • Vertikale Ereignis-Marker für Meilensteine |
+
+**Designbegründung:**
+- **Visualisierung der Dynamik**: Jede Blase repräsentiert einen Tag. Die Größe und der vertikale Abstand zeigen die Intensität der Preisänderung.
+- **Die "Raupe"**: Im stabilen Markt bilden die Blasen eine geschlossene Kette.
+- **Lückenanzeige (Vakuum)**: Wenn zwei Kreise getrennt sind, signalisiert dies einen **massiven Preissprung** innerhalb von 24 Stunden. Dieser "Bruch" in der Visualisierung macht Marktschocks haptisch greifbar.
+- Die **Ereignis-Linien** enden am oberen Rand der Blasen, um den "Aufprall" des Ereignisses auf den Markt zu symbolisieren, ohne die Daten zu verdecken.
+
+---
+
+## Installation
 
 ### Voraussetzungen
 
-- Python 3.8+
-- Node.js (optional, für Entwicklung)
+- Python 3.8+ (für lokale Installation)
+- Docker (für Container-Installation)
 - Git
 
-### 1. Repository klonen
+---
+
+### Option 1: Docker
 
 ```bash
-git clone https://github.com/donatogiuliano/Tankdaten_InfVis.git
-cd Tankdaten_InfVis
+# 1. Repository klonen
+git clone https://gitlab.rz.hft-stuttgart.de/dpt_winter2526/tankdaten_infvis.git
+cd tankdaten_infvis
+
+# 2. Docker-Image bauen und Container starten
+docker build -t tankdaten-app .
+docker run -d -p 5000:5000 --name tankdata_instance tankdaten-app
+
+# 3. Im Browser öffnen
+# http://localhost:5000
 ```
 
-### 2. Python Dependencies installieren
+**Container stoppen/neu starten:**
+```bash
+# Container stoppen
+docker stop tankdata_instance
+
+# Container entfernen und neu bauen (nach Code-Änderungen)
+docker rm -f tankdata_instance
+docker build -t tankdaten-app .
+docker run -d -p 5000:5000 --name tankdata_instance tankdaten-app
+```
+
+---
+
+### Option 2: Lokale Installation
 
 ```bash
+# 1. Repository klonen
+git clone https://gitlab.rz.hft-stuttgart.de/dpt_winter2526/tankdaten_infvis.git
+cd tankdaten_infvis
+
+# 2. (Optional) Virtuelle Umgebung erstellen
+python -m venv venv
+# Windows: venv\Scripts\activate
+# Linux/Mac: source venv/bin/activate
+
+# 3. Python Dependencies installieren
 pip install -r requirements.txt
-```
 
-### 3. Backend starten
-
-```bash
-cd backend
+# 4. Backend starten
 python app.py
-```
 
-### 4. Im Browser öffnen
-
-```
-http://localhost:5000
+# 5. Im Browser öffnen
+# http://localhost:5000
 ```
 
 ---
@@ -87,50 +156,43 @@ http://localhost:5000
 ## 📁 Projektstruktur
 
 ```
+## 📁 Projektstruktur
+
+```text
 tankdaten_infvis/
 ├── backend/
-│   ├── app.py              # Flask API Server
-│   ├── data/               # CSV Datensätze
-│   │   ├── 2020.csv        # Corona-Jahr Daten
-│   │   ├── 2022.csv        # Ukraine-Krise Daten
-│   │   └── macro_data.csv  # Rohölpreise (Brent)
-│   └── scripts/            # Datenverarbeitungs-Skripte
-│       ├── ingest_data.py
-│       ├── enrich_with_macro.py
-│       └── fetch_real_macro.py
+│   ├── app.py                  # Flask API Server mit Endpoints
+│   ├── market_phases.py        # Logik zur Erkennung von Marktphasen
+│   ├── data/                   # Daten-Verzeichnis
+│   │   ├── cache/              # Berechnete Caches für Performance
+│   │   ├── geometries/         # GeoJSON für die Deutschlandkarte
+│   │   └── *.parquet           # Optimierte Preisdaten (Täglich/Wöchentlich/Monatlich)
+│   └── scripts/                # Hilfsskripte für Datenimport & Berechnung
 │
 ├── frontend/
-│   ├── index.html          # Haupt-HTML
-│   ├── index.css           # Globale Styles
-│   ├── js/
-│   │   ├── main.js         # App Entry Point
-│   │   └── pages/          # Seiten-Module
-│   │       ├── OverviewPage.js
-│   │       ├── TrendsPage.js
-│   │       ├── CrisisPage.js    # Corona-Analyse
-│   │       ├── UkrainePage.js   # Ukraine Bubble-Chart
-│   │       └── RegionalPage.js
-│   └── img/                # Assets
+│   ├── index.html              # Zentrale Einstiegsseite (Single Page App)
+│   ├── index.css               # Globales Styling & Variablen
+│   ├── img/                    # Grafiken und Icons
+│   └── js/                     # Frontend-Logik
+│       ├── main.js             # Initialisierung & Routing
+│       ├── state.js            # Globales State-Management
+│       ├── components/         # Wiederverwendbare Visualisierungs-Komponenten
+│       │   ├── CrisisChart.js          # Corona-Chart
+│       │   ├── MarketPhasesChart.js    # Markttrends-Chart
+│       │   ├── RegionalMap.js          # Deutschlandkarte
+│       │   └── UkraineBubbleChart.js   # Ukraine-Bubble-Chart
+│       └── pages/              # Seiten-Controller
+│           ├── CrisisPage.js
+│           ├── MarketPhasesPage.js
+│           ├── RegionalPage.js
+│           └── UkrainePage.js
 │
-├── Dockerfile              # Container Build
-├── requirements.txt        # Python Dependencies
-└── README.md
+├── Dockerfile                  # Konfiguration für Docker-Container
+├── requirements.txt            # Python-Abhängigkeiten
+└── README.md                   # Projekt-Dokumentation
 ```
 
----
-
-## 🔌 API Endpoints
-
-| Endpoint                 | Beschreibung                     |
-| ------------------------ | -------------------------------- |
-| `GET /api/data/corona`   | Preisdaten 2020 mit Rohölpreisen |
-| `GET /api/data/ukraine`  | Preisdaten 2022 mit Rohölpreisen |
-| `GET /api/data/trends`   | Historische Trenddaten           |
-| `GET /api/data/overview` | Aktuelle Übersichtsdaten         |
-
----
-
-## 🛠️ Technologie-Stack
+## Technologie-Stack
 
 ### Frontend
 
@@ -152,41 +214,8 @@ tankdaten_infvis/
 
 ---
 
-## 📈 Datenquellen
+## Datenquellen
 
-- **Tankstellenpreise**: Tankerkönig API / MTS-K Datensatz
-- **Rohölpreise (Brent)**: Yahoo Finance / ECB
-
----
-
-## 🎯 Roadmap
-
-- [x] Corona-Krisenanalyse 2020
-- [x] Ukraine-Schock Bubble-Chart 2022
-- [x] Responsive Chart-Sizing (ResizeObserver)
-- [x] Light-Theme Redesign
-- [ ] Jahresvergleich Feature
-- [ ] Export als PDF/PNG
-- [ ] Dunkel-Modus Toggle
-
----
-
-## 👥 Team
-
-**Hochschule für Technik Stuttgart**  
-Wintersemester 2025/26  
-Modul: Datenanalyse & Visualisierung
-
----
-
-## 📄 Lizenz
-
-Dieses Projekt ist für akademische Zwecke erstellt.
-
----
-
-## 🙏 Danksagung
-
-- D3.js Community für exzellente Dokumentation
-- Tankerkönig für offene Preisdaten
-- Leaflet für Kartenbibliothek
+- **Tankstellenpreise**: Tankerkönig
+- **Rohölpreise (Brent)**: US EAI
+- **Wechselkurse (EUR/USD)**: EZB

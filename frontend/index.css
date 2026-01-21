@@ -1,6 +1,4 @@
-/* ===== CSS Variables & Reset ===== */
 :root {
-    /* Premium Light Theme Palette */
     --bg-body: #f4f7fa;
     --bg-card: #FFFFFF;
     --bg-sidebar: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
@@ -10,7 +8,6 @@
     --text-secondary: #4a5568;
     --text-muted: #8b95a5;
 
-    /* Refined Gradients */
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --gradient-subtle: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
@@ -42,7 +39,6 @@
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-fast: all 0.15s ease-out;
 
-    /* Layout Variables */
     --sidebar-width: 320px;
     --header-height: 70px;
 }
@@ -60,18 +56,14 @@ body {
     overflow-x: hidden;
     line-height: 1.5;
     height: 100vh;
-    /* overflow: hidden; */
-    /* Removed as per new body styles */
 }
 
-/* ===== Layout Structure ===== */
 .app-layout {
     display: grid;
     grid-template-columns: var(--sidebar-width) 1fr;
     height: 100vh;
 }
 
-/* ===== Sidebar ===== */
 .sidebar {
     background: var(--bg-sidebar);
     border-right: 1px solid var(--border-subtle);
@@ -86,7 +78,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Center the logo */
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-subtle);
@@ -94,7 +85,6 @@ body {
 
 .logo-wrapper {
     width: 140px;
-    /* Huge logo */
     height: 140px;
     flex-shrink: 0;
     overflow: hidden;
@@ -102,22 +92,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Removed background/shadow to blend with sidebar */
 }
 
 .logo-img {
     width: 140%;
-    /* Zoom to crop white border */
     height: 140%;
     object-fit: cover;
     mix-blend-mode: multiply;
-    /* Blends white bg of image with sidebar */
 }
 
 .logo-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: -8px;
 }
 
 .logo-title {
@@ -126,7 +114,6 @@ body {
     line-height: 1.2;
     margin-bottom: 0.2rem;
     color: var(--text-primary);
-    /* Black/Dark as requested */
 }
 
 .logo-subtitle {
@@ -216,14 +203,12 @@ body {
     font-family: 'JetBrains Mono', monospace;
 }
 
-/* ===== Main Content Area ===== */
 .main-content {
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
     background: var(--bg-body);
-    /* Standard Light Bg */
 }
 
 .top-bar {
@@ -234,11 +219,9 @@ body {
     padding: 0 2rem;
     border-bottom: 1px solid var(--border-subtle);
     background-color: rgba(255, 255, 255, 0.8);
-    /* White with opacity */
     backdrop-filter: blur(10px);
     z-index: 5;
     position: sticky;
-    /* Make header sticky */
     top: 0;
 }
 
@@ -247,7 +230,6 @@ body {
     color: var(--text-secondary);
 }
 
-/* Minimalist Select */
 .styled-select {
     appearance: none;
     -webkit-appearance: none;
@@ -296,7 +278,6 @@ body {
     outline: none;
 }
 
-/* One-Pager Layout Adjustments */
 html {
     scroll-behavior: smooth;
 }
@@ -306,25 +287,16 @@ html {
     overflow-y: auto;
     height: calc(100vh - var(--header-height));
     display: block !important;
-    /* Override grid for vertical stacking */
     padding-right: 1rem;
-    /* Space for scrollbar */
-    /* Removed grid properties for one-pager layout */
-    /* grid-template-columns: repeat(12, 1fr); */
-    /* grid-auto-rows: minmax(100px, auto); */
-    /* gap: 1.5rem; */
-    /* align-content: start; */
 }
 
 .dashboard-section {
     margin-bottom: 4rem;
     padding-top: 1rem;
     scroll-margin-top: 100px;
-    /* Offset for sticky header */
     border-bottom: 1px solid var(--border-subtle);
     padding-bottom: 3rem;
     display: grid;
-    /* Sections themselves can still use grid */
     grid-template-columns: repeat(12, 1fr);
     gap: 1.5rem;
 }
@@ -334,7 +306,6 @@ html {
     margin-bottom: 0;
 }
 
-/* ===== Components ===== */
 .card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -370,7 +341,6 @@ html {
     opacity: 1;
 }
 
-/* Grid Spans */
 .col-span-12 {
     grid-column: span 12;
 }
@@ -423,14 +393,10 @@ html {
     color: var(--accent-danger);
 }
 
-/* High prices bad for consumer */
 .trend-down {
     color: var(--accent-success);
 }
 
-/* Low prices good */
-
-/* Charts */
 .chart-wrapper {
     flex: 1;
     min-height: 300px;
@@ -464,7 +430,6 @@ html {
     }
 }
 
-/* Leaflet Dark Override */
 .leaflet-container {
     background: var(--bg-card);
 }
@@ -479,7 +444,6 @@ html {
     background: var(--bg-card);
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }

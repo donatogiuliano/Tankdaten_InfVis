@@ -1,5 +1,5 @@
 import { LineChart } from '../components/LineChart.js';
-import { Heatmap } from '../components/Heatmap.js';
+import { Heatmap } from '../components/HeatMap.js';
 
 export class TrendsPage {
     async render(container) {

@@ -114,7 +114,7 @@ export class CrisisPage {
                             this.resizeObserver.observe(chartContainer);
                         }
                     }
-                }, 200); // Increased timeout for proper sizing
+                }, 200);
             });
         } catch (e) {
             console.error(e);
@@ -133,24 +133,20 @@ export class CrisisPage {
         const chartContainer = this.container.querySelector('#corona-chart');
         chartContainer.innerHTML = '';
 
-        // Filter data for selected fuel
         const fuelData = this.data.filter(d => d.fuel === this.selectedFuel);
         
-        // Parse dates and sort
         const parseDate = d3.timeParse('%Y-%m-%d');
         fuelData.forEach(d => {
             d.parsedDate = parseDate(d.date);
         });
         fuelData.sort((a, b) => a.parsedDate - b.parsedDate);
 
-        // Dimensions - use fallback values if container has no size yet
         const margin = { top: 40, right: 70, bottom: 50, left: 70 };
         const containerWidth = chartContainer.clientWidth || 800;
         const containerHeight = chartContainer.clientHeight || 400;
         const width = Math.max(containerWidth - margin.left - margin.right, 400);
         const height = Math.max(containerHeight - margin.top - margin.bottom, 300);
 
-        // Create SVG
         const svg = d3.select(chartContainer)
             .append('svg')
             .attr('width', width + margin.left + margin.right)
@@ -158,7 +154,6 @@ export class CrisisPage {
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-        // Scales
         const x = d3.scaleTime()
             .domain(d3.extent(fuelData, d => d.parsedDate))
             .range([0, width]);
@@ -174,35 +169,29 @@ export class CrisisPage {
             .domain([0, d3.max(fuelData, d => d.brent_oil_eur) * 1.1])
             .range([height, 0]);
 
-        // Gridlines
         svg.append('g')
             .attr('class', 'grid')
             .style('stroke', '#eee')
             .style('stroke-dasharray', '3,3')
             .call(d3.axisLeft(yPrice).ticks(6).tickSize(-width).tickFormat(''));
 
-        // Corona Event Markers
         this.coronaEvents.forEach((event, index) => {
             const eventDate = parseDate(event.date);
             const xPos = x(eventDate);
-            
-            // Stagger Y position to avoid overlap (alternate between -10 and -25)
             const yOffset = index % 2 === 0 ? -12 : -28;
             
-            // Vertical Line (Exclude for Price-Tief)
             if (event.label !== 'Preis-Tief') {
                 svg.append('line')
                     .attr('x1', xPos)
                     .attr('x2', xPos)
                     .attr('y1', yOffset + 8)
                     .attr('y2', height)
-                    .attr('stroke', '#37474f') // Dark Slate Grey (High Contrast)
+                    .attr('stroke', '#37474f')
                     .attr('stroke-width', 2)
                     .attr('stroke-dasharray', '4,4')
                     .style('opacity', 1);
             }
             
-            // Label (Keep original color for readability)
             svg.append('text')
                 .attr('x', xPos)
                 .attr('y', yOffset)
@@ -213,7 +202,6 @@ export class CrisisPage {
                 .text(`${event.icon} ${event.label}`);
         });
 
-        // Oil Price Area (Slate Grey)
         const areaOil = d3.area()
             .x(d => x(d.parsedDate))
             .y0(height)
@@ -222,10 +210,9 @@ export class CrisisPage {
 
         svg.append('path')
             .datum(fuelData)
-            .attr('fill', 'rgba(84, 110, 122, 0.15)') // #546E7A at 15%
+            .attr('fill', 'rgba(84, 110, 122, 0.15)')
             .attr('d', areaOil);
 
-        // Main Price Line
         const line = d3.line()
             .x(d => x(d.parsedDate))
             .y(d => yPrice(d.price_mean))
@@ -238,14 +225,12 @@ export class CrisisPage {
             .attr('stroke-width', 3)
             .attr('d', line);
 
-        // Find min/max prices for markers
         const prices = fuelData.map(d => d.price_mean);
         const minPrice = Math.min(...prices);
         const maxPrice = Math.max(...prices);
         const minEntry = fuelData.find(d => d.price_mean === minPrice);
         const maxEntry = fuelData.find(d => d.price_mean === maxPrice);
 
-        // Min Price Marker (Teal)
         if (minEntry) {
             svg.append('circle')
                 .attr('cx', x(minEntry.parsedDate))
@@ -256,7 +241,7 @@ export class CrisisPage {
                 .attr('stroke-width', 2);
             svg.append('text')
                 .attr('x', x(minEntry.parsedDate))
-                .attr('y', yPrice(minEntry.price_mean) - 15) // Position ABOVE point
+                .attr('y', yPrice(minEntry.price_mean) - 15)
                 .attr('text-anchor', 'middle')
                 .attr('font-size', '10px')
                 .attr('fill', '#009688')
@@ -264,7 +249,6 @@ export class CrisisPage {
                 .text('📉 ' + minEntry.price_mean.toFixed(3) + ' €');
         }
 
-        // Max Price Marker (Purple)
         if (maxEntry) {
             svg.append('circle')
                 .attr('cx', x(maxEntry.parsedDate))
@@ -283,28 +267,24 @@ export class CrisisPage {
                 .text('📈 ' + maxEntry.price_mean.toFixed(3) + ' €');
         }
 
-        // X Axis
         svg.append('g')
             .attr('transform', `translate(0,${height})`)
             .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')))
             .selectAll('text')
             .style('font-size', '11px');
 
-        // Y Axis Left (Price)
         svg.append('g')
             .call(d3.axisLeft(yPrice).ticks(6).tickFormat(d => d.toFixed(2) + ' €'))
             .selectAll('text')
             .style('font-size', '11px');
 
-        // Y Axis Right (Oil - Slate Grey)
         svg.append('g')
             .attr('transform', `translate(${width},0)`)
             .call(d3.axisRight(yOil).ticks(5).tickFormat(d => d.toFixed(0) + ' €'))
             .selectAll('text')
             .style('font-size', '11px')
-            .style('fill', '#546E7A'); // Slate Grey
+            .style('fill', '#546E7A');
 
-        // Axis Labels
         svg.append('text')
             .attr('transform', 'rotate(-90)')
             .attr('y', -45)
@@ -320,10 +300,9 @@ export class CrisisPage {
             .attr('x', -height / 2)
             .attr('text-anchor', 'middle')
             .attr('font-size', '11px')
-            .attr('fill', '#546E7A') // Slate Grey
+            .attr('fill', '#546E7A')
             .text('Rohölpreis Brent (€/Barrel)');
 
-        // Interactive Overlay for Tooltip
         const tooltip = d3.select(chartContainer)
             .append('div')
             .attr('class', 'tooltip-corona')
@@ -364,18 +343,15 @@ export class CrisisPage {
 
         const fuelData = this.data.filter(d => d.fuel === this.selectedFuel);
         
-        // Fuel name mapping
         const fuelNames = { 'e5': 'Super E5', 'e10': 'E10', 'diesel': 'Diesel' };
         const fuelName = fuelNames[this.selectedFuel] || this.selectedFuel.toUpperCase();
         
-        // Calculate stats
         const prices = fuelData.map(d => d.price_mean);
         const min = Math.min(...prices);
         const max = Math.max(...prices);
         const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
         const diff = max - min;
 
-        // Find dates for min/max
         const minEntry = fuelData.find(d => d.price_mean === min);
         const maxEntry = fuelData.find(d => d.price_mean === max);
 
@@ -404,7 +380,6 @@ export class CrisisPage {
     }
 
     destroy() {
-        // Cleanup resize observer
         if (this.resizeObserver) {
             this.resizeObserver.disconnect();
             this.resizeObserver = null;

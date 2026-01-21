@@ -1,45 +1,49 @@
 /* ===== CSS Variables & Reset ===== */
 :root {
-    /* Gemini Light Theme Palette */
-    --bg-body: #F0F4F9;
-    /* Light blueish gray */
+    /* Premium Light Theme Palette */
+    --bg-body: #f4f7fa;
     --bg-card: #FFFFFF;
-    --bg-sidebar: #FFFFFF;
+    --bg-sidebar: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    --bg-sidebar-hover: rgba(26, 115, 232, 0.06);
 
-    --text-primary: #1F1F1F;
-    --text-secondary: #5f6368;
-    --text-muted: #80868b;
+    --text-primary: #1a1f36;
+    --text-secondary: #4a5568;
+    --text-muted: #8b95a5;
 
-    /* Gemini Gradients */
-    --gradient-primary: linear-gradient(135deg, #4285F4 0%, #9C27B0 50%, #E91E63 100%);
-    --gradient-subtle: linear-gradient(135deg, rgba(66, 133, 244, 0.1) 0%, rgba(156, 39, 176, 0.1) 100%);
+    /* Refined Gradients */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-subtle: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
 
-    --accent-primary: #1a73e8;
-    /* Google Blue */
-    --accent-glow: rgba(26, 115, 232, 0.4);
+    --accent-primary: #5a67d8;
+    --accent-hover: #4c51bf;
+    --accent-glow: rgba(90, 103, 216, 0.25);
 
-    --border-color: #e0e0e0;
-    --border-subtle: #f1f3f4;
+    --border-color: #e2e8f0;
+    --border-subtle: #edf2f7;
+    --border-active: #cbd5e0;
 
-    --success: #1e8e3e;
-    --danger: #d93025;
-    --warning: #f9ab00;
+    --success: #38a169;
+    --danger: #e53e3e;
+    --warning: #dd6b20;
 
     --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
     --radius: 16px;
-    /* Softer, larger radius */
+    --radius-md: 12px;
     --radius-sm: 8px;
 
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    --shadow-hover: 0 8px 24px rgba(60, 64, 67, 0.15);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+    --shadow-glow: 0 0 20px var(--accent-glow);
 
-    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
 
     /* Layout Variables */
-    --sidebar-width: 350px;
-    /* Wider sidebar for huge logo */
+    --sidebar-width: 320px;
     --header-height: 70px;
 }
 
@@ -69,12 +73,13 @@ body {
 
 /* ===== Sidebar ===== */
 .sidebar {
-    background-color: var(--bg-sidebar);
+    background: var(--bg-sidebar);
     border-right: 1px solid var(--border-subtle);
     display: flex;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
     z-index: 10;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03);
 }
 
 .logo-area {
@@ -148,33 +153,54 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.8rem 1rem;
+    padding: 0.9rem 1.25rem;
     color: var(--text-secondary);
     text-decoration: none;
     border-radius: var(--radius-sm);
     transition: var(--transition);
     font-weight: 500;
-    font-size: 1.2rem;
-    /* Even larger Menu Text */
+    font-size: 1.05rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 4px;
+    height: 60%;
+    background: var(--gradient-primary);
+    border-radius: 0 4px 4px 0;
+    transition: transform 0.2s ease;
 }
 
 .nav-item:hover {
-    background-color: var(--bg-hover);
+    background: var(--bg-sidebar-hover);
     color: var(--text-primary);
 }
 
+.nav-item:hover .icon {
+    transform: scale(1.15);
+}
+
 .nav-item.active {
-    background-color: #e8f0fe;
-    /* More visible blue background */
-    color: #1967d2;
-    /* Stronger blue text */
-    font-weight: 700;
+    background: linear-gradient(135deg, rgba(90, 103, 216, 0.12) 0%, rgba(118, 75, 162, 0.08) 100%);
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.nav-item.active::before {
+    transform: translateY(-50%) scaleY(1);
 }
 
 .nav-item .icon {
     font-size: 1.2rem;
     min-width: 24px;
     text-align: center;
+    transition: transform 0.2s ease;
 }
 
 .sidebar-footer {
@@ -312,19 +338,35 @@ html {
     background-color: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity 0.25s ease;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
     border-color: var(--border-active);
+}
+
+.card:hover::before {
+    opacity: 1;
 }
 
 /* Grid Spans */

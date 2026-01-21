@@ -119,27 +119,82 @@ def get_states_geo():
     except Exception as e:
         return jsonify({"error": str(e)}), 404
 
+@app.route('/api/data/corona')
+def get_corona_data():
+    """Get aggregated 2020 fuel price data for Corona crisis analysis."""
+    try:
+        file_path = os.path.join(DATA_DIR, 'data_daily_2020.parquet')
+        if not os.path.exists(file_path):
+            return jsonify({"error": "2020 data not found"}), 404
+        
+        df = pd.read_parquet(file_path)
+        
+        # Aggregate by date and fuel type (average across all regions)
+        agg = df.groupby(['date', 'fuel']).agg({
+            'price_mean': 'mean',
+            'brent_oil_eur': 'first'
+        }).reset_index()
+        
+        # Convert date to string for JSON
+        agg['date'] = agg['date'].dt.strftime('%Y-%m-%d')
+        
+        return jsonify(agg.to_dict(orient='records'))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/data/ukraine')
+def get_ukraine_data():
+    """Get aggregated 2022 fuel price data for Ukraine crisis analysis."""
+    try:
+        file_path = os.path.join(DATA_DIR, 'data_daily_2022.parquet')
+        if not os.path.exists(file_path):
+            return jsonify({"error": "2022 data not found"}), 404
+        
+        df = pd.read_parquet(file_path)
+        
+        # Aggregate by date and fuel type
+        agg = df.groupby(['date', 'fuel']).agg({
+            'price_mean': 'mean',
+            'brent_oil_eur': 'first'
+        }).reset_index()
+        
+        # Convert date to string
+        agg['date'] = agg['date'].dt.strftime('%Y-%m-%d')
+        
+        return jsonify(agg.to_dict(orient='records'))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 @app.route('/api/data/history')
 def get_region_history():
     try:
         year = request.args.get('year', type=int)
-        plz = request.args.get('plz', type=str) # string to preserve leading zeros if needed
+        lat = request.args.get('lat', type=float)
+        lon = request.args.get('lon', type=float)
         
-        if not plz:
-            return jsonify({"error": "Missing PLZ"}), 400
-
+        if lat is None or lon is None:
+            return jsonify({"error": "Missing lat/lon parameters"}), 400
+        if not year:
+            year = 2024  # default year
+            
         # Read Data (using daily for granularity, then agg to month)
-        df = pd.read_parquet(os.path.join(DATA_DIR, 'data_daily.parquet'))
+        file_path = os.path.join(DATA_DIR, f'data_daily_{year}.parquet')
+        if not os.path.exists(file_path):
+            return jsonify({"error": f"Data for year {year} not found"}), 404
+            
+        df = pd.read_parquet(file_path)
         
         if 'date' in df.columns:
             df['date'] = pd.to_datetime(df['date'])
-            if year:
-                df = df[df['date'].dt.year == year]
         
-        # Filter by Region (PLZ2)
-        # Ensure string comparison
-        df['region_plz2'] = df['region_plz2'].astype(str)
-        df = df[df['region_plz2'] == str(plz)]
+        # Filter by Region using rounded lat/lon (matching regional data grid)
+        # Round to 0.1 to match the grid used in regional aggregation
+        target_lat = round(lat, 1)
+        target_lon = round(lon, 1)
+        
+        df['lat_rounded'] = df['lat'].round(1)
+        df['lon_rounded'] = df['lon'].round(1)
+        df = df[(df['lat_rounded'] == target_lat) & (df['lon_rounded'] == target_lon)]
 
         if df.empty:
             return jsonify([])

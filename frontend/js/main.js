@@ -1,6 +1,7 @@
 import { OverviewPage } from './pages/OverviewPage.js';
 import { TrendsPage } from './pages/TrendsPage.js';
 import { CrisisPage } from './pages/CrisisPage.js';
+import { UkrainePage } from './pages/UkrainePage.js';
 import { RegionalPage } from './pages/RegionalPage.js';
 import { StateManager } from './utils/StateManager.js';
 
@@ -20,6 +21,7 @@ class App {
         await this.renderSection('overview', OverviewPage);
         await this.renderSection('trends', TrendsPage);
         await this.renderSection('analysis', CrisisPage);
+        await this.renderSection('ukraine', UkrainePage);
         await this.renderSection('map', RegionalPage);
 
         // Setup Router
@@ -42,7 +44,7 @@ class App {
     handleRoute() {
         // Get Hash or Default to #overview
         let hash = window.location.hash.slice(1) || 'overview';
-        const validRoutes = ['overview', 'trends', 'analysis', 'map'];
+        const validRoutes = ['overview', 'trends', 'analysis', 'ukraine', 'map'];
 
         if (!validRoutes.includes(hash)) {
             hash = 'overview';

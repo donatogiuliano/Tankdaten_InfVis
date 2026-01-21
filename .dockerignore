@@ -1,0 +1,8 @@
+
+.git
+.venv
+backend/data/tankerkoenig_historic
+backend/data/excel_exports
+__pycache__
+*.pyc
+*.pyo

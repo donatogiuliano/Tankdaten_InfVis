@@ -2,8 +2,9 @@
 export class UkrainePage {
     constructor() {
         this.data = null;
-        this.selectedFuel = 'diesel'; // Default to Diesel for Ukraine crisis context
-        this.pinnedBubble = null; // State for pinned tooltip
+        this.selectedFuel = 'diesel';
+        this.pinnedBubble = null;
+        this.resizeObserver = null;
     }
 
     async render(container) {
@@ -18,7 +19,7 @@ export class UkrainePage {
         container.innerHTML = `
             <div class="ukraine-page" style="padding: 1.5rem; height: 100%; display: flex; flex-direction: column; box-sizing: border-box; overflow-y: auto;">
                 
-                <!-- Header (Light Theme - matching CrisisPage) -->
+                <!-- Header (Light Theme) -->
                 <div style="margin-bottom: 1rem;">
                     <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span style="font-size: 1.8rem;">⚔️</span> Ukraine-Schock 2022
@@ -116,7 +117,6 @@ export class UkrainePage {
                     this.renderBubbles();
                     this.updateStats();
                     
-                    // Add resize observer to re-render on container size change
                     if (!this.resizeObserver) {
                         this.resizeObserver = new ResizeObserver(() => {
                             if (this.data) {
@@ -128,7 +128,7 @@ export class UkrainePage {
                             this.resizeObserver.observe(chartContainer);
                         }
                     }
-                }, 200); // Increased timeout for proper sizing
+                }, 200);
             });
         } catch (e) {
             console.error(e);
@@ -145,35 +145,29 @@ export class UkrainePage {
         chartContainer.innerHTML = '';
         const tooltip = this.container.querySelector('#bubble-tooltip');
 
-        // Filter and process data
         const fuelData = this.data.filter(d => d.fuel === this.selectedFuel);
         const parseDate = d3.timeParse('%Y-%m-%d');
         fuelData.forEach(d => d.parsedDate = parseDate(d.date));
         fuelData.sort((a, b) => a.parsedDate - b.parsedDate);
 
-        // Dimensions
         const margin = { top: 40, right: 30, bottom: 50, left: 60 };
         const width = (chartContainer.clientWidth || 800) - margin.left - margin.right;
         const height = (chartContainer.clientHeight || 400) - margin.top - margin.bottom;
 
-        // X Scale (Year 2022)
         const x = d3.scaleTime()
             .domain([new Date(2022, 0, 1), new Date(2022, 11, 31)])
             .range([0, width]);
 
-        // Y Scale (Price)
         const minPrice = d3.min(fuelData, d => d.price_mean);
         const maxPrice = d3.max(fuelData, d => d.price_mean);
         const y = d3.scaleLinear()
             .domain([minPrice * 0.9, maxPrice * 1.1])
             .range([height, 0]);
 
-        // Bubble size based on price - BIGGER bubbles
         const radiusScale = d3.scaleLinear()
             .domain([minPrice, maxPrice])
             .range([12, 45]);
 
-        // Color scale: Green (Cheap) -> Yellow (Mid) -> Red (Exp)
         const colorScale = d3.scaleLinear()
             .domain([1.70, 1.95, 2.20])
             .range(['#43a047', '#ffc107', '#e53935'])
@@ -184,14 +178,12 @@ export class UkrainePage {
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
             .on('click', () => {
-                // Click on background closes pinned tooltip
                 this.pinnedBubble = null;
                 tooltip.style.display = 'none';
             })
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-        // Render Bubbles
         const bubbles = svg.selectAll('circle')
             .data(fuelData)
             .enter()
@@ -199,21 +191,19 @@ export class UkrainePage {
             .attr('class', 'bubble')
             .attr('cx', d => x(d.parsedDate))
             .attr('cy', d => y(d.price_mean))
-            .attr('r', 0) // Start with 0 for animation
+            .attr('r', 0)
             .attr('fill', d => colorScale(d.price_mean))
             .attr('stroke', 'white')
             .attr('stroke-width', 2)
             .style('opacity', 0.85);
 
-        // Animate Bubbles In
         bubbles.transition()
             .duration(800)
             .delay((d, i) => i * 5)
             .attr('r', d => radiusScale(d.price_mean));
 
-        // Interaction
         bubbles.on('mouseenter', (event, d) => {
-            if (this.pinnedBubble) return; // Don't show hover if pinned
+            if (this.pinnedBubble) return;
             d3.select(event.currentTarget).style('stroke', '#333');
             this.showTooltip(d, tooltip, x, y, margin, colorScale);
         })
@@ -226,17 +216,14 @@ export class UkrainePage {
         .on('click', (event, d) => {
             event.stopPropagation();
             if (this.pinnedBubble === d) {
-                // Unpin if clicking same bubble
                 this.pinnedBubble = null;
                 tooltip.style.display = 'none';
             } else {
-                // Pin this bubble
                 this.pinnedBubble = d;
                 this.showTooltip(d, tooltip, x, y, margin, colorScale);
             }
         });
 
-        // Event Lines
         const parseEventDate = d3.timeParse('%Y-%m-%d');
         this.events.forEach(e => {
             const date = parseEventDate(e.date);
@@ -269,7 +256,6 @@ export class UkrainePage {
                 .text(e.label);
         });
 
-        // Axes
         svg.append('g')
             .attr('transform', `translate(0,${height})`)
             .call(d3.axisBottom(x).ticks(d3.timeMonth.every(3)).tickFormat(d3.timeFormat('%b')))
@@ -319,7 +305,7 @@ export class UkrainePage {
         const animate = (currentTime) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 3); // Cubic ease out
+            const ease = 1 - Math.pow(1 - progress, 3);
             
             const current = start + (target - start) * ease;
             el.innerHTML = `${prefix}${current.toFixed(decimals)}${suffix}`;
@@ -333,7 +319,6 @@ export class UkrainePage {
     }
 
     destroy() {
-        // Cleanup resize observer
         if (this.resizeObserver) {
             this.resizeObserver.disconnect();
             this.resizeObserver = null;

@@ -4,7 +4,7 @@ export class MarketPhasesPage {
         this.container = null;
         this.data = null;
         this.meta = null;
-        
+
         // Default State
         this.state = {
             year: 2022,
@@ -37,11 +37,11 @@ export class MarketPhasesPage {
             <div class="market-phases-page" style="padding: 1.5rem; height: 100%; display: flex; flex-direction: column; overflow-y: auto;">
                 
                 <!-- Header -->
-                <div style="margin-bottom: 1.5rem;">
-                    <h1 style="margin: 0 0 0.5rem 0; display: flex; align-items: center; gap: 0.5rem;">
-                        <span>📊</span> Marktphasen-Analyse
+                <div style="margin-bottom: 1rem;">
+                    <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.8rem;">📊</span> Marktphasen-Analyse
                     </h1>
-                    <p style="margin: 0; color: #666; font-size: 0.95rem;">
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">
                         Erkennt Marktstabilität, Asymmetrien und Volatilität basierend auf Ölpreis-Dynamik.
                     </p>
                 </div>
@@ -151,13 +151,13 @@ export class MarketPhasesPage {
 
         fetch('js/data/plz3_cities.json')
             .then(r => r.json())
-            .then(data => { 
-                plzMap = data; 
-                
+            .then(data => {
+                plzMap = data;
+
                 // Build Datastore & Reverse Map
                 const datalist = this.container.querySelector('#mp-city-list');
                 const uniqueCities = new Set();
-                
+
                 Object.entries(data).forEach(([plz, city]) => {
                     // Reverse Map: Keep first PLZ found for a city (simplification)
                     if (!cityToPlz[city]) cityToPlz[city] = plz;
@@ -176,25 +176,25 @@ export class MarketPhasesPage {
         const update = () => {
             this.state.year = this.container.querySelector('#mp-year').value;
             this.state.fuel = this.container.querySelector('#mp-fuel').value;
-            
+
             // City Input Resolution
             const cityInput = this.container.querySelector('#mp-city-input').value.trim();
             const regionHidden = this.container.querySelector('#mp-region');
-            
+
             // Logic: 
             // 1. Check if input matches a City Name -> use Reverse Map
             // 2. Check if input is a PLZ (fallback) -> use it directly
             // 3. Else -> Empty (All regions)
-            
+
             if (cityToPlz[cityInput]) {
                 this.state.region = cityToPlz[cityInput];
             } else if (cityInput.match(/^\d+$/)) {
                 // User typed PLZ directly
-                this.state.region = cityInput; 
+                this.state.region = cityInput;
             } else {
-                 this.state.region = ''; // Reset if invalid
+                this.state.region = ''; // Reset if invalid
             }
-            
+
             // Debug viz (optional)
             // console.log(`Searching for: ${cityInput} -> PLZ: ${this.state.region}`);
 
@@ -204,7 +204,7 @@ export class MarketPhasesPage {
         const toggles = () => {
             this.state.showOil = this.container.querySelector('#mp-toggle-oil').checked;
             this.state.showBand = this.container.querySelector('#mp-toggle-band').checked;
-            
+
             // Phase Toggles
             this.state.showPhaseGleichlauf = this.container.querySelector('#mp-toggle-p-gleichlauf').checked;
             this.state.showPhaseAsymmetrie = this.container.querySelector('#mp-toggle-p-asymmetrie').checked;
@@ -215,14 +215,14 @@ export class MarketPhasesPage {
 
         this.container.querySelector('#mp-year').addEventListener('change', update);
         this.container.querySelector('#mp-fuel').addEventListener('change', update);
-        
+
         // Use 'change' for datalist selection + 'input' with debounce could be nice, but 'change' is safer for now
         this.container.querySelector('#mp-city-input').addEventListener('change', update);
         this.container.querySelector('#mp-city-input').addEventListener('blur', update); // Ensure update on leave
 
         this.container.querySelector('#mp-toggle-oil').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-band').addEventListener('change', toggles);
-        
+
         // New Phase Toggles
         this.container.querySelector('#mp-toggle-p-gleichlauf').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-p-asymmetrie').addEventListener('change', toggles);
@@ -242,7 +242,7 @@ export class MarketPhasesPage {
 
             const res = await fetch(`/api/data/market-phases?${params.toString()}`);
             if (!res.ok) throw new Error('Fehler beim Laden der Daten');
-            
+
             const json = await res.json();
             this.data = json.timeseries;
             this.meta = json.phases; // Phasen-Intervalle
@@ -292,7 +292,7 @@ export class MarketPhasesPage {
 
         const yFuel = d3.scaleLinear()
             .domain([
-                d3.min(this.data, d => d.price_mean) * 0.95, 
+                d3.min(this.data, d => d.price_mean) * 0.95,
                 d3.max(this.data, d => d.price_mean) * 1.05
             ])
             .range([height, 0]);
@@ -408,7 +408,7 @@ export class MarketPhasesPage {
                 .attr('class', 'volatility-band')
                 .attr('d', areaBand);
         }
-        
+
         // Handling "No Oil Data" Warning
         if (!this.metaData.oil_available) {
             svg.append('text')

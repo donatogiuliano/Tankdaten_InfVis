@@ -24,12 +24,19 @@ export class RegionalPage {
             <div style="display: flex; flex-direction: column; height: 100%; padding: 1rem; padding-bottom: 0.5rem; box-sizing: border-box;">
                 
                 <!-- New Header -->
-                <div class="dashboard-header" style="flex: 0 0 auto; padding: 0.5rem 0; margin-bottom: 0.5rem; display:flex; align-items:center; gap: 0.75rem;">
-                    <div class="flag-de" title="Germany"></div>
-                    <h1 style="margin:0; font-size:1.25rem;">Regional-Vergleich</h1>
-                    
+                <!-- New Header -->
+                <div class="dashboard-header" style="flex: 0 0 auto; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 1.8rem;">🇩🇪</span> Regional-Vergleich
+                        </h1>
+                        <p style="margin: 0; color: #666; font-size: 0.9rem;">
+                            Regionale Preisunterschiede auf PLZ3-Ebene analysieren und vergleichen.
+                        </p>
+                    </div>
+
                     <!-- A11y Toggle (Top Right) -->
-                    <button id="a11y-toggle" style="margin-left: auto; background: #fff; border: 2px solid #333; border-radius: 4px; padding: 4px 12px; font-size: 0.9rem; color: #000; cursor: pointer; font-weight: 700; display:flex; align-items:center; gap:8px;" title="Barrierefreie Farben aktivieren">
+                    <button id="a11y-toggle" style="background: #fff; border: 2px solid #333; border-radius: 4px; padding: 4px 12px; font-size: 0.9rem; color: #000; cursor: pointer; font-weight: 700; display:flex; align-items:center; gap:8px;" title="Barrierefreie Farben aktivieren">
                         <span class="state-icon" style="font-size:1.2em; line-height:1;">☐</span>
                         <span style="font-size:1.3em; line-height:1;">◐</span>
                         Barrierefrei

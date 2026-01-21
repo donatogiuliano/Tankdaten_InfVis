@@ -5,6 +5,7 @@ import pandas as pd
 import os
 import glob
 import json
+from market_phases import calculate_market_phases
 
 app = Flask(__name__, static_folder="../frontend", static_url_path="/")
 CORS(app)
@@ -233,6 +234,28 @@ def get_region_history():
         return jsonify(pivot.to_dict(orient='records'))
 
     except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/data/market-phases')
+def get_market_phases_route():
+    try:
+        year = request.args.get('year', default=2024, type=int)
+        fuel = request.args.get('fuel', default='e10', type=str)
+        region = request.args.get('region', type=str) # Optional PLZ3
+
+        # Read Data
+        file_path = os.path.join(DATA_DIR, f'data_daily_{year}.parquet')
+        if not os.path.exists(file_path):
+            return jsonify({"error": f"Data for year {year} not found"}), 404
+            
+        df = pd.read_parquet(file_path)
+        
+        # Calculate Phases
+        result = calculate_market_phases(df, fuel=fuel, region=region)
+        
+        return jsonify(result)
+    except Exception as e:
+        print(f"Error in market phases: {e}") 
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':

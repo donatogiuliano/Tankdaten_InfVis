@@ -3,6 +3,7 @@ import { TrendsPage } from './pages/TrendsPage.js';
 import { CrisisPage } from './pages/CrisisPage.js';
 import { UkrainePage } from './pages/UkrainePage.js';
 import { RegionalPage } from './pages/RegionalPage.js';
+import { MarketPhasesPage } from './pages/MarketPhasesPage.js';
 import { StateManager } from './utils/StateManager.js';
 
 window.state = new StateManager();
@@ -22,6 +23,11 @@ class App {
         await this.renderSection('trends', TrendsPage);
         await this.renderSection('analysis', CrisisPage);
         await this.renderSection('ukraine', UkrainePage);
+        try {
+            await this.renderSection('phases', MarketPhasesPage);
+        } catch (e) {
+            console.error("Failed to load MarketPhasesPage", e);
+        }
         await this.renderSection('map', RegionalPage);
 
         // Setup Router
@@ -42,9 +48,9 @@ class App {
     }
 
     handleRoute() {
-        // Get Hash or Default to #trends
-        let hash = window.location.hash.slice(1) || 'trends';
-        const validRoutes = ['trends', 'analysis', 'ukraine', 'map'];
+        // Get Hash or Default to #overview
+        let hash = window.location.hash.slice(1) || 'overview';
+        const validRoutes = ['overview', 'trends', 'analysis', 'ukraine', 'phases', 'map'];
 
         if (!validRoutes.includes(hash)) {
             hash = 'trends';

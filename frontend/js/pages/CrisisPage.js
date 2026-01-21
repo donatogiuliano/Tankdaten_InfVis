@@ -1,15 +1,18 @@
 import { CrisisChart } from '../components/CrisisChart.js';
+import { state } from '../state.js';
 
 export class CrisisPage {
     constructor() {
         this.data = null;
-        this.selectedFuel = 'e10';
+        this.selectedFuel = state.get('fuelType') || 'e10';
         this.resizeObserver = null;
         this.chart = null;
     }
 
     async render(container) {
         this.container = container;
+        // Sync state
+        this.selectedFuel = state.get('fuelType') || 'e10';
 
         // Corona-Event Markers
         this.coronaEvents = [
@@ -33,10 +36,10 @@ export class CrisisPage {
 
                 <!-- Controls -->
                 <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap;">
-                    <div style="display: flex; gap: 0.5rem; background: #f0f2f5; padding: 4px; border-radius: 8px;">
-                        <button class="fuel-btn active" data-fuel="e5" style="border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s;">Super E5</button>
-                        <button class="fuel-btn" data-fuel="e10" style="border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s;">E10</button>
-                        <button class="fuel-btn" data-fuel="diesel" style="border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s;">Diesel</button>
+                    <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
+                        <button class="fuel-btn ${this.selectedFuel === 'e5' ? 'active' : ''}" data-fuel="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
+                        <button class="fuel-btn ${this.selectedFuel === 'e10' ? 'active' : ''}" data-fuel="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
+                        <button class="fuel-btn ${this.selectedFuel === 'diesel' ? 'active' : ''}" data-fuel="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
                     </div>
                     
                     <div style="display: flex; gap: 1rem; margin-left: auto;">
@@ -66,8 +69,8 @@ export class CrisisPage {
             
             <style>
                 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-                .fuel-btn:hover { background: rgba(0,0,0,0.05); }
-                .fuel-btn.active { background: #333; color: white; }
+                .fuel-btn:hover { background-color: rgba(0,0,0,0.05); }
+                .fuel-btn.active { background-color: #333; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
                 .stat-card { background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
                 .stat-card .label { font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 0.25rem; }
                 .stat-card .value { font-size: 1.5rem; font-weight: 700; }
@@ -85,10 +88,29 @@ export class CrisisPage {
             btn.addEventListener('click', () => {
                 fuelBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                btn.classList.add('active');
                 this.selectedFuel = btn.dataset.fuel;
+                state.set('fuelType', this.selectedFuel);
                 this.renderChart();
                 this.renderStats();
             });
+        });
+
+        // Global State Subscription
+        state.subscribe((s, key, value) => {
+            if (key === 'fuelType') {
+                // Update Buttons UI
+                const btns = this.container.querySelectorAll('.fuel-btn');
+                btns.forEach(b => {
+                    if (b.dataset.fuel === value) b.classList.add('active');
+                    else b.classList.remove('active');
+                });
+
+                // Update Internal State & Reload
+                this.selectedFuel = value;
+                this.renderChart();
+                this.renderStats();
+            }
         });
     }
 

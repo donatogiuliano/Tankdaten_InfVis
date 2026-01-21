@@ -1,9 +1,10 @@
 import { UkraineBubbleChart } from '../components/UkraineBubbleChart.js';
+import { state } from '../state.js';
 
 export class UkrainePage {
     constructor() {
         this.data = null;
-        this.selectedFuel = 'diesel';
+        this.selectedFuel = state.get('fuelType') || 'diesel'; // Default override might need to be e10 but Keeping diesel if preferred, or using state default
         this.pinnedBubble = null;
         this.resizeObserver = null;
         this.chart = null;
@@ -11,6 +12,9 @@ export class UkrainePage {
 
     async render(container) {
         this.container = container;
+        // Sync state
+        this.selectedFuel = state.get('fuelType') || 'diesel';
+
         this.events = [
             { date: '2022-02-24', label: 'Kriegsausbruch', color: '#d32f2f', icon: '⚔️' },
             { date: '2022-03-10', label: 'Rekordpreis', color: '#7b1fa2', icon: '📈' },
@@ -33,10 +37,10 @@ export class UkrainePage {
 
                 <!-- Controls + Legend with Prices -->
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
-                    <div style="display: flex; gap: 0.5rem; background: #f0f2f5; padding: 4px; border-radius: 8px;">
-                        <button class="fuel-btn active" data-fuel="diesel" style="border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s;">Diesel</button>
-                        <button class="fuel-btn" data-fuel="e10" style="border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s;">E10</button>
-                        <button class="fuel-btn" data-fuel="e5" style="border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s;">Super E5</button>
+                    <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
+                        <button class="fuel-btn ${this.selectedFuel === 'e5' ? 'active' : ''}" data-fuel="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
+                        <button class="fuel-btn ${this.selectedFuel === 'e10' ? 'active' : ''}" data-fuel="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
+                        <button class="fuel-btn ${this.selectedFuel === 'diesel' ? 'active' : ''}" data-fuel="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
                     </div>
                     
                     <!-- Legend with price ranges -->
@@ -81,8 +85,8 @@ export class UkrainePage {
             </div>
             
             <style>
-                .fuel-btn:hover { background: rgba(0,0,0,0.05); }
-                .fuel-btn.active { background: #333; color: white; }
+                .fuel-btn:hover { background-color: rgba(0,0,0,0.05); }
+                .fuel-btn.active { background-color: #333; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
                 .bubble { cursor: pointer; transition: transform 0.2s, filter 0.2s; }
                 .bubble:hover { transform: scale(1.3); filter: brightness(1.2); }
             </style>
@@ -99,9 +103,27 @@ export class UkrainePage {
                 fuelBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 this.selectedFuel = btn.dataset.fuel;
+                state.set('fuelType', this.selectedFuel);
                 this.renderBubbles();
                 this.updateStats();
             });
+        });
+
+        // Global State Subscription
+        state.subscribe((s, key, value) => {
+            if (key === 'fuelType') {
+                // Update Buttons UI
+                const btns = this.container.querySelectorAll('.fuel-btn');
+                btns.forEach(b => {
+                    if (b.dataset.fuel === value) b.classList.add('active');
+                    else b.classList.remove('active');
+                });
+
+                // Update Internal State & Reload
+                this.selectedFuel = value;
+                this.renderBubbles();
+                this.updateStats();
+            }
         });
     }
 

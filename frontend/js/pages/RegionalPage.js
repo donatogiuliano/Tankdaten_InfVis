@@ -48,45 +48,41 @@ export class RegionalPage {
                     </button>
                 </div>
 
-                <!-- Map Card -->
-                <div class="card full-width" style="flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: white;">
-
-                    <!-- New Controls Bar -->
-                    <div class="map-controls" style="flex: 0 0 auto; margin-bottom: 0.5rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: #fff; padding: 0.5rem; border-radius: 4px; border: 1px solid #eee;">
-
-                        <!-- 1. Year Input (Text) -->
-                        <div class="control-group">
-                            <label style="font-size:0.75rem; color:#888; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:2px;">Jahr</label>
-                            <input type="number" id="regional-year-input" value="${savedYear}" min="2014" max="${currentYear}" 
-                                   style="font-size: 1rem; font-weight: 600; padding: 2px 6px; border: 1px solid #ddd; border-radius: 6px; width: 80px; text-align: center;">
+                <!-- Controls -->
+                <div class="controls-bar" style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
+                    
+                    <!-- 1. Fuel Selector (Buttons) - First Position -->
+                    <div class="control-group">
+                        <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
+                            <button class="fuel-btn ${savedFuel === 'e5' ? 'active' : ''}" data-value="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
+                            <button class="fuel-btn ${savedFuel === 'e10' ? 'active' : ''}" data-value="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
+                            <button class="fuel-btn ${savedFuel === 'diesel' ? 'active' : ''}" data-value="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
                         </div>
-
-                        <!-- 2. Month Stepper -->
-                        <div class="control-group">
-                            <label style="font-size:0.75rem; color:#888; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:2px;">Monat</label>
-                            <div class="stepper" style="display:flex; align-items:center; gap: 0.5rem; background: #f9f9f9; padding: 2px; border-radius: 8px; border: 1px solid #eee;">
-                                <button id="month-prev" class="stepper-btn" style="border:none; background:transparent; cursor:pointer; padding: 2px 8px; font-weight:bold; color:#555;">&lt;</button>
-                                <span id="month-display" style="min-width: 80px; text-align:center; font-weight:600; font-size: 0.95rem; user-select:none;">${monthNames[savedMonth]}</span>
-                                <input type="hidden" id="regional-month-val" value="${savedMonth}">
-                                <button id="month-next" class="stepper-btn" style="border:none; background:transparent; cursor:pointer; padding: 2px 8px; font-weight:bold; color:#555;">&gt;</button>
-                            </div>
-                        </div>
-
-                        <!-- 3. Fancy Fuel Selector -->
-                        <div class="control-group">
-                            <label style="font-size:0.75rem; color:#888; text-transform:uppercase; letter-spacing:0.5px; display:block; margin-bottom:2px;">Sorte</label>
-                            <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 8px;">
-                                <button class="fuel-btn ${savedFuel === 'e5' ? 'active' : ''}" data-value="e5" style="border:none; padding: 4px 12px; border-radius: 6px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
-                                <button class="fuel-btn ${savedFuel === 'e10' ? 'active' : ''}" data-value="e10" style="border:none; padding: 4px 12px; border-radius: 6px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
-                                <button class="fuel-btn ${savedFuel === 'diesel' ? 'active' : ''}" data-value="diesel" style="border:none; padding: 4px 12px; border-radius: 6px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
-                            </div>
-                        </div>
-                        
-                        <span id="map-status" style="font-size: 0.85rem; color: #999; margin-left: auto;"></span>
                     </div>
 
-                <!-- Comparison Dock removed (Now dynamic) -->
+                    <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
 
+                    <!-- 2. Year Input -->
+                    <div class="control-group">
+                        <input type="number" id="regional-year-input" value="${savedYear}" min="2014" max="${currentYear}" 
+                               style="font-size: 0.95rem; font-weight: 600; padding: 6px; border: 1px solid #ddd; border-radius: 4px; width: 80px;">
+                    </div>
+
+                    <!-- 3. Month Stepper -->
+                    <div class="control-group">
+                        <div class="stepper" style="display:flex; align-items:center; gap: 0.25rem; background: #fff; padding: 0; border-radius: 4px;">
+                            <button id="month-prev" class="stepper-btn" style="border:1px solid #ddd; background:#fff; cursor:pointer; padding: 5px 10px; font-weight:bold; color:#555; border-radius: 4px 0 0 4px;">&lt;</button>
+                            <span id="month-display" style="min-width: 90px; text-align:center; font-weight:500; font-size: 0.95rem; border: 1px solid #ddd; border-left: none; border-right: none; padding: 5px 0;">${monthNames[savedMonth]}</span>
+                            <input type="hidden" id="regional-month-val" value="${savedMonth}">
+                            <button id="month-next" class="stepper-btn" style="border:1px solid #ddd; background:#fff; cursor:pointer; padding: 5px 10px; font-weight:bold; color:#555; border-radius: 0 4px 4px 0;">&gt;</button>
+                        </div>
+                    </div>
+                    
+                    <span id="map-status" style="font-size: 0.85rem; color: #999; margin-left: auto;"></span>
+                </div>
+
+                <!-- Map Card -->
+                <div class="card full-width" style="flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 0.5rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: white; border: 1px solid #eee;">
                     <div id="map-wrapper" style="flex:1; width: 100%; border-radius: 4px; overflow:hidden; position:relative; z-index: 1;">
                          <div id="regional-map" style="width:100%; height:100%;">
                              <div class="loading">Lade Karte...</div>
@@ -109,7 +105,7 @@ export class RegionalPage {
             }
             .fuel-btn:hover { background-color: rgba(0,0,0,0.05); }
             .fuel-btn.active { background-color: #333; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-            .stepper-btn:hover { background-color: #eee; border-radius: 4px; }
+            .stepper-btn:hover { background-color: #f5f5f5; }
             #regional-year-input:focus { outline: none; border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26,115,232,0.2); }
             #a11y-toggle { border: 2px solid #333; color: #000; background: #fff; font-weight: 800; border-radius: 4px; }
             #a11y-toggle:hover { background: #f0f0f0; }
@@ -190,6 +186,21 @@ export class RegionalPage {
                     state.set('fuelType', fuel);
                     this.updateMap();
                 });
+            });
+
+            // Global State Subscription
+            state.subscribe((s, key, value) => {
+                if (key === 'fuelType') {
+                    // Update Buttons UI
+                    const btns = this.container.querySelectorAll('.fuel-btn');
+                    btns.forEach(b => {
+                        if (b.dataset.value === value) b.classList.add('active');
+                        else b.classList.remove('active');
+                    });
+
+                    // Trigger map update
+                    this.updateMap();
+                }
             });
 
             // --- A11y Logic ---

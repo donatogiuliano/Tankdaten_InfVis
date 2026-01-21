@@ -1,4 +1,5 @@
 import { MarketPhasesChart } from '../components/MarketPhasesChart.js';
+import { state } from '../state.js';
 
 export class MarketPhasesPage {
     constructor() {
@@ -11,7 +12,7 @@ export class MarketPhasesPage {
         // Default State
         this.state = {
             year: 2022,
-            fuel: 'e10',
+            fuel: state.get('fuelType') || 'e10',
             region: '',
             showOil: false,
             // Phase Toggles
@@ -36,6 +37,9 @@ export class MarketPhasesPage {
 
     async render(container) {
         this.container = container;
+        // Sync state from global
+        this.state.fuel = state.get('fuelType') || 'e10';
+
         this.container.innerHTML = `
             <div class="market-phases-page" style="padding: 1.5rem; height: 100%; display: flex; flex-direction: column; overflow-y: auto;">
                 
@@ -66,19 +70,24 @@ export class MarketPhasesPage {
 
                     <div class="control-group">
                         <label style="font-size: 0.8rem; font-weight: 600; color: #555; display: block; margin-bottom: 4px;">Kraftstoff</label>
-                        <select id="mp-fuel" style="padding: 6px; border-radius: 4px; border: 1px solid #ddd;">
-                            <option value="e5">Super E5</option>
-                            <option value="e10" selected>Super E10</option>
-                            <option value="diesel">Diesel</option>
-                        </select>
+                        <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
+                            <button class="fuel-btn ${this.state.fuel === 'e5' ? 'active' : ''}" data-value="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
+                            <button class="fuel-btn ${this.state.fuel === 'e10' ? 'active' : ''}" data-value="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
+                            <button class="fuel-btn ${this.state.fuel === 'diesel' ? 'active' : ''}" data-value="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
+                        </div>
                     </div>
+                    
+                    <style>
+                        .fuel-btn:hover { background-color: rgba(0,0,0,0.05); }
+                        .fuel-btn.active { background-color: #333; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+                    </style>
 
                     <div class="control-group">
                         <label style="font-size: 0.8rem; font-weight: 600; color: #555; display: block; margin-bottom: 4px;">Stadt / Region</label>
-                        <input type="text" id="mp-city-input" list="mp-city-list" placeholder="Stadt eingeben..." style="padding: 6px; border-radius: 4px; border: 1px solid #ddd; width: 140px;">
-                        <datalist id="mp-city-list"></datalist>
-                        <!-- Hidden storage for the actual PLZ sent to API -->
-                        <input type="hidden" id="mp-region" value="">
+                        <div style="position: relative;">
+                             <input type="text" id="mp-city-input" placeholder="Stadt eingeben..." style="padding: 6px; border-radius: 4px; border: 1px solid #ddd; width: 140px;">
+                             <!-- No Datalist -->
+                        </div>
                     </div>
 
                     <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
@@ -117,14 +126,11 @@ export class MarketPhasesPage {
                 </div>
 
                 <!-- Chart Container -->
-                <div class="chart-card" style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; min-height: 400px; position: relative; display: flex; flex-direction: column;">
+                <div class="chart-card" id="mp-chart-container" style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; min-height: 400px; position: relative; display: flex; flex-direction: column;">
                     <div id="mp-chart" style="width: 100%; flex: 1; position: relative;"></div>
                     
-                    <!-- Tooltip left for safety, though Component might create its own if missing -->
-                    <div id="mp-tooltip" style="position: absolute; display: none; background: rgba(255,255,255,0.95); color: #333; padding: 12px; border-radius: 8px; font-size: 0.85rem; pointer-events: none; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: 1px solid #eee; min-width: 200px;"></div>
-
-                    <!-- Legend -->
-                    <div style="margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.8rem; color: #666; border-top: 1px solid #eee; padding-top: 1rem;">
+                    <!-- Legend (Only visible when data is loaded) -->
+                    <div id="mp-legend" style="margin-top: 1rem; display: none; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.8rem; color: #666; border-top: 1px solid #eee; padding-top: 1rem;">
                         <!-- Data Series -->
                         <div style="display: flex; align-items: center; gap: 6px;">
                             <span style="width: 20px; height: 3px; background: ${this.colors.fuel};"></span>
@@ -144,82 +150,142 @@ export class MarketPhasesPage {
         `;
 
         this.bindEvents();
-        this.loadData();
     }
 
     bindEvents() {
-        // PLZ Mapping: Statische Datei laden & Datalist befüllen
-        let plzMap = {}; // PLZ -> City
-        let cityToPlz = {}; // City -> PLZ (Reverse Map)
+        // PLZ Mapping
+        let cityToPlz = {}; // City -> PLZ
 
         fetch('js/data/plz3_cities.json')
             .then(r => r.json())
             .then(data => {
-                plzMap = data;
-
-                // Build Datastore & Reverse Map
-                const datalist = this.container.querySelector('#mp-city-list');
-                const uniqueCities = new Set();
-
+                // Build Reverse Map lowercased for case-insensitive search
                 Object.entries(data).forEach(([plz, city]) => {
-                    // Reverse Map: Keep first PLZ found for a city (simplification)
-                    if (!cityToPlz[city]) cityToPlz[city] = plz;
-                    uniqueCities.add(city);
+                    const c = city.trim();
+                    if (!cityToPlz[c.toLowerCase()]) cityToPlz[c.toLowerCase()] = plz;
                 });
 
-                // Sort and populate datalist
-                Array.from(uniqueCities).sort().forEach(city => {
-                    const option = document.createElement('option');
-                    option.value = city;
-                    datalist.appendChild(option);
-                });
+                // Default to Stuttgart
+                const input = this.container.querySelector('#mp-city-input');
+                if (input) {
+                    input.value = 'Stuttgart';
+                    // Trigger initial load
+                    update();
+                }
             })
             .catch(e => console.warn('Konnte PLZ-Mapping nicht laden', e));
 
         const update = () => {
+            if (!this.container) return; // Safety check
+
             this.state.year = this.container.querySelector('#mp-year').value;
-            this.state.fuel = this.container.querySelector('#mp-fuel').value;
+            this.state.year = this.container.querySelector('#mp-year').value;
+            // this.state.fuel updated by buttons
 
-            // City Input Resolution
-            const cityInput = this.container.querySelector('#mp-city-input').value.trim();
-            // const regionHidden = this.container.querySelector('#mp-region');
+            // City Input validation
+            const inputField = this.container.querySelector('#mp-city-input');
+            const cityInputRaw = inputField.value.trim();
+            const cityInput = cityInputRaw.toLowerCase();
+            const chartDiv = this.container.querySelector('#mp-chart');
+            const legendDiv = this.container.querySelector('#mp-legend');
 
-            // Logic: 
-            if (cityToPlz[cityInput]) {
-                this.state.region = cityToPlz[cityInput];
-            } else if (cityInput.match(/^\d+$/)) {
-                this.state.region = cityInput;
-            } else {
-                this.state.region = ''; // Reset if invalid
+            // Reset UI
+            inputField.style.borderColor = '#ddd';
+            legendDiv.style.display = 'none';
+
+            if (!cityInput) {
+                this.state.region = '';
+                this.renderMessage('Bitte geben Sie eine Stadt ein.', 'info');
+                return;
             }
 
-            this.loadData();
+            if (cityToPlz[cityInput]) {
+                // Determine PLZ
+                this.state.region = cityToPlz[cityInput];
+                // Valid City -> Load Data
+                this.loadData();
+            } else {
+                // Invalid City
+                this.state.region = '';
+                inputField.style.borderColor = 'red';
+                this.renderMessage(`Stadt "${cityInputRaw}" nicht gefunden.`, 'warning');
+            }
         };
 
         const toggles = () => {
             this.state.showOil = this.container.querySelector('#mp-toggle-oil').checked;
             this.state.showBand = this.container.querySelector('#mp-toggle-band').checked;
-
-            // Phase Toggles
             this.state.showPhaseGleichlauf = this.container.querySelector('#mp-toggle-p-gleichlauf').checked;
             this.state.showPhaseAsymmetrie = this.container.querySelector('#mp-toggle-p-asymmetrie').checked;
             this.state.showPhaseVolatility = this.container.querySelector('#mp-toggle-p-volatility').checked;
 
-            this.renderChart();
+            this.renderChart(); // Just re-render chart if data exists
         };
 
         this.container.querySelector('#mp-year').addEventListener('change', update);
-        this.container.querySelector('#mp-fuel').addEventListener('change', update);
+        this.container.querySelector('#mp-year').addEventListener('change', update);
 
-        this.container.querySelector('#mp-city-input').addEventListener('change', update);
-        this.container.querySelector('#mp-city-input').addEventListener('blur', update);
+        // Fuel Buttons Logic
+        const fuelBtns = this.container.querySelectorAll('.fuel-btn');
+        fuelBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update UI
+                fuelBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update State
+                this.state.fuel = btn.dataset.value;
+                state.set('fuelType', this.state.fuel);
+                update();
+            });
+        });
+
+        // Update on Enter or Blur
+        const cityInput = this.container.querySelector('#mp-city-input');
+        cityInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                update();
+            }
+        });
+        cityInput.addEventListener('blur', update);
 
         this.container.querySelector('#mp-toggle-oil').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-band').addEventListener('change', toggles);
-
         this.container.querySelector('#mp-toggle-p-gleichlauf').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-p-asymmetrie').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-p-volatility').addEventListener('change', toggles);
+
+        // Global State Subscription
+        state.subscribe((s, key, value) => {
+            if (key === 'fuelType') {
+                // Update Buttons UI
+                const btns = this.container.querySelectorAll('.fuel-btn');
+                btns.forEach(b => {
+                    if (b.dataset.value === value) b.classList.add('active');
+                    else b.classList.remove('active');
+                });
+
+                // Update Internal State & Reload
+                this.state.fuel = value;
+                update();
+            }
+        });
+    }
+
+    renderMessage(msg, type = 'info') {
+        const chartDiv = this.container.querySelector('#mp-chart');
+        const color = type === 'warning' ? '#d9534f' : '#666';
+        const icon = type === 'warning' ? '⚠️' : 'ℹ️';
+        if (chartDiv) {
+            chartDiv.innerHTML = `
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:${color};">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">${icon}</div>
+                    <div>${msg}</div>
+                </div>`;
+        }
+        // Clear chart instance reference so we don't try to update a destroyed chart
+        this.chart = null;
     }
 
     async loadData() {
@@ -263,11 +329,15 @@ export class MarketPhasesPage {
         if (!this.data || this.data.length === 0) return;
 
         const container = this.container.querySelector('#mp-chart');
+        const legend = this.container.querySelector('#mp-legend');
 
         if (!this.chart) {
             this.chart = new MarketPhasesChart(container, this.colors);
         }
 
         this.chart.update(this.data, this.meta, this.state, this.metaData);
+
+        // Show legend
+        if (legend) legend.style.display = 'flex';
     }
 }

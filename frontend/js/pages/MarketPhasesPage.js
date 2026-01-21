@@ -1,9 +1,12 @@
+import { MarketPhasesChart } from '../components/MarketPhasesChart.js';
 
 export class MarketPhasesPage {
     constructor() {
         this.container = null;
         this.data = null;
         this.meta = null;
+        this.metaData = null;
+        this.chart = null;
 
         // Default State
         this.state = {
@@ -117,7 +120,7 @@ export class MarketPhasesPage {
                 <div class="chart-card" style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; min-height: 400px; position: relative; display: flex; flex-direction: column;">
                     <div id="mp-chart" style="width: 100%; flex: 1; position: relative;"></div>
                     
-                    <!-- Tooltip -->
+                    <!-- Tooltip left for safety, though Component might create its own if missing -->
                     <div id="mp-tooltip" style="position: absolute; display: none; background: rgba(255,255,255,0.95); color: #333; padding: 12px; border-radius: 8px; font-size: 0.85rem; pointer-events: none; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: 1px solid #eee; min-width: 200px;"></div>
 
                     <!-- Legend -->
@@ -141,7 +144,7 @@ export class MarketPhasesPage {
         `;
 
         this.bindEvents();
-        this.loadData(); // Non-blocking load
+        this.loadData();
     }
 
     bindEvents() {
@@ -179,24 +182,16 @@ export class MarketPhasesPage {
 
             // City Input Resolution
             const cityInput = this.container.querySelector('#mp-city-input').value.trim();
-            const regionHidden = this.container.querySelector('#mp-region');
+            // const regionHidden = this.container.querySelector('#mp-region');
 
             // Logic: 
-            // 1. Check if input matches a City Name -> use Reverse Map
-            // 2. Check if input is a PLZ (fallback) -> use it directly
-            // 3. Else -> Empty (All regions)
-
             if (cityToPlz[cityInput]) {
                 this.state.region = cityToPlz[cityInput];
             } else if (cityInput.match(/^\d+$/)) {
-                // User typed PLZ directly
                 this.state.region = cityInput;
             } else {
                 this.state.region = ''; // Reset if invalid
             }
-
-            // Debug viz (optional)
-            // console.log(`Searching for: ${cityInput} -> PLZ: ${this.state.region}`);
 
             this.loadData();
         };
@@ -210,20 +205,18 @@ export class MarketPhasesPage {
             this.state.showPhaseAsymmetrie = this.container.querySelector('#mp-toggle-p-asymmetrie').checked;
             this.state.showPhaseVolatility = this.container.querySelector('#mp-toggle-p-volatility').checked;
 
-            this.renderChart(); // Kein Reload nötig, nur Re-Render
+            this.renderChart();
         };
 
         this.container.querySelector('#mp-year').addEventListener('change', update);
         this.container.querySelector('#mp-fuel').addEventListener('change', update);
 
-        // Use 'change' for datalist selection + 'input' with debounce could be nice, but 'change' is safer for now
         this.container.querySelector('#mp-city-input').addEventListener('change', update);
-        this.container.querySelector('#mp-city-input').addEventListener('blur', update); // Ensure update on leave
+        this.container.querySelector('#mp-city-input').addEventListener('blur', update);
 
         this.container.querySelector('#mp-toggle-oil').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-band').addEventListener('change', toggles);
 
-        // New Phase Toggles
         this.container.querySelector('#mp-toggle-p-gleichlauf').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-p-asymmetrie').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-p-volatility').addEventListener('change', toggles);
@@ -270,154 +263,11 @@ export class MarketPhasesPage {
         if (!this.data || this.data.length === 0) return;
 
         const container = this.container.querySelector('#mp-chart');
-        container.innerHTML = '';
-        const tooltip = this.container.querySelector('#mp-tooltip');
 
-        // Dimensions
-        const margin = { top: 20, right: 60, bottom: 30, left: 50 };
-        const width = container.clientWidth - margin.left - margin.right;
-        const height = container.clientHeight - margin.top - margin.bottom;
-
-        const svg = d3.select(container)
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .append('g')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
-
-        // Scales
-        const x = d3.scaleTime()
-            .domain(d3.extent(this.data, d => d.parsedDate))
-            .range([0, width]);
-
-        const yFuel = d3.scaleLinear()
-            .domain([
-                d3.min(this.data, d => d.price_mean) * 0.95,
-                d3.max(this.data, d => d.price_mean) * 1.05
-            ])
-            .range([height, 0]);
-
-        // Draw Phases Background (Filtered)
-        if (this.meta) {
-            // Filter phases based on state
-            const visiblePhases = this.meta.filter(d => {
-                if (d.phase === 'GLEICHLAUF') return this.state.showPhaseGleichlauf;
-                if (d.phase === 'ASYMMETRIE') return this.state.showPhaseAsymmetrie;
-                if (d.phase === 'INTERNE_VOLATILITÄT') return this.state.showPhaseVolatility;
-                return false;
-            });
-
-            svg.selectAll('.phase-rect')
-                .data(visiblePhases)
-                .enter()
-                .append('rect')
-                .attr('x', d => x(d.startParsed))
-                .attr('width', d => Math.max(2, x(d.endParsed) - x(d.startParsed)))
-                .attr('y', 0)
-                .attr('height', height)
-                .attr('fill', d => this.colors.phase[d.phase] || 'transparent')
-                .on('mouseover', (e, d) => {
-                    tooltip.style.display = 'block';
-                    tooltip.innerHTML = `
-                        <strong>Phase: ${d.phase}</strong><br>
-                        ${d.start_date} bis ${d.end_date}<br>
-                        Dauer: ${d.duration_days} Tage<br>
-                        <div style="margin-top:4px; font-size:0.8em; color:#666;">
-                            Ø Korrelation: ${d.avg_correlation ? d.avg_correlation.toFixed(2) : '-'}<br>
-                            Ø Lag: ${d.avg_lag ? d.avg_lag.toFixed(1) : '-'} Tage
-                        </div>
-                    `;
-                })
-                .on('mousemove', (e) => {
-                    tooltip.style.left = (e.pageX + 15) + 'px';
-                    tooltip.style.top = (e.pageY - 10) + 'px';
-                })
-                .on('mouseout', () => {
-                    tooltip.style.display = 'none';
-                });
+        if (!this.chart) {
+            this.chart = new MarketPhasesChart(container, this.colors);
         }
 
-        // Axes
-        svg.append('g')
-            .attr('transform', `translate(0,${height})`)
-            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')));
-
-        svg.append('g')
-            .call(d3.axisLeft(yFuel).ticks(5))
-            .call(g => g.select('.domain').remove())
-            .call(g => g.selectAll('.tick line').attr('stroke-opacity', 0.1).attr('x2', width)); // Grid lines
-
-        // Add Oil Axis if toggled
-        if (this.state.showOil && this.metaData.oil_available) {
-            const yOil = d3.scaleLinear()
-                .domain([
-                    d3.min(this.data, d => d.brent_oil_eur) * 0.9,
-                    d3.max(this.data, d => d.brent_oil_eur) * 1.1
-                ])
-                .range([height, 0]);
-
-            svg.append('g')
-                .attr('transform', `translate(${width}, 0)`)
-                .call(d3.axisRight(yOil).ticks(5))
-                .call(g => g.selectAll('text').attr('fill', this.colors.oil));
-
-            // Oil Line
-            const lineOil = d3.line()
-                .defined(d => d.brent_oil_eur !== null)
-                .x(d => x(d.parsedDate))
-                .y(d => yOil(d.brent_oil_eur))
-                .curve(d3.curveMonotoneX);
-
-            svg.append('path')
-                .datum(this.data)
-                .attr('fill', 'none')
-                .attr('stroke', this.colors.oil)
-                .attr('stroke-width', 2)
-                .attr('stroke-dasharray', '4,4')
-                .attr('d', lineOil);
-        }
-
-        // Fuel Line (MA7)
-        const lineFuel = d3.line()
-            .defined(d => d.price_ma7 !== null)
-            .x(d => x(d.parsedDate))
-            .y(d => yFuel(d.price_ma7))
-            .curve(d3.curveMonotoneX);
-
-        svg.append('path')
-            .datum(this.data)
-            .attr('fill', 'none')
-            .attr('stroke', this.colors.fuel)
-            .attr('stroke-width', 3)
-            .attr('d', lineFuel);
-
-        // Volatility Band (Mean +/- StdDev)
-        if (this.state.showBand) {
-            const areaBand = d3.area()
-                .defined(d => d.price_mean !== null && d.price_std !== null)
-                .x(d => x(d.parsedDate))
-                .y0(d => yFuel(d.price_mean - d.price_std))
-                .y1(d => yFuel(d.price_mean + d.price_std))
-                // User requested "sharper" look -> Linear instead of MonotoneX
-                .curve(d3.curveLinear);
-
-            svg.append('path')
-                .datum(this.data)
-                .attr('fill', this.colors.band) // Blue transparent (defined in constructor)
-                .attr('stroke', 'none')
-                .attr('class', 'volatility-band')
-                .attr('d', areaBand);
-        }
-
-        // Handling "No Oil Data" Warning
-        if (!this.metaData.oil_available) {
-            svg.append('text')
-                .attr('x', width / 2)
-                .attr('y', height / 2)
-                .attr('text-anchor', 'middle')
-                .attr('fill', '#999')
-                .style('font-size', '1.2rem')
-                .text('⚠️ Keine Ölpreisdaten für dieses Jahr verfügbar');
-        }
+        this.chart.update(this.data, this.meta, this.state, this.metaData);
     }
 }

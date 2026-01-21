@@ -1,0 +1,186 @@
+export class MarketPhasesChart {
+    constructor(container, colors) {
+        this.container = container;
+        this.colors = colors || {
+            fuel: '#1976d2',
+            oil: '#546e7a',
+            band: 'rgba(25, 118, 210, 0.2)',
+            phase: {
+                'GLEICHLAUF': 'rgba(100, 100, 100, 0.1)', // Grau
+                'ASYMMETRIE': 'rgba(229, 57, 53, 0.1)', // Rot
+                'INTERNE_VOLATILITÄT': 'rgba(255, 160, 0, 0.15)' // Orange
+            }
+        };
+
+        // Create Tooltip if missing
+        let tp = d3.select(this.container.parentNode).select('#mp-tooltip');
+        if (tp.empty()) {
+            tp = d3.select(this.container.parentNode).append('div')
+                .attr('id', 'mp-tooltip')
+                .style('position', 'absolute')
+                .style('display', 'none')
+                .style('background', 'rgba(255,255,255,0.95)')
+                .style('border', '1px solid #ddd')
+                .style('padding', '10px')
+                .style('border-radius', '4px')
+                .style('box-shadow', '0 2px 8px rgba(0,0,0,0.1)')
+                .style('font-size', '0.9em')
+                .style('pointer-events', 'none')
+                .style('z-index', '100');
+        }
+        this.tooltip = tp;
+    }
+
+    update(data, meta, state, metaData) {
+        if (!data || data.length === 0) return;
+
+        this.container.innerHTML = '';
+
+        // Dimensions
+        const margin = { top: 20, right: 60, bottom: 30, left: 50 };
+        const width = this.container.clientWidth - margin.left - margin.right;
+        const height = this.container.clientHeight - margin.top - margin.bottom;
+
+        const svg = d3.select(this.container)
+            .append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr('transform', `translate(${margin.left},${margin.top})`);
+
+        // Scales
+        const x = d3.scaleTime()
+            .domain(d3.extent(data, d => d.parsedDate))
+            .range([0, width]);
+
+        const yFuel = d3.scaleLinear()
+            .domain([
+                d3.min(data, d => d.price_mean) * 0.95,
+                d3.max(data, d => d.price_mean) * 1.05
+            ])
+            .range([height, 0]);
+
+        // Draw Phases Background (Filtered)
+        if (meta) {
+            // Filter phases based on state
+            const visiblePhases = meta.filter(d => {
+                if (d.phase === 'GLEICHLAUF') return state.showPhaseGleichlauf;
+                if (d.phase === 'ASYMMETRIE') return state.showPhaseAsymmetrie;
+                if (d.phase === 'INTERNE_VOLATILITÄT') return state.showPhaseVolatility;
+                return false;
+            });
+
+            svg.selectAll('.phase-rect')
+                .data(visiblePhases)
+                .enter()
+                .append('rect')
+                .attr('x', d => x(d.startParsed))
+                .attr('width', d => Math.max(2, x(d.endParsed) - x(d.startParsed)))
+                .attr('y', 0)
+                .attr('height', height)
+                .attr('fill', d => this.colors.phase[d.phase] || 'transparent')
+                .on('mouseover', (e, d) => {
+                    this.tooltip.style('display', 'block');
+                    this.tooltip.html(`
+                        <strong>Phase: ${d.phase}</strong><br>
+                        ${d.start_date} bis ${d.end_date}<br>
+                        Dauer: ${d.duration_days} Tage<br>
+                        <div style="margin-top:4px; font-size:0.8em; color:#666;">
+                            Ø Korrelation: ${d.avg_correlation ? d.avg_correlation.toFixed(2) : '-'}<br>
+                            Ø Lag: ${d.avg_lag ? d.avg_lag.toFixed(1) : '-'} Tage
+                        </div>
+                    `);
+                })
+                .on('mousemove', (e) => {
+                    const [mx, my] = d3.pointer(e, this.container.parentNode);
+                    this.tooltip.style('left', (mx + 15) + 'px')
+                    this.tooltip.style('top', (my + 15) + 'px');
+                })
+                .on('mouseout', () => {
+                    this.tooltip.style('display', 'none');
+                });
+        }
+
+        // Axes
+        svg.append('g')
+            .attr('transform', `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')));
+
+        svg.append('g')
+            .call(d3.axisLeft(yFuel).ticks(5))
+            .call(g => g.select('.domain').remove())
+            .call(g => g.selectAll('.tick line').attr('stroke-opacity', 0.1).attr('x2', width)); // Grid lines
+
+        // Add Oil Axis if toggled
+        if (state.showOil && metaData.oil_available) {
+            const yOil = d3.scaleLinear()
+                .domain([
+                    d3.min(data, d => d.brent_oil_eur) * 0.9,
+                    d3.max(data, d => d.brent_oil_eur) * 1.1
+                ])
+                .range([height, 0]);
+
+            svg.append('g')
+                .attr('transform', `translate(${width}, 0)`)
+                .call(d3.axisRight(yOil).ticks(5))
+                .call(g => g.selectAll('text').attr('fill', this.colors.oil));
+
+            // Oil Line
+            const lineOil = d3.line()
+                .defined(d => d.brent_oil_eur !== null)
+                .x(d => x(d.parsedDate))
+                .y(d => yOil(d.brent_oil_eur))
+                .curve(d3.curveMonotoneX);
+
+            svg.append('path')
+                .datum(data)
+                .attr('fill', 'none')
+                .attr('stroke', this.colors.oil)
+                .attr('stroke-width', 2)
+                .attr('stroke-dasharray', '4,4')
+                .attr('d', lineOil);
+        }
+
+        // Fuel Line (MA7)
+        const lineFuel = d3.line()
+            .defined(d => d.price_ma7 !== null)
+            .x(d => x(d.parsedDate))
+            .y(d => yFuel(d.price_ma7))
+            .curve(d3.curveMonotoneX);
+
+        svg.append('path')
+            .datum(data)
+            .attr('fill', 'none')
+            .attr('stroke', this.colors.fuel)
+            .attr('stroke-width', 3)
+            .attr('d', lineFuel);
+
+        // Volatility Band (Mean +/- StdDev)
+        if (state.showBand) {
+            const areaBand = d3.area()
+                .defined(d => d.price_mean !== null && d.price_std !== null)
+                .x(d => x(d.parsedDate))
+                .y0(d => yFuel(d.price_mean - d.price_std))
+                .y1(d => yFuel(d.price_mean + d.price_std))
+                .curve(d3.curveLinear);
+
+            svg.append('path')
+                .datum(data)
+                .attr('fill', this.colors.band)
+                .attr('stroke', 'none')
+                .attr('class', 'volatility-band')
+                .attr('d', areaBand);
+        }
+
+        // Handling "No Oil Data" Warning
+        if (!metaData.oil_available) {
+            svg.append('text')
+                .attr('x', width / 2)
+                .attr('y', height / 2)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#999')
+                .style('font-size', '1.2rem')
+                .text('⚠️ Keine Ölpreisdaten für dieses Jahr verfügbar');
+        }
+    }
+}

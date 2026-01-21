@@ -1,3 +1,4 @@
+import { UkraineBubbleChart } from '../components/UkraineBubbleChart.js';
 
 export class UkrainePage {
     constructor() {
@@ -5,6 +6,7 @@ export class UkrainePage {
         this.selectedFuel = 'diesel';
         this.pinnedBubble = null;
         this.resizeObserver = null;
+        this.chart = null;
     }
 
     async render(container) {
@@ -64,10 +66,7 @@ export class UkrainePage {
                 <!-- Bubble Chart -->
                 <div class="chart-card" style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; min-height: 350px; position: relative;">
                     <div id="bubble-chart" style="width: 100%; height: 100%; position: relative;"></div>
-                    
-                    <!-- Tooltip -->
-                    <div id="bubble-tooltip" style="position: absolute; display: none; background: rgba(0,0,0,0.9); color: white; padding: 12px 16px; border-radius: 10px; font-size: 0.9rem; pointer-events: none; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-                    </div>
+                    <!-- Tooltip managed by Component now, but we keep structure if needed by CSS -->
                 </div>
 
                 <!-- Compact Event Timeline -->
@@ -111,12 +110,12 @@ export class UkrainePage {
             const response = await fetch('/api/data/ukraine');
             if (!response.ok) throw new Error('Daten nicht gefunden');
             this.data = await response.json();
-            
+
             requestAnimationFrame(() => {
                 setTimeout(() => {
                     this.renderBubbles();
                     this.updateStats();
-                    
+
                     if (!this.resizeObserver) {
                         this.resizeObserver = new ResizeObserver(() => {
                             if (this.data) {
@@ -142,145 +141,17 @@ export class UkrainePage {
         if (!this.data) return;
 
         const chartContainer = this.container.querySelector('#bubble-chart');
-        chartContainer.innerHTML = '';
-        const tooltip = this.container.querySelector('#bubble-tooltip');
 
-        const fuelData = this.data.filter(d => d.fuel === this.selectedFuel);
-        const parseDate = d3.timeParse('%Y-%m-%d');
-        fuelData.forEach(d => d.parsedDate = parseDate(d.date));
-        fuelData.sort((a, b) => a.parsedDate - b.parsedDate);
+        if (!this.chart) {
+            this.chart = new UkraineBubbleChart(chartContainer, this.events);
+        }
 
-        const margin = { top: 40, right: 30, bottom: 50, left: 60 };
-        const width = (chartContainer.clientWidth || 800) - margin.left - margin.right;
-        const height = (chartContainer.clientHeight || 400) - margin.top - margin.bottom;
-
-        const x = d3.scaleTime()
-            .domain([new Date(2022, 0, 1), new Date(2022, 11, 31)])
-            .range([0, width]);
-
-        const minPrice = d3.min(fuelData, d => d.price_mean);
-        const maxPrice = d3.max(fuelData, d => d.price_mean);
-        const y = d3.scaleLinear()
-            .domain([minPrice * 0.9, maxPrice * 1.1])
-            .range([height, 0]);
-
-        const radiusScale = d3.scaleLinear()
-            .domain([minPrice, maxPrice])
-            .range([12, 45]);
-
-        const colorScale = d3.scaleLinear()
-            .domain([1.70, 1.95, 2.20])
-            .range(['#43a047', '#ffc107', '#e53935'])
-            .interpolate(d3.interpolateRgb);
-
-        const svg = d3.select(chartContainer)
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .on('click', () => {
-                this.pinnedBubble = null;
-                tooltip.style.display = 'none';
-            })
-            .append('g')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
-
-        const bubbles = svg.selectAll('circle')
-            .data(fuelData)
-            .enter()
-            .append('circle')
-            .attr('class', 'bubble')
-            .attr('cx', d => x(d.parsedDate))
-            .attr('cy', d => y(d.price_mean))
-            .attr('r', 0)
-            .attr('fill', d => colorScale(d.price_mean))
-            .attr('stroke', 'white')
-            .attr('stroke-width', 2)
-            .style('opacity', 0.85);
-
-        bubbles.transition()
-            .duration(800)
-            .delay((d, i) => i * 5)
-            .attr('r', d => radiusScale(d.price_mean));
-
-        bubbles.on('mouseenter', (event, d) => {
-            if (this.pinnedBubble) return;
-            d3.select(event.currentTarget).style('stroke', '#333');
-            this.showTooltip(d, tooltip, x, y, margin, colorScale);
-        })
-        .on('mouseleave', (event) => {
-            d3.select(event.currentTarget).style('stroke', 'white');
-            if (!this.pinnedBubble) {
-                tooltip.style.display = 'none';
-            }
-        })
-        .on('click', (event, d) => {
-            event.stopPropagation();
-            if (this.pinnedBubble === d) {
-                this.pinnedBubble = null;
-                tooltip.style.display = 'none';
-            } else {
-                this.pinnedBubble = d;
-                this.showTooltip(d, tooltip, x, y, margin, colorScale);
-            }
-        });
-
-        const parseEventDate = d3.timeParse('%Y-%m-%d');
-        this.events.forEach(e => {
-            const date = parseEventDate(e.date);
-            const xPos = x(date);
-            
-            svg.append('line')
-                .attr('x1', xPos)
-                .attr('x2', xPos)
-                .attr('y1', 0)
-                .attr('y2', height)
-                .attr('stroke', e.color)
-                .attr('stroke-width', 2)
-                .attr('stroke-dasharray', '5,5');
-
-            svg.append('text')
-                .attr('x', xPos)
-                .attr('y', -10)
-                .attr('text-anchor', 'middle')
-                .attr('fill', e.color)
-                .attr('font-size', '12px')
-                .attr('font-weight', 'bold')
-                .text(e.icon);
-                
-            svg.append('text')
-                .attr('x', xPos)
-                .attr('y', -25)
-                .attr('text-anchor', 'middle')
-                .attr('fill', e.color)
-                .attr('font-size', '10px')
-                .text(e.label);
-        });
-
-        svg.append('g')
-            .attr('transform', `translate(0,${height})`)
-            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(3)).tickFormat(d3.timeFormat('%b')))
-            .selectAll('text').style('font-size', '11px');
-
-        svg.append('g')
-            .call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toFixed(2) + '€'))
-            .selectAll('text').style('font-size', '11px');
-    }
-
-    showTooltip(d, tooltip, x, y, margin, colorScale) {
-        const formatDate = d3.timeFormat('%d. %B %Y');
-        tooltip.innerHTML = `
-            <div style="font-weight: 700; margin-bottom: 4px;">${formatDate(d.parsedDate)}</div>
-            <div style="font-size: 1.3rem; font-weight: 800; color: ${colorScale(d.price_mean)};">${d.price_mean.toFixed(3)} €</div>
-            <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 4px;">pro Liter ${this.pinnedBubble ? '(📌 fixiert)' : ''}</div>
-        `;
-        tooltip.style.display = 'block';
-        tooltip.style.left = (x(d.parsedDate) + margin.left + 25) + 'px';
-        tooltip.style.top = (y(d.price_mean) + margin.top - 30) + 'px';
+        this.chart.update(this.data, this.selectedFuel);
     }
 
     updateStats() {
         if (!this.data) return;
-        
+
         const fuelData = this.data.filter(d => d.fuel === this.selectedFuel);
         const prices = fuelData.map(d => d.price_mean);
         const max = Math.max(...prices);
@@ -297,7 +168,7 @@ export class UkrainePage {
     animateNumber(id, target, suffix, decimals, prefix = '') {
         const el = this.container.querySelector(`#${id}`);
         if (!el) return;
-        
+
         const start = parseFloat(el.innerText.replace(/[^0-9.-]/g, '')) || 0;
         const duration = 1000;
         const startTime = performance.now();
@@ -306,7 +177,7 @@ export class UkrainePage {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const ease = 1 - Math.pow(1 - progress, 3);
-            
+
             const current = start + (target - start) * ease;
             el.innerHTML = `${prefix}${current.toFixed(decimals)}${suffix}`;
 

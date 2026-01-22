@@ -1,7 +1,4 @@
 # Tankpreis-Analyse Dashboard
-
-> **Interaktives Dashboard zur Visualisierung von Tankpreisen**
-
 ---
 
 ## Projektinformationen
@@ -15,8 +12,8 @@
 
 ### Gruppenmitglieder
 
-| Name | Matrikelnummer |
-|------|----------------|
+| Name |
+|------|
 | [Giuliano Donato] |
 | [Klempar Sheyenne] |
 | [Nakay Selcuk] |

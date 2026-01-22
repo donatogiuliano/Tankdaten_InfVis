@@ -114,11 +114,10 @@ export class MarketPhasesChart {
                 });
         }
 
-        // Axes
-        // X-Axis (Bottom)
+        // X-Axis (Bottom) - Show years for multi-year view
         svg.append('g')
             .attr('transform', `translate(0,${height})`)
-            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')))
+            .call(d3.axisBottom(x).ticks(d3.timeYear.every(1)).tickFormat(d3.timeFormat('%Y')))
             .call(g => g.select('.domain').attr('stroke', '#333'))
             .selectAll('text')
             .style('font-size', '11px')

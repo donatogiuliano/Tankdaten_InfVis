@@ -233,16 +233,24 @@ def get_region_history():
 @app.route('/api/data/market-phases')
 def get_market_phases_route():
     try:
-        year = request.args.get('year', default=2024, type=int)
         fuel = request.args.get('fuel', default='e10', type=str)
         region = request.args.get('region', type=str) # Optional PLZ3
 
-        # Read Data
-        file_path = os.path.join(DATA_DIR, f'data_daily_{year}.parquet')
-        if not os.path.exists(file_path):
-            return jsonify({"error": f"Data for year {year} not found"}), 404
-            
-        df = pd.read_parquet(file_path)
+        # Load 5 years of data (2020-2024)
+        years = [2020, 2021, 2022, 2023, 2024]
+        dfs = []
+        
+        for year in years:
+            file_path = os.path.join(DATA_DIR, f'data_daily_{year}.parquet')
+            if os.path.exists(file_path):
+                df_year = pd.read_parquet(file_path)
+                dfs.append(df_year)
+        
+        if not dfs:
+            return jsonify({"error": "No data files found"}), 404
+        
+        # Combine all years
+        df = pd.concat(dfs, ignore_index=True)
         
         # Calculate Phases
         result = calculate_market_phases(df, fuel=fuel, region=region)

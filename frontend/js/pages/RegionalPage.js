@@ -142,10 +142,10 @@ export class RegionalPage {
             });
 
             // --- Fuel Logic ---
-            const fuelBtns = this.container.querySelectorAll('.btn-group-item');
+            const fuelBtns = this.container.querySelectorAll('.fuel-toggle-group .btn-group-item');
             fuelBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Update UI
+                    // Update UI - only fuel buttons
                     fuelBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
 
@@ -159,8 +159,8 @@ export class RegionalPage {
             // Global State Subscription
             state.subscribe((s, key, value) => {
                 if (key === 'fuelType') {
-                    // Update Buttons UI
-                    const btns = this.container.querySelectorAll('.btn-group-item');
+                    // Update Buttons UI - only fuel buttons
+                    const btns = this.container.querySelectorAll('.fuel-toggle-group .btn-group-item');
                     btns.forEach(b => {
                         if (b.dataset.value === value) b.classList.add('active');
                         else b.classList.remove('active');
@@ -619,7 +619,9 @@ export class RegionalPage {
     // Helper to update map without reloading data if year hasn't changed
     updateMap() {
         if (this.map) {
-            const fuel = this.container.querySelector('.btn-group-item.active').dataset.value;
+            // Get fuel from active button, or fallback to state
+            const activeBtn = this.container.querySelector('.fuel-toggle-group .btn-group-item.active');
+            const fuel = activeBtn ? activeBtn.dataset.value : (state.get('fuelType') || 'e10');
             const month = parseInt(this.container.querySelector('#regional-month-val').value);
             // Sync Color Mode just in case it changed via toggle
             this.map.options.colorMode = state.get('colorMode');
@@ -700,7 +702,9 @@ export class RegionalPage {
             }
 
             const initialMonth = parseInt(this.container.querySelector('#regional-month-val').value);
-            const initialFuel = this.container.querySelector('.btn-group-item.active').dataset.value;
+            // Get fuel from active button, or fallback to state
+            const activeBtn = this.container.querySelector('.fuel-toggle-group .btn-group-item.active');
+            const initialFuel = activeBtn ? activeBtn.dataset.value : (state.get('fuelType') || 'e10');
 
             if (!this.map) {
                 // If map container is empty (e.g. after error), ensure it's clean

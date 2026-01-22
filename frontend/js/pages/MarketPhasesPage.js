@@ -38,7 +38,7 @@ export class MarketPhasesPage {
         this.state.fuel = state.get('fuelType') || 'e10';
 
         this.container.innerHTML = `
-            <div class="market-phases-page" style="padding: 1.5rem; height: 100%; display: flex; flex-direction: column; overflow-y: auto;">
+            <div class="page-layout">
                 
                 <!-- Header -->
                 <div style="margin-bottom: 1rem;">
@@ -48,73 +48,67 @@ export class MarketPhasesPage {
                 </div>
 
                 <!-- Controls -->
-                <div class="controls-bar" style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
+                <div class="controls-row">
                     
                     <!-- Kraftstoff -->
-                    <div class="control-group">
-                        <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
-                            <button class="fuel-btn ${this.state.fuel === 'e5' ? 'active' : ''}" data-value="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
-                            <button class="fuel-btn ${this.state.fuel === 'e10' ? 'active' : ''}" data-value="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
-                            <button class="fuel-btn ${this.state.fuel === 'diesel' ? 'active' : ''}" data-value="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
-                        </div>
+                    <div class="button-group fuel-toggle-group">
+                        <button class="btn-group-item ${this.state.fuel === 'e5' ? 'active' : ''}" data-value="e5">Super E5</button>
+                        <button class="btn-group-item ${this.state.fuel === 'e10' ? 'active' : ''}" data-value="e10">E10</button>
+                        <button class="btn-group-item ${this.state.fuel === 'diesel' ? 'active' : ''}" data-value="diesel">Diesel</button>
                     </div>
                     
 
 
                     <!-- Stadt / Region -->
                     <div class="control-group">
-                        <div style="position: relative;">
-                             <input type="text" id="mp-city-input" placeholder="Stadt eingeben..." value="Stuttgart" style="font-size: 0.95rem; padding: 6px; border-radius: 4px; border: 1px solid #ddd; width: 140px;">
-                        </div>
+                         <input type="text" id="mp-city-input" placeholder="Stadt eingeben..." value="Stuttgart" 
+                                style="padding: 6px 10px; border: 1px solid var(--border-strong); border-radius: 4px; font-family: inherit; width: 140px;">
                     </div>
 
-                    <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
+                    <div style="width: 1px; height: 30px; background: var(--border-subtle); margin: 0 0.5rem;"></div>
 
                     <!-- Phasen anzeigen -->
-                    <div style="display: flex; gap: 1rem; align-items: center;">
-                        <span style="font-size: 0.85rem; font-weight: 600; color: #555;">Phasen:</span>
+                    <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.9rem;">
+                        <span style="font-weight: 600; color: var(--text-secondary);">Phasen:</span>
                         
-
-
-                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
                             <input type="checkbox" id="mp-toggle-p-asymmetrie" checked>
-                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['ASYMMETRIE']}; border: 1px solid #ccc; display: inline-block;"></span>
+                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['ASYMMETRIE']}; border: 1px solid #ccc; display: inline-block; border-radius: 2px;"></span>
                             Asymmetrie
                         </label>
 
-                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
                             <input type="checkbox" id="mp-toggle-p-volatility" checked>
-                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['INTERNE_FAKTOREN']}; border: 1px solid #ccc; display: inline-block;"></span>
+                            <span style="width: 10px; height: 10px; background: ${this.colors.phase['INTERNE_FAKTOREN']}; border: 1px solid #ccc; display: inline-block; border-radius: 2px;"></span>
                             Interne Faktoren
                         </label>
                     </div>
 
-                    <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
+                    <div style="width: 1px; height: 30px; background: var(--border-subtle); margin: 0 0.5rem;"></div>
 
                     <!-- Ölpreis & Vol.-Band -->
-                    <div class="toggles" style="display: flex; gap: 1rem; align-items: center;">
-                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
+                    <div class="toggles" style="display: flex; gap: 1rem; align-items: center; font-size: 0.9rem;">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
                             <input type="checkbox" id="mp-toggle-oil" checked> Ölpreis
                         </label>
-                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.9rem;">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
                             <input type="checkbox" id="mp-toggle-band" checked> Volatilität
                         </label>
                     </div>
                 </div>
 
                 <!-- Chart Container -->
-                <div class="chart-card" id="mp-chart-container" style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; min-height: 480px; position: relative; display: flex; flex-direction: column;">
-                    <div id="mp-chart" style="width: 100%; height: 350px; position: relative;"></div>
+                <div class="card chart-card" id="mp-chart-container" style="display: flex; flex-direction: column;">
+                    <div id="mp-chart" class="chart-wrapper"></div>
                     
-                    <!-- Legend (Only visible when data is loaded) -->
-                    <div id="mp-legend" style="margin-top: 1rem; display: none; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.8rem; color: #666; border-top: 1px solid #eee; padding-top: 1rem;">
-                        <!-- Data Series -->
+                    <!-- Legend -->
+                    <div id="mp-legend" style="margin-top: 1rem; display: none; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-secondary); border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
                         <div style="display: flex; align-items: center; gap: 6px;">
                             <span style="width: 20px; height: 3px; background: ${this.colors.fuel};"></span>
                             Tankpreis (Ø)
                         </div>
                         <div style="display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 12px; height: 12px; background: ${this.colors.band}; border: 1px solid #ccc;"></span>
+                            <span style="width: 12px; height: 12px; background: ${this.colors.band}; border: 1px solid #ccc; border-radius: 2px;"></span>
                             Volatilitätsband
                         </div>
                         <div style="display: flex; align-items: center; gap: 6px;">
@@ -197,7 +191,7 @@ export class MarketPhasesPage {
         };
 
         // Fuel Buttons Logic
-        const fuelBtns = this.container.querySelectorAll('.fuel-btn');
+        const fuelBtns = this.container.querySelectorAll('.btn-group-item');
         fuelBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 // Update UI
@@ -230,7 +224,7 @@ export class MarketPhasesPage {
         state.subscribe((s, key, value) => {
             if (key === 'fuelType') {
                 // Update Buttons UI
-                const btns = this.container.querySelectorAll('.fuel-btn');
+                const btns = this.container.querySelectorAll('.btn-group-item');
                 btns.forEach(b => {
                     if (b.dataset.value === value) b.classList.add('active');
                     else b.classList.remove('active');

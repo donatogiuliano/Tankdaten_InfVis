@@ -4,7 +4,7 @@ import { state } from '../state.js';
 export class UkrainePage {
     constructor() {
         this.data = null;
-        this.selectedFuel = state.get('fuelType') || 'diesel'; // Default override might need to be e10 but Keeping diesel if preferred, or using state default
+        this.selectedFuel = state.get('fuelType') || 'diesel';
         this.pinnedBubble = null;
         this.resizeObserver = null;
         this.chart = null;
@@ -12,7 +12,6 @@ export class UkrainePage {
 
     async render(container) {
         this.container = container;
-        // Sync state
         this.selectedFuel = state.get('fuelType') || 'diesel';
 
         this.events = [
@@ -23,78 +22,65 @@ export class UkrainePage {
         ];
 
         container.innerHTML = `
-            <div class="ukraine-page" style="padding: 1.5rem; height: 100%; display: flex; flex-direction: column; box-sizing: border-box; overflow-y: auto;">
-                
-                <!-- Header (Light Theme) -->
-                <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start;">
-                    <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="font-size: 1.8rem;">⚔️</span> Ukraine-Schock 2022
+            <div class="page-layout">
+                <!-- Header -->
+                <div class="page-header">
+                    <h1 class="page-title">
+                        <span>⚔️</span> Ukraine-Schock 2022
                     </h1>
 
-                    <!-- A11y Toggle (Top Right) -->
-                    <button id="ukraine-a11y-toggle" style="background: #fff; border: 2px solid #333; border-radius: 4px; padding: 4px 12px; font-size: 0.9rem; color: #000; cursor: pointer; font-weight: 700; display:flex; align-items:center; gap:8px;" title="Barrierefreie Farben aktivieren">
-                        <span class="state-icon" style="font-size:1.2em; line-height:1;">☐</span>
-                        <span style="font-size:1.3em; line-height:1;">◐</span>
-                        Barrierefrei
+                    <button id="ukraine-a11y-toggle" class="btn btn-outline" title="Barrierefreie Farben aktivieren">
+                        <span class="state-icon">☐</span>
+                        <span>Barrierefrei</span>
                     </button>
                 </div>
 
-                <!-- Controls + Legend with Prices -->
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
-                    <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
-                        <button class="fuel-btn ${this.selectedFuel === 'e5' ? 'active' : ''}" data-fuel="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
-                        <button class="fuel-btn ${this.selectedFuel === 'e10' ? 'active' : ''}" data-fuel="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
-                        <button class="fuel-btn ${this.selectedFuel === 'diesel' ? 'active' : ''}" data-fuel="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
+                <!-- Controls & Legend -->
+                <div class="controls-row">
+                    <div class="button-group fuel-toggle-group">
+                        <button class="btn-group-item ${this.selectedFuel === 'e5' ? 'active' : ''}" data-fuel="e5">Super E5</button>
+                        <button class="btn-group-item ${this.selectedFuel === 'e10' ? 'active' : ''}" data-fuel="e10">E10</button>
+                        <button class="btn-group-item ${this.selectedFuel === 'diesel' ? 'active' : ''}" data-fuel="diesel">Diesel</button>
                     </div>
                     
-                    <!-- Legend with price ranges -->
-                    <div id="ukraine-legend" style="display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: #5f6368;">
-                        <span style="display: flex; align-items: center; gap: 4px;"><span class="legend-color" style="width: 12px; height: 12px; background: #43a047; border-radius: 50%;"></span> Günstig (&lt;1.80€)</span>
-                        <span style="display: flex; align-items: center; gap: 4px;"><span class="legend-color" style="width: 12px; height: 12px; background: #ffc107; border-radius: 50%;"></span> Mittel (1.80-2.10€)</span>
-                        <span style="display: flex; align-items: center; gap: 4px;"><span class="legend-color" style="width: 12px; height: 12px; background: #e53935; border-radius: 50%;"></span> Teuer (&gt;2.10€)</span>
+                    <div id="ukraine-legend" class="legend-container">
+                        <span class="legend-item"><span class="legend-dot" style="background: #43a047;"></span> Günstig (&lt;1.80€)</span>
+                        <span class="legend-item"><span class="legend-dot" style="background: #ffc107;"></span> Mittel (1.80-2.10€)</span>
+                        <span class="legend-item"><span class="legend-dot" style="background: #e53935;"></span> Teuer (&gt;2.10€)</span>
                     </div>
                 </div>
 
-                <!-- Stats Row (Light Theme) -->
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
-                    <div style="background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center;">
-                        <div style="font-size: 0.75rem; color: #888; text-transform: uppercase;">Rekordpreis</div>
-                        <div id="peak-price" style="font-size: 1.5rem; font-weight: 700; color: #e53935;">---</div>
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Rekordpreis</div>
+                        <div id="peak-price" class="stat-value" style="color: var(--danger);">---</div>
                     </div>
-                    <div style="background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center;">
-                        <div style="font-size: 0.75rem; color: #888; text-transform: uppercase;">Tankfüllung (50L)</div>
-                        <div id="tank-cost" style="font-size: 1.5rem; font-weight: 700; color: #ff9800;">---</div>
+                    <div class="stat-box">
+                        <div class="stat-label">Tankfüllung (50L)</div>
+                        <div id="tank-cost" class="stat-value" style="color: var(--warning);">---</div>
                     </div>
-                    <div style="background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center;">
-                        <div style="font-size: 0.75rem; color: #888; text-transform: uppercase;">Preisanstieg</div>
-                        <div id="price-rise" style="font-size: 1.5rem; font-weight: 700; color: #9c27b0;">---</div>
+                    <div class="stat-box">
+                        <div class="stat-label">Preisanstieg</div>
+                        <div id="price-rise" class="stat-value" style="color: #9c27b0;">---</div>
                     </div>
                 </div>
 
                 <!-- Bubble Chart -->
-                <div class="chart-card" style="flex: 1; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1.5rem; min-height: 350px; position: relative;">
+                <div class="card chart-card">
                     <div id="bubble-chart" style="width: 100%; height: 100%; position: relative;"></div>
-                    <!-- Tooltip managed by Component now, but we keep structure if needed by CSS -->
                 </div>
 
                 <!-- Compact Event Timeline -->
-                <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; padding: 0.75rem 1rem; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; padding: 0.75rem 1rem; background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--border-subtle);">
                     ${this.events.map(e => `
                         <div style="display: flex; align-items: center; gap: 6px;">
-                            <span style="width: 12px; height: 12px; background: ${e.color}; border-radius: 50%;"></span>
-                            <span style="font-size: 0.8rem; font-weight: 500; color: #333;">${e.label}</span>
+                            <span style="width: 8px; height: 8px; background: ${e.color}; border-radius: 50%;"></span>
+                            <span style="font-size: 0.85rem; font-weight: 500; color: var(--text-secondary);">${e.label}</span>
                         </div>
                     `).join('')}
                 </div>
             </div>
-            
-            <style>
-                .fuel-btn:hover { background-color: rgba(0,0,0,0.05); }
-                .fuel-btn.active { background-color: #333; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-                .bubble { cursor: pointer; transition: transform 0.2s, filter 0.2s; }
-                .bubble:hover { transform: scale(1.3); filter: brightness(1.2); }
-                #ukraine-a11y-toggle:hover { background: #f0f0f0; }
-            </style>
         `;
 
         this.initEvents();
@@ -102,7 +88,7 @@ export class UkrainePage {
     }
 
     initEvents() {
-        const fuelBtns = this.container.querySelectorAll('.fuel-btn');
+        const fuelBtns = this.container.querySelectorAll('.btn-group-item');
         fuelBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 fuelBtns.forEach(b => b.classList.remove('active'));
@@ -132,14 +118,12 @@ export class UkrainePage {
         // Global State Subscription
         state.subscribe((s, key, value) => {
             if (key === 'fuelType') {
-                // Update Buttons UI
-                const btns = this.container.querySelectorAll('.fuel-btn');
+                const btns = this.container.querySelectorAll('.btn-group-item');
                 btns.forEach(b => {
                     if (b.dataset.fuel === value) b.classList.add('active');
                     else b.classList.remove('active');
                 });
 
-                // Update Internal State & Reload
                 this.selectedFuel = value;
                 this.renderBubbles();
                 this.updateStats();
@@ -177,7 +161,7 @@ export class UkrainePage {
         } catch (e) {
             console.error(e);
             this.container.querySelector('#bubble-chart').innerHTML = `
-                <div style="text-align: center; color: #c62828; padding: 2rem;">⚠️ Fehler: ${e.message}</div>
+                <div style="text-align: center; color: var(--danger); padding: 2rem;">⚠️ Fehler: ${e.message}</div>
             `;
         }
     }
@@ -189,13 +173,11 @@ export class UkrainePage {
         if (a11yBtn) {
             const stateIcon = a11yBtn.querySelector('.state-icon');
             stateIcon.textContent = isAccessible ? '☑' : '☐';
-            a11yBtn.title = isAccessible ? "Modus: Barrierefrei (Aktiv)" : "Modus: Standard (Inaktiv)";
+            a11yBtn.classList.toggle('active', isAccessible);
         }
 
-        // Update Legend Colors
-        const legendColors = this.container.querySelectorAll('.legend-color');
+        const legendColors = this.container.querySelectorAll('.legend-dot');
         if (legendColors.length === 3) {
-            // [Günstig, Mittel, Teuer]
             const colors = isAccessible
                 ? ['hsl(240, 70%, 50%)', 'hsl(60, 90%, 90%)', 'hsl(0, 100%, 50%)']
                 : ['#43a047', '#ffc107', '#e53935'];

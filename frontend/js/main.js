@@ -67,7 +67,7 @@ class App {
         }
 
         // Update Active Nav
-        document.querySelectorAll('.nav-item').forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             const linkHref = link.getAttribute('href').slice(1);
             if (linkHref === hash) {
                 link.classList.add('active');

@@ -14,98 +14,69 @@ export class RegionalPage {
         // Month Names
         const monthNames = ["", "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
-        // Force layout constraints on parent container to ensure "One Page" feel
-        // this.container.style.padding = '0';
-        // this.container.style.height = 'calc(100vh - 70px)';
-        // this.container.style.overflow = 'hidden';
-        // this.container.style.display = 'block';
-
         this.container.innerHTML = `
-            <div style="display: flex; flex-direction: column; height: 85vh; padding: 1.5rem; box-sizing: border-box;">
+            <div class="page-layout">
                 
                 <!-- Header -->
-                <div style="flex: 0 0 auto; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-start;">
-                    <div>
-                        <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <!-- SVG Flag for Windows compatibility -->
-                            <svg width="28" height="20" viewBox="0 0 5 3" style="border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                                <rect width="5" height="3" y="0" fill="#000"/>
-                                <rect width="5" height="2" y="1" fill="#DD0000"/>
-                                <rect width="5" height="1" y="2" fill="#FFCE00"/>
-                            </svg>
-                            Regional-Vergleich
-                        </h1>
-                    </div>
+                <div class="page-header">
+                    <h1 class="page-title">
+                        <span>🇩🇪</span> Regional-Vergleich
+                    </h1>
 
-                    <!-- A11y Toggle (Top Right) -->
-                    <button id="a11y-toggle" style="background: #fff; border: 2px solid #333; border-radius: 4px; padding: 4px 12px; font-size: 0.9rem; color: #000; cursor: pointer; font-weight: 700; display:flex; align-items:center; gap:8px;" title="Barrierefreie Farben aktivieren">
-                        <span class="state-icon" style="font-size:1.2em; line-height:1;">☐</span>
-                        <span style="font-size:1.3em; line-height:1;">◐</span>
-                        Barrierefrei
+                    <button id="a11y-toggle" class="btn btn-outline" title="Barrierefreie Farben aktivieren">
+                        <span class="state-icon">☐</span>
+                        <span>Barrierefrei</span>
                     </button>
                 </div>
 
                 <!-- Controls -->
-                <div class="controls-bar" style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
+                <div class="controls-row">
                     
-                    <!-- 1. Fuel Selector (Buttons) - First Position -->
-                    <div class="control-group">
-                        <div class="fuel-toggle-group" style="display:flex; background: #f0f2f5; padding: 3px; border-radius: 6px;">
-                            <button class="fuel-btn ${savedFuel === 'e5' ? 'active' : ''}" data-value="e5" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Super E5</button>
-                            <button class="fuel-btn ${savedFuel === 'e10' ? 'active' : ''}" data-value="e10" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">E10</button>
-                            <button class="fuel-btn ${savedFuel === 'diesel' ? 'active' : ''}" data-value="diesel" style="border:none; padding: 4px 12px; border-radius: 4px; cursor:pointer; font-size:0.9rem; font-weight:500; transition:all 0.2s;">Diesel</button>
-                        </div>
+                    <!-- Fuel Selector -->
+                    <div class="button-group fuel-toggle-group">
+                        <button class="btn-group-item ${savedFuel === 'e5' ? 'active' : ''}" data-value="e5">Super E5</button>
+                        <button class="btn-group-item ${savedFuel === 'e10' ? 'active' : ''}" data-value="e10">E10</button>
+                        <button class="btn-group-item ${savedFuel === 'diesel' ? 'active' : ''}" data-value="diesel">Diesel</button>
                     </div>
 
-                    <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
-
-                    <!-- 2. Year Input -->
-                    <div class="control-group">
+                    <!-- Date Controls -->
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
                         <input type="number" id="regional-year-input" value="${savedYear}" min="2014" max="${currentYear}" 
-                               style="font-size: 0.95rem; font-weight: 600; padding: 6px; border: 1px solid #ddd; border-radius: 4px; width: 80px;">
-                    </div>
+                               style="padding: 6px 10px; border: 1px solid var(--border-strong); border-radius: 4px; font-family: inherit; width: 80px;">
 
-                    <!-- 3. Month Stepper -->
-                    <div class="control-group">
-                        <div class="stepper" style="display:flex; align-items:center; gap: 0.25rem; background: #fff; padding: 0; border-radius: 4px;">
-                            <button id="month-prev" class="stepper-btn" style="border:1px solid #ddd; background:#fff; cursor:pointer; padding: 5px 10px; font-weight:bold; color:#555; border-radius: 4px 0 0 4px;">&lt;</button>
-                            <span id="month-display" style="min-width: 90px; text-align:center; font-weight:500; font-size: 0.95rem; border: 1px solid #ddd; border-left: none; border-right: none; padding: 5px 0;">${monthNames[savedMonth]}</span>
+                        <div class="button-group">
+                            <button id="month-prev" class="btn-group-item" style="padding: 6px 12px;">&lt;</button>
+                            <span id="month-display" style="min-width: 90px; text-align: center; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-variant-numeric: tabular-nums;">${monthNames[savedMonth]}</span>
+                            <div style="width: 1px; background: var(--border-subtle);"></div>
                             <input type="hidden" id="regional-month-val" value="${savedMonth}">
-                            <button id="month-next" class="stepper-btn" style="border:1px solid #ddd; background:#fff; cursor:pointer; padding: 5px 10px; font-weight:bold; color:#555; border-radius: 0 4px 4px 0;">&gt;</button>
+                            <button id="month-next" class="btn-group-item" style="padding: 6px 12px;">&gt;</button>
                         </div>
                     </div>
                     
-                    <span id="map-status" style="font-size: 0.85rem; color: #999; margin-left: auto;"></span>
+                    <span id="map-status" style="font-size: 0.85rem; color: var(--text-muted); margin-left: auto;"></span>
                 </div>
 
                 <!-- Map Card -->
-                <div class="card full-width" style="flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 0.5rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: white; border: 1px solid #eee;">
-                    <div id="map-wrapper" style="flex:1; width: 100%; border-radius: 4px; overflow:hidden; position:relative; z-index: 1;">
-                         <div id="regional-map" style="width:100%; height:100%;">
-                             <div class="loading">Lade Karte...</div>
+                <div class="card chart-card" style="flex: 1; padding: 0.5rem; overflow: hidden; display: flex; flex-direction: column;">
+                    <div id="map-wrapper" style="flex: 1; width: 100%; border-radius: 4px; overflow: hidden; position: relative;">
+                         <div id="regional-map" style="width: 100%; height: 100%;">
+                             <div class="loading-screen">
+                                 <div class="spinner"></div>
+                                 <p>Lade Karte...</p>
+                             </div>
                          </div>
-                         <!-- Dock will be injected here by initComparisonLogic -->
                     </div>
                 </div>
             </div>
         `;
 
-        // Add minimal inline styles for interactions (hover/active) and Flag
+        // Inject Styles for Comparison Dock (Micro Styles)
         const style = document.createElement('style');
         style.textContent = `
-            .flag-de {
-                width: 28px;
-                height: 18px;
-                background: linear-gradient(to bottom, #000 33.3%, #dd0000 33.3%, #dd0000 66.6%, #ffce00 66.6%);
-                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-                border-radius: 2px;
-            }
-            .fuel-btn:hover { background-color: rgba(0,0,0,0.05); }
-            .fuel-btn.active { background-color: #333; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-            .stepper-btn:hover { background-color: #f5f5f5; }
-            #regional-year-input:focus { outline: none; border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26,115,232,0.2); }
-            #a11y-toggle { border: 2px solid #333; color: #000; background: #fff; font-weight: 800; border-radius: 4px; }
-            #a11y-toggle:hover { background: #f0f0f0; }
+            .micro-input:hover { border-color: var(--success); background: #e8f5e9; }
+            .micro-input.active { border-color: var(--success); background: #fff; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); color: #000; }
+            .micro-input.filled { background: #e8f5e9; color: var(--success); border-color: #c8e6c9; }
+            .micro-btn:hover { color: var(--danger); }
         `;
         this.container.appendChild(style);
 
@@ -171,7 +142,7 @@ export class RegionalPage {
             });
 
             // --- Fuel Logic ---
-            const fuelBtns = this.container.querySelectorAll('.fuel-btn');
+            const fuelBtns = this.container.querySelectorAll('.btn-group-item');
             fuelBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     // Update UI
@@ -189,7 +160,7 @@ export class RegionalPage {
             state.subscribe((s, key, value) => {
                 if (key === 'fuelType') {
                     // Update Buttons UI
-                    const btns = this.container.querySelectorAll('.fuel-btn');
+                    const btns = this.container.querySelectorAll('.btn-group-item');
                     btns.forEach(b => {
                         if (b.dataset.value === value) b.classList.add('active');
                         else b.classList.remove('active');
@@ -648,7 +619,7 @@ export class RegionalPage {
     // Helper to update map without reloading data if year hasn't changed
     updateMap() {
         if (this.map) {
-            const fuel = this.container.querySelector('.fuel-btn.active').dataset.value;
+            const fuel = this.container.querySelector('.btn-group-item.active').dataset.value;
             const month = parseInt(this.container.querySelector('#regional-month-val').value);
             // Sync Color Mode just in case it changed via toggle
             this.map.options.colorMode = state.get('colorMode');
@@ -729,7 +700,7 @@ export class RegionalPage {
             }
 
             const initialMonth = parseInt(this.container.querySelector('#regional-month-val').value);
-            const initialFuel = this.container.querySelector('.fuel-btn.active').dataset.value;
+            const initialFuel = this.container.querySelector('.btn-group-item.active').dataset.value;
 
             if (!this.map) {
                 // If map container is empty (e.g. after error), ensure it's clean

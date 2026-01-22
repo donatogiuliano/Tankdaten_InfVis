@@ -59,6 +59,14 @@ export class MarketPhasesPage {
 
                     <div style="width: 1px; height: 30px; background: var(--border-subtle); margin: 0 0.5rem;"></div>
 
+                    <!-- Stadt / Region -->
+                    <div class="control-group">
+                         <input type="text" id="mp-city-input" placeholder="Stadt (leer = Deutschland)" value="" 
+                                style="padding: 6px 10px; border: 1px solid var(--border-strong); border-radius: 4px; font-family: inherit; width: 180px;">
+                    </div>
+
+                    <div style="width: 1px; height: 30px; background: var(--border-subtle); margin: 0 0.5rem;"></div>
+
                     <!-- Phasen anzeigen -->
                     <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.9rem;">
                         <span style="font-weight: 600; color: var(--text-secondary);">Phasen:</span>
@@ -116,9 +124,43 @@ export class MarketPhasesPage {
     }
 
     bindEvents() {
-        // Simple update function - just load data (uses cache)
+        // PLZ Mapping
+        let cityToPlz = {};
+
+        fetch('js/data/plz3_cities.json')
+            .then(r => r.json())
+            .then(data => {
+                Object.entries(data).forEach(([plz, city]) => {
+                    const c = city.trim();
+                    if (!cityToPlz[c.toLowerCase()]) cityToPlz[c.toLowerCase()] = plz;
+                });
+                // Initial load with empty region (uses cache)
+                update();
+            })
+            .catch(e => {
+                console.warn('Konnte PLZ-Mapping nicht laden', e);
+                update(); // Still load with cache
+            });
+
         const update = () => {
             if (!this.container) return;
+
+            const inputField = this.container.querySelector('#mp-city-input');
+            const cityInputRaw = inputField ? inputField.value.trim() : '';
+            const cityInput = cityInputRaw.toLowerCase();
+
+            if (cityInput && cityToPlz[cityInput]) {
+                this.state.region = cityToPlz[cityInput];
+            } else if (cityInput && !cityToPlz[cityInput]) {
+                // Invalid city - show error
+                if (inputField) inputField.style.borderColor = 'red';
+                this.renderMessage(`Stadt "${cityInputRaw}" nicht gefunden.`, 'warning');
+                return;
+            } else {
+                this.state.region = ''; // Empty = Deutschland-wide (uses cache)
+            }
+
+            if (inputField) inputField.style.borderColor = '';
             this.loadData();
         };
 
@@ -128,26 +170,32 @@ export class MarketPhasesPage {
             this.state.showPhaseAsymmetrie = this.container.querySelector('#mp-toggle-p-asymmetrie').checked;
             this.state.showPhaseVolatility = this.container.querySelector('#mp-toggle-p-volatility').checked;
 
-            this.renderChart(); // Just re-render chart if data exists
+            this.renderChart();
         };
 
         // Fuel Buttons Logic
         const fuelBtns = this.container.querySelectorAll('.btn-group-item');
         fuelBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update UI
                 fuelBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
-                // Update State
                 this.state.fuel = btn.dataset.value;
                 state.set('fuelType', this.state.fuel);
                 update();
             });
         });
 
-        // Initial load
-        update();
+        // City input events
+        const cityInput = this.container.querySelector('#mp-city-input');
+        if (cityInput) {
+            cityInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    update();
+                }
+            });
+            cityInput.addEventListener('blur', update);
+        }
 
         this.container.querySelector('#mp-toggle-oil').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-band').addEventListener('change', toggles);
@@ -191,10 +239,13 @@ export class MarketPhasesPage {
         chartDiv.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#888;">Lade Analyse...</div>';
 
         try {
-            // Only send fuel parameter - no region for fast cached response
+            // Send region if specified, otherwise use cache
             const params = new URLSearchParams({
                 fuel: this.state.fuel
             });
+            if (this.state.region) {
+                params.append('region', this.state.region);
+            }
 
             const res = await fetch(`/api/data/market-phases?${params.toString()}`);
             if (!res.ok) throw new Error('Fehler beim Laden der Daten');

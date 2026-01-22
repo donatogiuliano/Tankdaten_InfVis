@@ -11,7 +11,6 @@ export class MarketPhasesPage {
 
         // Default State
         this.state = {
-            year: 2022,
             fuel: state.get('fuelType') || 'e10',
             region: '',
             showOil: true,           // Standardmäßig an
@@ -44,7 +43,7 @@ export class MarketPhasesPage {
                 <!-- Header -->
                 <div style="margin-bottom: 1rem;">
                     <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="font-size: 1.8rem;">📊</span> Markttrends
+                        <span style="font-size: 1.8rem;">📊</span> Markttrends (2020-2024)
                     </h1>
                 </div>
 
@@ -60,19 +59,7 @@ export class MarketPhasesPage {
                         </div>
                     </div>
                     
-                    <div style="width: 1px; height: 30px; background: #eee; margin: 0 0.5rem;"></div>
 
-                    <!-- Jahr -->
-                    <div class="control-group">
-                        <select id="mp-year" style="font-size: 0.95rem; font-weight: 600; padding: 6px; border-radius: 4px; border: 1px solid #ddd;">
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022" selected>2022</option>
-                            <option value="2021">2021</option>
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                        </select>
-                    </div>
 
                     <!-- Stadt / Region -->
                     <div class="control-group">
@@ -168,7 +155,6 @@ export class MarketPhasesPage {
         const update = () => {
             if (!this.container) return; // Safety check
 
-            this.state.year = this.container.querySelector('#mp-year').value;
             // this.state.fuel updated by buttons
 
             // City Input validation
@@ -209,8 +195,6 @@ export class MarketPhasesPage {
 
             this.renderChart(); // Just re-render chart if data exists
         };
-
-        this.container.querySelector('#mp-year').addEventListener('change', update);
 
         // Fuel Buttons Logic
         const fuelBtns = this.container.querySelectorAll('.fuel-btn');
@@ -280,7 +264,6 @@ export class MarketPhasesPage {
 
         try {
             const params = new URLSearchParams({
-                year: this.state.year,
                 fuel: this.state.fuel,
                 region: this.state.region
             });

@@ -236,8 +236,19 @@ def get_market_phases_route():
         fuel = request.args.get('fuel', default='e10', type=str)
         region = request.args.get('region', type=str) # Optional PLZ3
 
-        # Load 5 years of data (2020-2024)
-        years = [2020, 2021, 2022, 2023, 2024]
+        # Try cache first (only for Germany-wide requests without region)
+        if not region or region == '':
+            cache_file = os.path.join(DATA_DIR, 'cache', f'market_phases_{fuel}.json')
+            if os.path.exists(cache_file):
+                print(f"Serving market phases from cache: {cache_file}")
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    return jsonify(json.load(f))
+
+        # Fallback: Calculate for specific region
+        print(f"Calculating market phases (region: {region})")
+        
+        # Load all available years (2019-2024)
+        years = [2019, 2020, 2021, 2022, 2023, 2024]
         dfs = []
         
         for year in years:

@@ -43,7 +43,7 @@ export class MarketPhasesPage {
                 <!-- Header -->
                 <div style="margin-bottom: 1rem;">
                     <h1 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="font-size: 1.8rem;">📊</span> Markttrends (2020-2024)
+                        <span style="font-size: 1.8rem;">📊</span> Markttrends (2019-2024)
                     </h1>
                 </div>
 
@@ -55,14 +55,6 @@ export class MarketPhasesPage {
                         <button class="btn-group-item ${this.state.fuel === 'e5' ? 'active' : ''}" data-value="e5">Super E5</button>
                         <button class="btn-group-item ${this.state.fuel === 'e10' ? 'active' : ''}" data-value="e10">E10</button>
                         <button class="btn-group-item ${this.state.fuel === 'diesel' ? 'active' : ''}" data-value="diesel">Diesel</button>
-                    </div>
-                    
-
-
-                    <!-- Stadt / Region -->
-                    <div class="control-group">
-                         <input type="text" id="mp-city-input" placeholder="Stadt eingeben..." value="Stuttgart" 
-                                style="padding: 6px 10px; border: 1px solid var(--border-strong); border-radius: 4px; font-family: inherit; width: 140px;">
                     </div>
 
                     <div style="width: 1px; height: 30px; background: var(--border-subtle); margin: 0 0.5rem;"></div>
@@ -124,61 +116,10 @@ export class MarketPhasesPage {
     }
 
     bindEvents() {
-        // PLZ Mapping
-        let cityToPlz = {}; // City -> PLZ
-
-        fetch('js/data/plz3_cities.json')
-            .then(r => r.json())
-            .then(data => {
-                // Build Reverse Map lowercased for case-insensitive search
-                Object.entries(data).forEach(([plz, city]) => {
-                    const c = city.trim();
-                    if (!cityToPlz[c.toLowerCase()]) cityToPlz[c.toLowerCase()] = plz;
-                });
-
-                // Default to Stuttgart
-                const input = this.container.querySelector('#mp-city-input');
-                if (input) {
-                    input.value = 'Stuttgart';
-                    // Trigger initial load
-                    update();
-                }
-            })
-            .catch(e => console.warn('Konnte PLZ-Mapping nicht laden', e));
-
+        // Simple update function - just load data (uses cache)
         const update = () => {
-            if (!this.container) return; // Safety check
-
-            // this.state.fuel updated by buttons
-
-            // City Input validation
-            const inputField = this.container.querySelector('#mp-city-input');
-            const cityInputRaw = inputField.value.trim();
-            const cityInput = cityInputRaw.toLowerCase();
-            const chartDiv = this.container.querySelector('#mp-chart');
-            const legendDiv = this.container.querySelector('#mp-legend');
-
-            // Reset UI
-            inputField.style.borderColor = '#ddd';
-            legendDiv.style.display = 'none';
-
-            if (!cityInput) {
-                this.state.region = '';
-                this.renderMessage('Bitte geben Sie eine Stadt ein.', 'info');
-                return;
-            }
-
-            if (cityToPlz[cityInput]) {
-                // Determine PLZ
-                this.state.region = cityToPlz[cityInput];
-                // Valid City -> Load Data
-                this.loadData();
-            } else {
-                // Invalid City
-                this.state.region = '';
-                inputField.style.borderColor = 'red';
-                this.renderMessage(`Stadt "${cityInputRaw}" nicht gefunden.`, 'warning');
-            }
+            if (!this.container) return;
+            this.loadData();
         };
 
         const toggles = () => {
@@ -205,15 +146,8 @@ export class MarketPhasesPage {
             });
         });
 
-        // Update on Enter or Blur
-        const cityInput = this.container.querySelector('#mp-city-input');
-        cityInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                update();
-            }
-        });
-        cityInput.addEventListener('blur', update);
+        // Initial load
+        update();
 
         this.container.querySelector('#mp-toggle-oil').addEventListener('change', toggles);
         this.container.querySelector('#mp-toggle-band').addEventListener('change', toggles);
@@ -257,9 +191,9 @@ export class MarketPhasesPage {
         chartDiv.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#888;">Lade Analyse...</div>';
 
         try {
+            // Only send fuel parameter - no region for fast cached response
             const params = new URLSearchParams({
-                fuel: this.state.fuel,
-                region: this.state.region
+                fuel: this.state.fuel
             });
 
             const res = await fetch(`/api/data/market-phases?${params.toString()}`);

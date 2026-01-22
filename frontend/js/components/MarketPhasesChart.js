@@ -47,9 +47,11 @@ export class MarketPhasesChart {
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-        // Scales
+        // Scales - extend x-axis to show 2025 label
+        const dataExtent = d3.extent(data, d => d.parsedDate);
+        const xMax = new Date('2025-01-01'); // End exactly at 2025
         const x = d3.scaleTime()
-            .domain(d3.extent(data, d => d.parsedDate))
+            .domain([dataExtent[0], xMax])
             .range([0, width]);
 
         const yFuel = d3.scaleLinear()

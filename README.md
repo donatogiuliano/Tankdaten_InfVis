@@ -4,6 +4,7 @@
 ## Projektinformationen
 
 | | |
+|---|---|
 | **Hochschule** | Hochschule für Technik Stuttgart |
 | **Vorlesung** | Informationsvisualisierung und Visual Analytics |
 | **Semester** | Wintersemester 2025/26 |

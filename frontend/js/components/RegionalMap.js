@@ -107,13 +107,13 @@ export class RegionalMap {
             const tClamped = Math.max(0, Math.min(1, t));
 
             if (this.options.colorMode === 'accessible') {
-                if (tClamped < 0.5) {
-                    const localT = tClamped * 2;
-                    return `hsl(${240 - (localT * 180)}, ${70 + localT * 20}%, ${50 + localT * 40}%)`;
-                } else {
-                    const localT = (tClamped - 0.5) * 2;
-                    return `hsl(${60 - (localT * 60)}, ${90 + localT * 10}%, ${90 - localT * 40}%)`;
-                }
+                // Vibrant Diverging 3.0: Blue -> Yellow -> Red
+                // Explicit 3-stop scale to force Yellow at the midpoint (0.5), but softer
+                const scale = d3.scaleLinear()
+                    .domain([0, 0.5, 1])
+                    .range(["#304FFE", "#FDD835", "#D50000"])
+                    .interpolate(d3.interpolateRgb);
+                return scale(tClamped);
             } else {
                 const hue = (1 - tClamped) * 120;
                 return `hsl(${hue}, 85%, 45%)`;

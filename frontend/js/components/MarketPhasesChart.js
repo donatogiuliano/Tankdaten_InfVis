@@ -37,8 +37,8 @@ export class MarketPhasesChart {
 
         // Dimensions
         const margin = { top: 20, right: 60, bottom: 30, left: 50 };
-        const width = this.container.clientWidth - margin.left - margin.right;
-        const height = this.container.clientHeight - margin.top - margin.bottom;
+        const width = (this.container.clientWidth || 800) - margin.left - margin.right;
+        const height = (this.container.clientHeight || 400) - margin.top - margin.bottom;
 
         const svg = d3.select(this.container)
             .append('svg')

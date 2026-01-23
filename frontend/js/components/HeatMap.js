@@ -39,7 +39,9 @@ export class Heatmap {
 
         // Color
         this.color = d3.scaleSequential()
-            .interpolator(d3.interpolateInferno); // Good heatmap scale
+            .interpolator(this.options.colorMode === 'accessible'
+                ? d3.interpolateViridis
+                : d3.interpolateInferno);
 
         // Axes
         this.svg.append("g")
@@ -49,7 +51,9 @@ export class Heatmap {
         this.yAxis = this.svg.append("g");
     }
 
-    update(filteredDataRange = null) {
+    update(filteredDataRange = null, colorMode = 'default') {
+        this.options.colorMode = colorMode;
+        this.color.interpolator(colorMode === 'accessible' ? d3.interpolateViridis : d3.interpolateInferno);
         // Prepare Data
         // 1. Filter by Date Range (if brushed)
         let workingData = this.allData;

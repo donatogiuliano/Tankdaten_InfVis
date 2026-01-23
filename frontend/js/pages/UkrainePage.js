@@ -8,6 +8,7 @@ export class UkrainePage {
         this.pinnedBubble = null;
         this.resizeObserver = null;
         this.chart = null;
+        this.boundHandleA11yToggle = this.handleA11yToggle.bind(this);
     }
 
     async render(container) {
@@ -28,11 +29,6 @@ export class UkrainePage {
                     <h1 class="page-title">
                         <span>⚔️</span> Ukraine-Schock 2022
                     </h1>
-
-                    <button id="ukraine-a11y-toggle" class="btn btn-outline" title="Barrierefreie Farben aktivieren">
-                        <span class="state-icon">☐</span>
-                        <span>Barrierefrei</span>
-                    </button>
                 </div>
 
                 <!-- Controls & Legend -->
@@ -44,9 +40,9 @@ export class UkrainePage {
                     </div>
                     
                     <div id="ukraine-legend" class="legend-container">
-                        <span class="legend-item"><span class="legend-dot" style="background: #43a047;"></span> Günstig (&lt;1.80€)</span>
-                        <span class="legend-item"><span class="legend-dot" style="background: #ffc107;"></span> Mittel (1.80-2.10€)</span>
-                        <span class="legend-item"><span class="legend-dot" style="background: #e53935;"></span> Teuer (&gt;2.10€)</span>
+                        <span class="legend-item"><span class="legend-dot" style="background: #304FFE;"></span> Günstig (&lt;1.80€)</span>
+                        <span class="legend-item"><span class="legend-dot" style="background: #FDD835;"></span> Mittel (1.80-2.10€)</span>
+                        <span class="legend-item"><span class="legend-dot" style="background: #D50000;"></span> Teuer (&gt;2.10€)</span>
                     </div>
                 </div>
 
@@ -101,18 +97,19 @@ export class UkrainePage {
         });
 
         // --- A11y Toggle Logic ---
-        const a11yBtn = this.container.querySelector('#ukraine-a11y-toggle');
-        if (a11yBtn) {
-            a11yBtn.addEventListener('click', () => {
-                const current = state.get('colorMode');
-                const next = current === 'accessible' ? 'default' : 'accessible';
-                state.set('colorMode', next);
-                this.updateA11yUI();
-                this.renderBubbles();
-            });
-
-            // Initial UI sync
-            this.updateA11yUI();
+        const globalA11yBtn = document.getElementById('accessibility-toggle');
+        if (globalA11yBtn) {
+            globalA11yBtn.removeEventListener('click', this.boundHandleA11yToggle);
+            globalA11yBtn.addEventListener('click', this.boundHandleA11yToggle);
+        } else {
+            // Retry once if not found (rare race condition)
+            setTimeout(() => {
+                const btn = document.getElementById('accessibility-toggle');
+                if (btn) {
+                    btn.removeEventListener('click', this.boundHandleA11yToggle);
+                    btn.addEventListener('click', this.boundHandleA11yToggle);
+                }
+            }, 100);
         }
 
         // Global State Subscription
@@ -166,20 +163,38 @@ export class UkrainePage {
         }
     }
 
+    handleA11yToggle() {
+        if (!this.container || this.container.style.display === 'none') return;
+
+        const current = state.get('colorMode');
+        const next = current === 'accessible' ? 'default' : 'accessible';
+        state.set('colorMode', next);
+
+        this.updateA11yUI();
+        this.renderBubbles();
+
+        // Sync button class manually just in case
+        const btn = document.getElementById('accessibility-toggle');
+        if (btn) btn.classList.toggle('active', next === 'accessible');
+    }
+
     updateA11yUI() {
         if (!this.container) return;
         const isAccessible = state.get('colorMode') === 'accessible';
-        const a11yBtn = this.container.querySelector('#ukraine-a11y-toggle');
+        const a11yBtn = document.getElementById('accessibility-toggle'); // Global Button
+
         if (a11yBtn) {
+            // Logic handled by event listener, visual sync might be needed?
             const stateIcon = a11yBtn.querySelector('.state-icon');
-            stateIcon.textContent = isAccessible ? '☑' : '☐';
+            // Check if icons exist (original code didn't use stateIcon much, but toggle class)
             a11yBtn.classList.toggle('active', isAccessible);
         }
 
         const legendColors = this.container.querySelectorAll('.legend-dot');
         if (legendColors.length === 3) {
+            // Vibrant Diverging 3.0: Blue -> Yellow -> Red (Softer)
             const colors = isAccessible
-                ? ['hsl(240, 70%, 50%)', 'hsl(60, 90%, 90%)', 'hsl(0, 100%, 50%)']
+                ? ['#0072B2', '#E69F00', '#B24A7A']
                 : ['#43a047', '#ffc107', '#e53935'];
 
             legendColors.forEach((el, i) => {
@@ -190,13 +205,10 @@ export class UkrainePage {
 
     renderBubbles() {
         if (!this.data) return;
-
         const chartContainer = this.container.querySelector('#bubble-chart');
-
         if (!this.chart) {
             this.chart = new UkraineBubbleChart(chartContainer, this.events);
         }
-
         this.chart.update(this.data, this.selectedFuel, state.get('colorMode'));
     }
 
@@ -244,6 +256,11 @@ export class UkrainePage {
         if (this.resizeObserver) {
             this.resizeObserver.disconnect();
             this.resizeObserver = null;
+        }
+
+        const globalA11yBtn = document.getElementById('accessibility-toggle');
+        if (globalA11yBtn) {
+            globalA11yBtn.removeEventListener('click', this.boundHandleA11yToggle);
         }
     }
 }

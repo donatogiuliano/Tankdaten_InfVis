@@ -2,8 +2,18 @@ import { RegionalMap } from '../components/RegionalMap.js';
 import { state } from '../state.js';
 
 export class RegionalPage {
+    constructor() {
+        this.map = null;
+        this.data = null;
+        this.geoJsonParams = null;
+        this.selectedFuel = state.get('fuelType') || 'e10';
+        this.boundHandleA11yToggle = this.handleA11yToggle.bind(this);
+    }
+
     async render(container) {
         this.container = container;
+        this.selectedFuel = state.get('fuelType') || 'e10';
+        this.unsub = null;
 
         // Load State
         const savedYear = state.get('year') || new Date().getFullYear().toString();
@@ -23,10 +33,6 @@ export class RegionalPage {
                         <span>🇩🇪</span> Regional-Vergleich
                     </h1>
 
-                    <button id="a11y-toggle" class="btn btn-outline" title="Barrierefreie Farben aktivieren">
-                        <span class="state-icon">☐</span>
-                        <span>Barrierefrei</span>
-                    </button>
                 </div>
 
                 <!-- Controls -->
@@ -156,42 +162,21 @@ export class RegionalPage {
                 });
             });
 
-            // Global State Subscription
-            state.subscribe((s, key, value) => {
-                if (key === 'fuelType') {
-                    // Update Buttons UI - only fuel buttons
-                    const btns = this.container.querySelectorAll('.fuel-toggle-group .btn-group-item');
-                    btns.forEach(b => {
-                        if (b.dataset.value === value) b.classList.add('active');
-                        else b.classList.remove('active');
-                    });
+            // Restore "Old Style" Logic but targeting Global Button
+            // User requested: "leave the function call as it was"
+            const globalA11yBtn = document.getElementById('accessibility-toggle');
+            if (globalA11yBtn) {
+                // Remove old listeners to be safe
+                globalA11yBtn.removeEventListener('click', this.boundHandleA11yToggle);
+                globalA11yBtn.addEventListener('click', this.boundHandleA11yToggle);
+            }
 
-                    // Trigger map update
+            // Global State Subscription for Accessibility (Keep this as backup/sync)
+            this.unsub = state.subscribe((s, key, value) => {
+                if (key === 'colorMode' && this.map) {
+                    this.map.options.colorMode = value;
                     this.updateMap();
                 }
-            });
-
-            // --- A11y Logic ---
-            const a11yBtn = this.container.querySelector('#a11y-toggle');
-            const stateIcon = a11yBtn.querySelector('.state-icon');
-
-            const updateA11yState = () => {
-                const isAccessible = state.get('colorMode') === 'accessible';
-                // Toggle Checkmark
-                stateIcon.textContent = isAccessible ? '☑' : '☐';
-                // Optional: Make text indicate state? No, Icon is enough.
-                a11yBtn.title = isAccessible ? "Modus: Barrierefrei (Aktiv)" : "Modus: Standard (Inaktiv)";
-            };
-
-            // Set initial
-            updateA11yState();
-
-            a11yBtn.addEventListener('click', () => {
-                const current = state.get('colorMode');
-                const next = current === 'accessible' ? 'default' : 'accessible';
-                state.set('colorMode', next);
-                updateA11yState();
-                this.updateMap();
             });
 
             this.initComparisonLogic();
@@ -200,6 +185,28 @@ export class RegionalPage {
             this.container.innerHTML += `<p style="color:red">${e.message}</p>`;
         }
     }
+
+    handleA11yToggle() {
+        // Logic from old implementation
+        if (!this.container || this.container.style.display === 'none') return;
+
+        const current = state.get('colorMode');
+        const next = current === 'accessible' ? 'default' : 'accessible';
+        state.set('colorMode', next);
+
+        // Update Map explicitly
+        if (this.map) {
+            this.map.options.colorMode = next;
+            this.updateMap();
+        }
+
+        // Update UI Button State manually
+        const globalA11yBtn = document.getElementById('accessibility-toggle');
+        if (globalA11yBtn) {
+            globalA11yBtn.classList.toggle('active', next === 'accessible');
+        }
+    }
+
 
     initComparisonLogic() {
         // --- Comparison Dock Logic ---
@@ -752,6 +759,16 @@ export class RegionalPage {
             setTimeout(() => {
                 this.map.map.invalidateSize();
             }, 100);
+        }
+    }
+
+    destroy() {
+        if (this.map && this.map.destroy) this.map.destroy();
+        if (this.unsub) this.unsub();
+
+        const globalA11yBtn = document.getElementById('accessibility-toggle');
+        if (globalA11yBtn) {
+            globalA11yBtn.removeEventListener('click', this.boundHandleA11yToggle);
         }
     }
 }

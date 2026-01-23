@@ -7,6 +7,7 @@ export class CrisisPage {
         this.selectedFuel = state.get('fuelType') || 'e10';
         this.resizeObserver = null;
         this.chart = null;
+        this.handleA11yToggle = this.handleA11yToggle.bind(this);
     }
 
     async render(container) {
@@ -95,8 +96,38 @@ export class CrisisPage {
                 this.selectedFuel = value;
                 this.renderChart();
                 this.renderStats();
+            } else if (key === 'colorMode') {
+                // Re-render chart with new color mode
+                this.renderChart();
+                this.updateLegendColors();
             }
         });
+    }
+
+    updateLegendColors() {
+        const isAccessible = state.get('colorMode') === 'accessible';
+        const colors = isAccessible ? ['#D50000', '#304FFE', '#D50000'] : ['#e53935', '#4caf50', '#e53935'];
+
+        const dots = this.container.querySelectorAll('.legend-dot');
+        if (dots.length >= 3) {
+            dots[0].style.background = colors[0]; // 1. Lockdown
+            dots[1].style.background = colors[1]; // Lockerungen
+            dots[2].style.background = colors[2]; // 2. Lockdown
+        }
+    }
+
+    handleA11yToggle() {
+        if (!this.container || this.container.style.display === 'none') return;
+
+        const current = state.get('colorMode');
+        const next = current === 'accessible' ? 'default' : 'accessible';
+        state.set('colorMode', next);
+
+        this.renderChart();
+        this.updateLegendColors();
+
+        const btn = document.getElementById('accessibility-toggle');
+        if (btn) btn.classList.toggle('active', next === 'accessible');
     }
 
     async loadData() {
@@ -109,6 +140,14 @@ export class CrisisPage {
                 setTimeout(() => {
                     this.renderChart();
                     this.renderStats();
+
+                    // Restore "Old Style" Logic for UkrainePage
+                    const globalA11yBtn = document.getElementById('accessibility-toggle');
+                    if (globalA11yBtn) {
+                        // Prevent duplicates by removing first (if exists)
+                        globalA11yBtn.removeEventListener('click', this.handleA11yToggle);
+                        globalA11yBtn.addEventListener('click', this.handleA11yToggle);
+                    }
 
                     if (!this.resizeObserver) {
                         this.resizeObserver = new ResizeObserver(() => {
@@ -143,7 +182,7 @@ export class CrisisPage {
             this.chart = new CrisisChart(chartContainer, this.coronaEvents);
         }
 
-        this.chart.update(this.data, this.selectedFuel);
+        this.chart.update(this.data, this.selectedFuel, state.get('colorMode'));
     }
 
     renderStats() {
@@ -192,8 +231,15 @@ export class CrisisPage {
             this.resizeObserver.disconnect();
             this.resizeObserver = null;
         }
+
+        const globalA11yBtn = document.getElementById('accessibility-toggle');
+        if (globalA11yBtn) {
+            globalA11yBtn.removeEventListener('click', this.handleA11yToggle);
+        }
+
         if (this.chart) {
 
         }
     }
 }
+

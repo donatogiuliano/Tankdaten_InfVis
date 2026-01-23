@@ -94,4 +94,6 @@ document.head.appendChild(style);
 document.addEventListener('DOMContentLoaded', () => {
     const app = new App();
     app.init();
+
+    // Accessibility Toggle handled by pages individually (Legacy Request)
 });

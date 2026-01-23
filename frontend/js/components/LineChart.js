@@ -17,8 +17,8 @@ export class LineChart {
 
         // Dimensions
         const rect = this.container.getBoundingClientRect();
-        this.width = rect.width - this.options.margin.left - this.options.margin.right;
-        this.height = rect.height - this.options.margin.top - this.options.margin.bottom;
+        this.width = (rect.width || 800) - this.options.margin.left - this.options.margin.right;
+        this.height = (rect.height || 400) - this.options.margin.top - this.options.margin.bottom;
 
         // SVG
         this.svg = d3.select(this.container).append("svg")
@@ -54,8 +54,9 @@ export class LineChart {
         this.update(this.data);
     }
 
-    update(newData) {
+    update(newData, colorMode = 'default') {
         this.data = newData;
+        this.colorMode = colorMode;
         const fuel = this.options.fuelType;
 
         // Parse Data if needed (assume backend returns nice JSON)
@@ -98,6 +99,15 @@ export class LineChart {
     }
 
     getFuelColor(type) {
+        if (this.colorMode === 'accessible') {
+            const colors = {
+                'e5': '#2196f3',    // Blue
+                'e10': '#42a5f5',   // Lighter Blue
+                'diesel': '#ff9800' // Orange
+            };
+            return colors[type] || '#2196f3';
+        }
+
         const colors = {
             'e5': '#1a73e8',   // Blue
             'e10': '#1e8e3e',  // Green

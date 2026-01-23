@@ -4,7 +4,7 @@ export class CrisisChart {
         this.events = events || [];
     }
 
-    update(data, selectedFuel) {
+    update(data, selectedFuel, colorMode = 'default') {
         if (!data) return;
 
         this.container.innerHTML = '';
@@ -57,6 +57,13 @@ export class CrisisChart {
             const xPos = x(eventDate);
             const yOffset = index % 2 === 0 ? -12 : -28;
 
+            let color = event.color;
+            if (colorMode === 'accessible') {
+                // Map Red to Orange, Green to Blue
+                if (event.label === 'Lockerungen') color = '#2196f3'; // Blue
+                else color = '#ff9800'; // Orange
+            }
+
             if (event.label !== 'Preis-Tief') {
                 svg.append('line')
                     .attr('x1', xPos)
@@ -74,7 +81,7 @@ export class CrisisChart {
                 .attr('y', yOffset)
                 .attr('text-anchor', 'middle')
                 .attr('font-size', '10px')
-                .attr('fill', event.color)
+                .attr('fill', color)
                 .attr('font-weight', '600')
                 .text(`${event.icon} ${event.label}`);
         });

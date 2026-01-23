@@ -27,7 +27,6 @@ export class UkraineBubbleChart {
         if (!data) return;
         this.colorMode = colorMode;
 
-        this.container.innerHTML = '';
         const fuelData = data.filter(d => d.fuel === selectedFuel);
 
         // Parse dates if needed
@@ -41,6 +40,37 @@ export class UkraineBubbleChart {
         const width = (this.container.clientWidth || 800) - margin.left - margin.right;
         const height = (this.container.clientHeight || 400) - margin.top - margin.bottom;
 
+        // --- 1. Setup/Select SVG ---
+        let svg = d3.select(this.container).select('svg.chart-svg');
+        let g;
+
+        if (svg.empty()) {
+            this.container.innerHTML = '';
+            svg = d3.select(this.container)
+                .append('svg')
+                .attr('class', 'chart-svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .on('click', () => {
+                    this.pinnedBubble = null;
+                    this.tooltip.style('display', 'none');
+                });
+
+            g = svg.append('g')
+                .attr('class', 'chart-area')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            // Add Axis Groups once
+            g.append('g').attr('class', 'x-axis').attr('transform', `translate(0,${height})`);
+            g.append('g').attr('class', 'y-axis');
+        } else {
+            // Update dims
+            svg.attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom);
+            g = svg.select('.chart-area');
+        }
+
+        // --- 2. Scales ---
         const x = d3.scaleTime()
             .domain([new Date(2022, 0, 1), new Date(2022, 11, 31)])
             .range([0, width]);
@@ -56,46 +86,53 @@ export class UkraineBubbleChart {
             .range([12, 45]);
 
         const colorScale = d3.scaleLinear()
-            .domain([1.70, 1.95, 2.20])
+            .domain([minPrice, (minPrice + maxPrice) / 2, maxPrice]) // Dynamic domain
             .range(colorMode === 'accessible'
-                ? ['hsl(240, 70%, 50%)', 'hsl(60, 90%, 90%)', 'hsl(0, 100%, 50%)']
-                : ['#43a047', '#ffc107', '#e53935'])
+                ? ['#0072B2', '#E69F00', '#B24A7A']
+                : ['#2c752fff', '#ecb100ff', '#b13230ff'])
             .interpolate(d3.interpolateRgb);
 
-        const svg = d3.select(this.container)
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .on('click', () => {
-                this.pinnedBubble = null;
-                this.tooltip.style('display', 'none');
-            })
-            .append('g')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
+        // --- 3. Axes ---
+        g.select('.x-axis')
+            .attr('transform', `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')))
+            .selectAll('text').style('font-size', '11px');
 
-        const bubbles = svg.selectAll('circle')
-            .data(fuelData)
-            .enter()
+        g.select('.y-axis')
+            .transition().duration(500)
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toFixed(2) + '€'))
+            .selectAll('text').style('font-size', '11px');
+
+        // --- 4. Bubbles (Join) ---
+        const bubbles = g.selectAll('circle.bubble')
+            .data(fuelData, d => d.date);
+
+        // EXIT
+        bubbles.exit()
+            .transition().duration(500)
+            .attr('r', 0)
+            .remove();
+
+        // MERGE (Update existing + Enter)
+        const bubblesEnter = bubbles.enter()
             .append('circle')
             .attr('class', 'bubble')
             .attr('cx', d => x(d.parsedDate))
             .attr('cy', d => y(d.price_mean))
-            .attr('r', 0)
+            .attr('r', 0) // Start small
             .attr('fill', d => colorScale(d.price_mean))
             .attr('stroke', 'white')
-            .attr('stroke-width', 2)
+            .attr('stroke-width', 1)
             .style('opacity', 0.85);
 
-        bubbles.transition()
-            .duration(800)
-            .delay((d, i) => i * 5)
-            .attr('r', d => radiusScale(d.price_mean));
-
-        bubbles.on('mouseenter', (event, d) => {
-            if (this.pinnedBubble) return;
-            d3.select(event.currentTarget).style('stroke', '#333');
-            this.showTooltip(d, x, y, margin, colorScale);
-        })
+        // Add Listeners to Enter only
+        bubblesEnter
+            .on('mouseenter', (event, d) => {
+                if (this.pinnedBubble) return;
+                d3.select(event.currentTarget).style('stroke', '#000')
+                    .style('stroke-width', 3);
+                this.showTooltip(d, x, y, margin, colorScale);
+            })
             .on('mouseleave', (event) => {
                 d3.select(event.currentTarget).style('stroke', 'white');
                 if (!this.pinnedBubble) {
@@ -113,23 +150,35 @@ export class UkraineBubbleChart {
                 }
             });
 
+        // Update All (Transitions)
+        bubblesEnter.merge(bubbles)
+            .transition()
+            .duration(800)
+            .attr('cx', d => x(d.parsedDate))
+            .attr('cy', d => y(d.price_mean))
+            .attr('fill', d => colorScale(d.price_mean))
+            .attr('r', d => radiusScale(d.price_mean));
+
+
+        // --- 5. Events Lines & Labels ---
+        g.selectAll('.event-marker').remove();
+
         const parseEventDate = d3.timeParse('%Y-%m-%d');
         this.events.forEach((e, i) => {
             const date = parseEventDate(e.date);
             const xPos = x(date);
 
-            // Find matching data point to get bubble height/radius
             const dAtDate = fuelData.find(d => d.date === e.date);
-            let y2Pos = height; // Fallback to axis if no bubble found
+            let y2Pos = height;
             if (dAtDate) {
-                // End at the TOP of the bubble
                 y2Pos = y(dAtDate.price_mean) - radiusScale(dAtDate.price_mean);
             }
 
-            // Alternating Y-position to prevent overlap (Kriegsausbruch vs Rekordpreis)
             const yOffset = (i % 2 === 0) ? -10 : -25;
 
-            svg.append('line')
+            const eventG = g.append('g').attr('class', 'event-marker');
+
+            eventG.append('line')
                 .attr('x1', xPos)
                 .attr('x2', xPos)
                 .attr('y1', yOffset + 3)
@@ -138,8 +187,7 @@ export class UkraineBubbleChart {
                 .attr('stroke-width', 2)
                 .attr('stroke-dasharray', '5,5');
 
-            // Text Label (Increased size, no icon)
-            svg.append('text')
+            eventG.append('text')
                 .attr('x', xPos)
                 .attr('y', yOffset)
                 .attr('text-anchor', 'middle')
@@ -148,23 +196,18 @@ export class UkraineBubbleChart {
                 .attr('font-weight', '700')
                 .text(e.label);
         });
-
-        svg.append('g')
-            .attr('transform', `translate(0,${height})`)
-            .call(d3.axisBottom(x).ticks(d3.timeMonth.every(1)).tickFormat(d3.timeFormat('%b')))
-            .selectAll('text').style('font-size', '11px');
-
-        svg.append('g')
-            .call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toFixed(2) + '€'))
-            .selectAll('text').style('font-size', '11px');
     }
 
     showTooltip(d, x, y, margin, colorScale) {
         const formatDate = d3.timeFormat('%d. %B %Y');
-        // tooltip is d3 selection
         this.tooltip.html(`
             <div style="font-weight: 700; margin-bottom: 4px;">${formatDate(d.parsedDate)}</div>
-            <div style="font-size: 1.3rem; font-weight: 800; color: ${colorScale(d.price_mean)};">${d.price_mean.toFixed(3)} €</div>
+<div style="
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: ${colorScale(d.price_mean)};
+  text-shadow: 0 0 2px #000;
+">
             <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 4px;">pro Liter ${this.pinnedBubble ? '(📌 fixiert)' : ''}</div>
         `);
         this.tooltip.style('display', 'block');
